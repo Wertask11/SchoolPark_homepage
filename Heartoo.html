@@ -1,0 +1,1182 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#a0d8ef">
+  <meta name="description" content="空中に描いたハートが、愛する人の胸元で光と香りに変わる。Heartooは、一生育てていく結婚指輪です。">
+  <meta property="og:title" content="Heartoo — 愛が、届く。">
+  <meta property="og:description" content="空中に描いたハートが、愛する人の胸元で光と香りに変わる。結婚指輪のように見えて、それ以上のもの。">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ja_JP">
+  <title>Heartoo — 愛が、届く。</title>
+  <style>
+    :root {
+      --sky: #a0d8ef;
+      --sky-light: #eaf8fd;
+      --sky-pale: #d9f0f9;
+      --sky-deep: #3188ad;
+      --paper: #f6fbfd;
+      --paper-deep: #e4f3f9;
+      --ink: #102632;
+      --muted: #607681;
+      --line: rgba(16, 38, 50, .13);
+      --wine: #3188ad;
+      --wine-dark: #176581;
+      --rose: #a0d8ef;
+      --gold: #b49962;
+      --white: #ffffff;
+      --shadow: 0 30px 90px rgba(39, 111, 141, .14);
+      --radius: 28px;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "YuGothic", "Noto Sans JP", system-ui, sans-serif;
+      font-feature-settings: "palt" 1;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      opacity: .12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.19'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
+
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img, svg { display: block; max-width: 100%; }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -60px;
+      z-index: 100;
+      padding: 12px 16px;
+      background: var(--ink);
+      color: white;
+      border-radius: 10px;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 16px; }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--wine);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, .serif {
+      font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", Georgia, serif;
+      font-weight: 500;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 26px;
+      font-size: clamp(3.1rem, 8vw, 7.4rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+    }
+    .hero h1 { white-space: nowrap; font-size: clamp(3rem, 7vw, 6.8rem); }
+
+    h2 {
+      margin-bottom: 24px;
+      font-size: clamp(2.3rem, 5.5vw, 5.2rem);
+      line-height: 1.1;
+      letter-spacing: -.045em;
+    }
+
+    h3 { margin-bottom: 12px; font-size: 1.15rem; line-height: 1.5; }
+    p { line-height: 1.9; }
+
+    .container { width: min(calc(100% - 40px), var(--max)); margin-inline: auto; }
+    .section { padding: clamp(90px, 12vw, 170px) 0; }
+    .section-head { max-width: 820px; margin-bottom: 64px; }
+    .lead { max-width: 680px; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.15rem); }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      transition: background .35s, box-shadow .35s, transform .35s;
+    }
+    .site-header.is-scrolled {
+      background: rgba(245, 240, 233, .88);
+      box-shadow: 0 1px 0 var(--line);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand {
+      text-decoration: none;
+      font-family: Georgia, serif;
+      font-size: 1.45rem;
+      letter-spacing: .02em;
+    }
+    .brand span { color: var(--wine); }
+    .nav-links { display: flex; align-items: center; gap: 30px; }
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(23,20,18,.72);
+      font-size: .8rem;
+      font-weight: 650;
+      letter-spacing: .08em;
+    }
+    .nav-links a:hover { color: var(--wine); }
+
+    .btn {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 24px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: .86rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      transition: transform .2s, color .2s, background .2s, border-color .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:focus-visible, .icon-button:focus-visible, .finish:focus-visible, summary:focus-visible {
+      outline: 3px solid rgba(49, 136, 173, .32);
+      outline-offset: 3px;
+    }
+    .btn-primary { background: var(--wine); color: white; box-shadow: 0 12px 30px rgba(49,136,173,.22); }
+    .btn-primary:hover { background: var(--wine-dark); box-shadow: 0 16px 34px rgba(23,101,129,.28); }
+    .btn-ghost { border-color: var(--line); background: rgba(255,255,255,.22); }
+    .btn-ghost:hover { border-color: rgba(23,20,18,.35); background: rgba(255,255,255,.6); }
+    .btn-small { min-height: 42px; padding-inline: 18px; }
+
+    .menu-button { display: none; }
+
+    .hero {
+      min-height: min(940px, 100svh);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      align-items: center;
+      padding: 130px 0 80px;
+      background:
+        radial-gradient(circle at 80% 18%, rgba(255,255,255,.92), transparent 25%),
+        radial-gradient(circle at 72% 70%, rgba(160,216,239,.46), transparent 38%),
+        linear-gradient(135deg, #fafeff 0%, #dff3fb 54%, #b9e4f5 100%);
+    }
+    .hero::after {
+      content: "Heart to you";
+      position: absolute;
+      left: max(20px, calc((100vw - var(--max)) / 2));
+      bottom: -5vw;
+      color: rgba(49,136,173,.065);
+      font-family: Georgia, serif;
+      font-size: clamp(6rem, 18vw, 18rem);
+      line-height: 1;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 40px; }
+    .hero-copy { position: relative; z-index: 2; padding-top: 40px; }
+    .hero-sub {
+      max-width: 600px;
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: .75rem;
+      letter-spacing: .08em;
+    }
+    .hero-note::before { content: ""; width: 26px; height: 1px; background: var(--gold); }
+
+    .hero-photo {
+      width: min(35vw, 470px);
+      position: relative;
+      justify-self: end;
+      margin: 0;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.88);
+      border-radius: 240px 240px 32px 32px;
+      background: var(--sky-pale);
+      box-shadow: 0 40px 100px rgba(24,82,107,.2);
+    }
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(160,216,239,.1), transparent 45%, rgba(7,38,52,.18));
+    }
+    .hero-photo img { width: 100%; aspect-ratio: 467 / 662; object-fit: cover; }
+    .hero-photo figcaption {
+      position: absolute;
+      z-index: 2;
+      left: 22px;
+      right: 22px;
+      bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      color: white;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-shadow: 0 1px 12px rgba(0,0,0,.55);
+    }
+
+    .product-stage {
+      min-height: 600px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      perspective: 1000px;
+    }
+    .orbit {
+      position: absolute;
+      width: min(38vw, 490px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(49,136,173,.22);
+      border-radius: 50%;
+      animation: breathe 7s ease-in-out infinite;
+    }
+    .orbit::before, .orbit::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(177,138,84,.14);
+      border-radius: inherit;
+    }
+    .orbit::before { inset: 12%; }
+    .orbit::after { inset: -9%; }
+    .ring-wrap {
+      position: relative;
+      width: min(32vw, 390px);
+      aspect-ratio: 1.05;
+      transform: rotateX(61deg) rotateZ(-13deg);
+      filter: drop-shadow(10px 55px 32px rgba(65,35,22,.26));
+      transition: transform 1s cubic-bezier(.2,.8,.2,1);
+    }
+    .product-stage:hover .ring-wrap { transform: rotateX(55deg) rotateZ(-7deg) scale(1.025); }
+    .ring {
+      position: absolute;
+      inset: 10%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 41% 22%, white 0 1.2%, transparent 2%),
+        conic-gradient(from 30deg, #665047, #f7efe8 11%, #9f8377 21%, #fffaf7 33%, #70584e 46%, #d8c6bd 62%, #fff 72%, #857067 83%, #f3e9e4 95%, #665047);
+      -webkit-mask: radial-gradient(ellipse, transparent 0 43%, #000 44% 100%);
+      mask: radial-gradient(ellipse, transparent 0 43%, #000 44% 100%);
+      box-shadow: inset 0 0 18px rgba(255,255,255,.75), inset 0 0 30px rgba(37,20,14,.25);
+    }
+    .ring::after {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,.9) 48%, transparent 59%);
+      opacity: .55;
+    }
+    .heart-light {
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      top: 7%;
+      width: 13px;
+      height: 13px;
+      transform: translateX(-50%) rotate(45deg);
+      border-radius: 3px 50% 50% 50%;
+      background: #7ed7f5;
+      box-shadow: 0 0 8px #d9f6ff, 0 0 22px rgba(126,215,245,.9), 0 0 48px rgba(80,183,224,.72);
+      animation: heartbeat 3.2s ease-in-out infinite;
+    }
+    .heart-light::before, .heart-light::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: inherit;
+    }
+    .heart-light::before { left: -50%; }
+    .heart-light::after { top: -50%; }
+    .stage-label {
+      position: absolute;
+      right: 0;
+      bottom: 58px;
+      padding: 13px 16px;
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 16px;
+      background: rgba(255,255,255,.42);
+      backdrop-filter: blur(13px);
+      color: var(--muted);
+      font-size: .7rem;
+      line-height: 1.6;
+      letter-spacing: .1em;
+    }
+    .stage-label strong { display: block; color: var(--ink); font-size: .78rem; }
+
+    @keyframes heartbeat { 0%, 68%, 100% { opacity: .28; transform: translateX(-50%) rotate(45deg) scale(.82); } 74% { opacity: 1; transform: translateX(-50%) rotate(45deg) scale(1); } 82% { opacity: .65; } 88% { opacity: 1; } }
+    @keyframes breathe { 0%, 100% { transform: scale(.96); opacity: .7; } 50% { transform: scale(1.04); opacity: 1; } }
+
+    .manifesto { background: #0b2f40; color: #f4fbfe; overflow: hidden; position: relative; }
+    .manifesto::before {
+      content: "♡";
+      position: absolute;
+      right: -2vw;
+      top: -10vw;
+      color: rgba(255,255,255,.035);
+      font-family: Georgia, serif;
+      font-size: min(55vw, 700px);
+      line-height: 1;
+    }
+    .manifesto-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: end; }
+    .manifesto .eyebrow { color: var(--sky); }
+    .manifesto h2 { max-width: 680px; }
+    .manifesto-copy { max-width: 490px; color: rgba(248,242,236,.68); }
+    .manifesto-sign { margin-top: 42px; color: var(--sky); font-family: Georgia, serif; font-size: 1.45rem; }
+
+    .experience {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #f9fdff 0%, #dff3fb 100%);
+    }
+    .experience::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .65;
+      background:
+        radial-gradient(circle at 12% 15%, white 0 7%, transparent 18%),
+        radial-gradient(circle at 88% 78%, white 0 8%, transparent 22%);
+    }
+    .experience .container { position: relative; }
+    .experience-stage {
+      min-height: 560px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      margin-top: 52px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 38px;
+      background: linear-gradient(135deg, rgba(255,255,255,.82), rgba(160,216,239,.42));
+      box-shadow: 0 40px 100px rgba(49,136,173,.14), inset 0 1px 0 white;
+    }
+    .experience-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(49,136,173,.19) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mask-image: linear-gradient(to bottom, transparent, black 22%, black 78%, transparent);
+    }
+    .love-scene { width: min(calc(100% - 48px), 980px); height: 390px; position: relative; }
+    .love-scene svg { width: 100%; height: 100%; overflow: hidden; }
+    .gesture-path {
+      fill: none;
+      stroke: #6dc4e6;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 8px rgba(109,196,230,.85));
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .send-path { fill: none; stroke: rgba(49,136,173,.25); stroke-width: 1.4; stroke-dasharray: 5 9; }
+    .scene-label { fill: var(--muted); font: 700 11px/1 sans-serif; letter-spacing: .18em; }
+    .scene-hand { fill: none; stroke: rgba(16,38,50,.44); stroke-width: 2; stroke-linecap: round; }
+    .scene-ring { fill: none; stroke: #8c969b; stroke-width: 5; filter: drop-shadow(0 0 4px white); }
+    .flying-heart { opacity: 0; filter: drop-shadow(0 0 12px #73cbe9); }
+    .received-heart { opacity: 0; transform-box: fill-box; transform-origin: center; filter: drop-shadow(0 0 15px #78d1ef) drop-shadow(0 0 35px #a0d8ef); }
+    .scent-wave { fill: none; stroke: rgba(49,136,173,.54); stroke-width: 2; opacity: 0; }
+    .experience-stage.is-playing .gesture-path { animation: draw-heart 1.8s ease-in-out forwards; }
+    .experience-stage.is-playing .flying-heart { animation: fly-heart 2.4s 1.65s cubic-bezier(.3,.75,.25,1) forwards; }
+    .experience-stage.is-playing .received-heart { animation: bloom-heart 2.8s 3.7s ease-out forwards; }
+    .experience-stage.is-playing .scent-wave.s1 { animation: scent-rise 2.4s 4.25s ease-out forwards; }
+    .experience-stage.is-playing .scent-wave.s2 { animation: scent-rise 2.4s 4.55s ease-out forwards; }
+    .experience-stage.is-playing .scent-wave.s3 { animation: scent-rise 2.4s 4.85s ease-out forwards; }
+    .experience-replay {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      z-index: 2;
+      white-space: nowrap;
+    }
+    .experience-replay:hover { transform: translateX(-50%) translateY(-2px); }
+    .experience-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin-top: 24px; background: var(--line); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+    .experience-step { min-height: 168px; padding: 24px; background: rgba(255,255,255,.7); }
+    .experience-step span { color: var(--wine); font-family: Georgia, serif; font-size: .78rem; }
+    .experience-step h3 { margin: 32px 0 5px; font-family: "Yu Mincho", "YuMincho", serif; font-size: 1.05rem; }
+    .experience-step p { margin: 0; color: var(--muted); font-size: .72rem; line-height: 1.7; }
+
+    @keyframes draw-heart { 0% { stroke-dashoffset: 1; opacity: 0; transform: translate(0,0) scale(1); } 8% { opacity: 1; } 68% { stroke-dashoffset: 0; opacity: 1; transform: translate(0,0) scale(1); } 86% { opacity: 1; transform: translate(18px,28px) scale(.72); } 100% { stroke-dashoffset: 0; opacity: 0; transform: translate(32px,20px) scale(.5); } }
+    @keyframes fly-heart { 0% { opacity: 0; transform: translate(0,0) scale(.72); } 10% { opacity: 1; } 55% { opacity: 1; transform: translate(250px,-78px) scale(.9); } 88% { opacity: 1; transform: translate(470px,-8px) scale(.55); } 100% { opacity: 0; transform: translate(500px,0) scale(.35); } }
+    @keyframes bloom-heart { 0% { opacity: 0; transform: scale(.05); } 18% { opacity: 1; transform: scale(1.2); } 35% { transform: scale(.94) rotate(-2deg); } 55% { opacity: 1; transform: scale(1.04) rotate(2deg); } 100% { opacity: 0; transform: scale(1.35); } }
+    @keyframes scent-rise { 0% { opacity: 0; transform: translateY(12px); } 22% { opacity: .8; } 100% { opacity: 0; transform: translateY(-74px); } }
+
+    .features { background: var(--white); }
+    .feature-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+    .feature-card {
+      min-height: 370px;
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 4vw, 46px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      transition: transform .35s, box-shadow .35s;
+    }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .feature-card:nth-child(1) { grid-column: span 7; }
+    .feature-card:nth-child(2) { grid-column: span 5; background: #e2f3fa; }
+    .feature-card:nth-child(3) { grid-column: span 5; background: #edf8fc; }
+    .feature-card:nth-child(4) { grid-column: span 7; background: #0b3446; color: white; }
+    .feature-card:nth-child(5) { grid-column: span 12; min-height: 310px; background: linear-gradient(120deg, #a0d8ef, #e9f8fd 68%, #fff); }
+    .feature-number { color: var(--wine); font-family: Georgia, serif; font-size: .9rem; }
+    .feature-card:nth-child(4) .feature-number { color: var(--sky); }
+    .feature-card:nth-child(5) h3 { margin-top: 60px; }
+    .feature-card h3 { margin-top: 90px; font-family: "Yu Mincho", "YuMincho", serif; font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 500; }
+    .feature-card p { max-width: 530px; margin-bottom: 0; color: var(--muted); }
+    .feature-card:nth-child(4) p { color: rgba(255,255,255,.63); }
+    .feature-icon { position: absolute; right: 34px; top: 26px; width: 88px; height: 88px; color: rgba(49,136,173,.28); }
+    .feature-card:nth-child(4) .feature-icon { color: rgba(160,216,239,.42); }
+
+    .technology { position: relative; overflow: hidden; background: var(--paper-deep); }
+    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .tech-photo {
+      position: relative;
+      margin: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #c6e7f4;
+      box-shadow: var(--shadow);
+    }
+    .tech-photo img { width: 100%; max-height: 720px; object-fit: cover; object-position: center; }
+    .tech-photo figcaption {
+      position: absolute;
+      left: 24px;
+      bottom: 22px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      color: white;
+      background: rgba(6,35,48,.55);
+      backdrop-filter: blur(10px);
+      font-size: .68rem;
+      letter-spacing: .1em;
+    }
+    .tech-visual { min-height: 580px; position: relative; display: grid; place-items: center; }
+    .tech-core {
+      position: relative;
+      z-index: 2;
+      width: 170px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 50%;
+      background: radial-gradient(circle at 36% 28%, #fff, #d7c9be 48%, #7a6158 100%);
+      box-shadow: 0 38px 70px rgba(52,31,20,.22), inset 0 0 22px white;
+      font-family: Georgia, serif;
+      font-size: 2.2rem;
+      color: var(--wine);
+    }
+    .tech-orbit {
+      position: absolute;
+      width: 330px;
+      aspect-ratio: 1;
+      border: 1px solid rgba(49,136,173,.24);
+      border-radius: 50%;
+    }
+    .tech-orbit.o2 { width: 480px; border-color: rgba(23,20,18,.1); }
+    .tech-dot {
+      position: absolute;
+      left: 50%;
+      top: -7px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--wine);
+      box-shadow: 0 0 0 7px rgba(49,136,173,.1);
+    }
+    .tech-orbit.o2 .tech-dot { left: 14%; top: 78%; background: var(--gold); box-shadow: 0 0 0 7px rgba(177,138,84,.1); }
+    .tech-tag { position: absolute; color: var(--muted); font-size: .72rem; letter-spacing: .12em; }
+    .tech-tag.t1 { top: 14%; right: 5%; }
+    .tech-tag.t2 { bottom: 14%; left: 0; }
+    .tech-tag.t3 { bottom: 3%; right: 12%; }
+    .tech-list { border-top: 1px solid var(--line); }
+    .tech-item { display: grid; grid-template-columns: 44px 1fr; gap: 18px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+    .tech-item span { color: var(--wine); font-family: Georgia, serif; }
+    .tech-item h3 { margin-bottom: 4px; }
+    .tech-item p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .design { background: var(--white); }
+    .design-split { display: grid; grid-template-columns: 1.12fr .88fr; gap: 18px; }
+    .design-gallery {
+      min-height: 670px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+    }
+    .design-shot {
+      min-width: 0;
+      min-height: 0;
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+      border-radius: 22px;
+      background: var(--sky-pale);
+    }
+    .design-shot:first-child { grid-row: 1 / 3; }
+    .design-shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.8,.2,1); }
+    .design-shot:hover img { transform: scale(1.025); }
+    .design-shot figcaption {
+      position: absolute;
+      left: 15px;
+      bottom: 14px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: white;
+      background: rgba(6,35,48,.56);
+      backdrop-filter: blur(8px);
+      font-size: .62rem;
+      letter-spacing: .08em;
+    }
+    .design-visual {
+      min-height: 670px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, #cbeaf6, #fbfeff 48%, #a0d8ef);
+    }
+    .design-visual .ring-wrap { width: min(43vw, 510px); filter: drop-shadow(14px 70px 35px rgba(54,29,20,.24)); }
+    .design-caption { position: absolute; left: 32px; bottom: 30px; color: rgba(23,20,18,.58); font-size: .72rem; letter-spacing: .12em; }
+    .design-copy {
+      min-height: 670px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(36px, 6vw, 72px);
+      border-radius: var(--radius);
+      background: #e2f3fa;
+    }
+    .design-copy blockquote { margin: 0; font-family: "Yu Mincho", "YuMincho", serif; font-size: clamp(1.8rem, 3vw, 3.1rem); line-height: 1.55; }
+    .design-copy p { color: var(--muted); }
+    .design-principles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+    .principle { padding-top: 14px; border-top: 1px solid rgba(23,20,18,.16); font-size: .76rem; line-height: 1.6; }
+    .principle strong { display: block; margin-bottom: 3px; font-size: .9rem; }
+
+    .pillars { background: var(--paper); }
+    .pillar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .pillar { min-height: 330px; padding: 34px; background: var(--paper); }
+    .pillar .roman { color: var(--wine); font-family: Georgia, serif; font-style: italic; }
+    .pillar h3 { margin-top: 100px; font-family: "Yu Mincho", "YuMincho", serif; font-size: 1.45rem; font-weight: 500; }
+    .pillar p { margin: 0; color: var(--muted); font-size: .85rem; }
+
+    .faq { background: var(--white); }
+    .faq-grid { display: grid; grid-template-columns: .7fr 1.3fr; gap: 90px; }
+    .faq-sticky { position: sticky; top: 120px; align-self: start; }
+    .faq-list { border-top: 1px solid var(--line); }
+    details { border-bottom: 1px solid var(--line); }
+    summary {
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      cursor: pointer;
+      list-style: none;
+      font-family: "Yu Mincho", "YuMincho", serif;
+      font-size: 1.06rem;
+      font-weight: 600;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; flex: 0 0 auto; color: var(--wine); font: 300 1.5rem/1 sans-serif; transition: transform .25s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    .answer { max-width: 650px; padding: 0 36px 30px 0; color: var(--muted); font-size: .92rem; }
+
+    .purchase {
+      position: relative;
+      overflow: hidden;
+      color: white;
+      background: linear-gradient(130deg, #082c3d 0%, #176581 54%, #0b4057 100%);
+    }
+    .purchase::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 75% 45%, rgba(160,216,239,.32), transparent 30%);
+    }
+    .purchase-grid { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; align-items: end; gap: 80px; }
+    .purchase .eyebrow { color: #efc5cb; }
+    .purchase h2 { max-width: 780px; }
+    .purchase-copy { max-width: 650px; color: rgba(255,255,255,.68); }
+    .purchase-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .purchase .btn-primary { background: white; color: var(--wine-dark); }
+    .purchase .btn-primary:hover { background: #f7e9eb; }
+    .purchase .btn-ghost { border-color: rgba(255,255,255,.25); color: white; background: rgba(255,255,255,.06); }
+    .purchase-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .purchase-meta div { padding-top: 18px; border-top: 1px solid rgba(255,255,255,.2); }
+    .purchase-meta strong { display: block; margin-bottom: 6px; font-size: .84rem; }
+    .purchase-meta span { color: rgba(255,255,255,.58); font-size: .75rem; line-height: 1.7; }
+
+    footer { padding: 48px 0 110px; color: var(--muted); background: #061e29; }
+    .footer-grid { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; }
+    footer .brand { color: white; }
+    footer p { margin: 14px 0 0; font-size: .75rem; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 20px; }
+    .footer-links a { color: rgba(255,255,255,.6); font-size: .75rem; text-decoration: none; }
+
+    .mobile-cta {
+      display: none;
+      position: fixed;
+      z-index: 45;
+      left: 12px;
+      right: 12px;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      padding: 8px 8px 8px 18px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      color: white;
+      background: rgba(7,37,50,.94);
+      box-shadow: 0 18px 50px rgba(20,8,12,.28);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .mobile-cta span { font-size: .72rem; line-height: 1.4; }
+    .mobile-cta strong { display: block; font-size: .78rem; }
+    .mobile-cta .btn { min-height: 44px; padding-inline: 18px; }
+
+    dialog {
+      width: min(calc(100% - 30px), 680px);
+      max-height: calc(100svh - 30px);
+      padding: 0;
+      overflow: auto;
+      border: 0;
+      border-radius: 28px;
+      color: var(--ink);
+      background: var(--white);
+      box-shadow: 0 50px 130px rgba(25,10,14,.42);
+    }
+    dialog::backdrop { background: rgba(17,10,12,.66); backdrop-filter: blur(8px); }
+    .modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 34px 34px 20px; }
+    .modal-head h2 { margin: 0; font-size: clamp(1.7rem, 5vw, 2.7rem); }
+    .icon-button { width: 42px; height: 42px; flex: 0 0 auto; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; font-size: 1.3rem; }
+    .order-form { padding: 10px 34px 36px; }
+    .field { margin-top: 22px; }
+    .field > label, .field > legend { display: block; margin-bottom: 10px; font-size: .78rem; font-weight: 700; letter-spacing: .06em; }
+    fieldset { padding: 0; border: 0; }
+    .finish-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .finish { position: relative; cursor: pointer; }
+    .finish input { position: absolute; opacity: 0; }
+    .finish span { min-height: 66px; display: flex; align-items: center; gap: 9px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; font-size: .75rem; }
+    .finish input:checked + span { border-color: var(--wine); box-shadow: inset 0 0 0 1px var(--wine); }
+    .swatch { width: 20px; height: 20px; flex: 0 0 auto; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
+    .swatch.silver { background: linear-gradient(135deg,#fff,#817c7a,#eee); }
+    .swatch.gold { background: linear-gradient(135deg,#f8e3a9,#9b6a21,#fff0b7); }
+    .swatch.rose { background: linear-gradient(135deg,#f2c9bb,#9b6258,#f7ddd5); }
+    select, input[type="email"], input[type="text"] {
+      width: 100%;
+      min-height: 52px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink);
+      background: white;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .consent { display: flex; gap: 10px; margin: 22px 0; color: var(--muted); font-size: .75rem; line-height: 1.6; }
+    .consent input { margin-top: 4px; accent-color: var(--wine); }
+    .order-form .btn { width: 100%; }
+    .form-note { margin: 13px 0 0; color: var(--muted); font-size: .7rem; text-align: center; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero { min-height: auto; padding-top: 120px; }
+      .hero-grid, .manifesto-grid, .tech-grid, .design-split, .faq-grid, .purchase-grid { grid-template-columns: 1fr; }
+      .hero-copy { padding-top: 20px; }
+      .product-stage { min-height: 470px; }
+      .hero-photo { width: min(72vw, 470px); justify-self: center; margin-top: 30px; }
+      .ring-wrap { width: min(65vw, 390px); }
+      .orbit { width: min(76vw, 490px); }
+      .stage-label { right: 8%; bottom: 24px; }
+      .manifesto-grid, .tech-grid, .faq-grid, .purchase-grid { gap: 50px; }
+      .experience-steps { grid-template-columns: repeat(5, minmax(160px, 1fr)); overflow-x: auto; }
+      .experience-stage { min-height: 500px; }
+      .feature-card:nth-child(n) { grid-column: span 6; }
+      .feature-card:nth-child(5) { grid-column: span 12; }
+      .design-visual .ring-wrap { width: min(68vw, 500px); }
+      .design-gallery { min-height: 720px; }
+      .design-copy { min-height: 550px; }
+      .pillar-grid { grid-template-columns: 1fr 1fr; }
+      .faq-sticky { position: static; }
+    }
+
+    @media (max-width: 620px) {
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      .section { padding: 86px 0; }
+      .site-header .nav { min-height: 66px; }
+      .nav-links .nav-cta { display: none; }
+      .hero { padding-top: 100px; }
+      h1 { font-size: clamp(3.05rem, 16vw, 4.7rem); }
+      .hero h1 { font-size: clamp(2.35rem, 12.2vw, 3.35rem); letter-spacing: -.065em; }
+      .hero-actions .btn { width: 100%; }
+      .product-stage { min-height: 390px; margin-top: 20px; }
+      .hero-photo { width: min(88vw, 440px); border-radius: 190px 190px 24px 24px; }
+      .experience-stage { min-height: 430px; margin-top: 32px; }
+      .love-scene { width: calc(100% - 8px); height: 340px; transform: none; }
+      .experience-replay { bottom: 20px; }
+      .experience-steps { margin-inline: -14px; border-radius: 0; }
+      .ring-wrap { width: 76vw; }
+      .orbit { width: 88vw; }
+      .stage-label { right: 0; bottom: 10px; }
+      .feature-grid { display: block; }
+      .feature-card { min-height: 330px; margin-bottom: 12px; }
+      .tech-visual { min-height: 410px; transform: scale(.78); margin: -30px 0; }
+      .design-visual, .design-copy { min-height: 520px; }
+      .design-gallery { min-height: auto; grid-template-columns: 1fr 1fr; grid-template-rows: 500px 300px; }
+      .design-shot:first-child { grid-column: 1 / 3; grid-row: auto; }
+      .design-visual .ring-wrap { width: 84vw; }
+      .design-principles, .purchase-meta { grid-template-columns: 1fr; }
+      .pillar-grid { grid-template-columns: 1fr; }
+      .pillar { min-height: 265px; }
+      .pillar h3 { margin-top: 65px; }
+      .footer-grid { align-items: flex-start; flex-direction: column; }
+      .footer-links { justify-content: flex-start; }
+      .mobile-cta { display: flex; }
+      .finish-options, .form-row { grid-template-columns: 1fr; }
+      .modal-head { padding: 28px 22px 16px; }
+      .order-form { padding: 8px 22px 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へ移動</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Heartoo トップへ">Heart<span>oo</span></a>
+      <nav class="nav-links" aria-label="メインナビゲーション">
+        <a href="index.html">← CHES</a>
+        <a href="#experience">体験</a>
+        <a href="#features">特徴</a>
+        <a href="#technology">技術</a>
+        <a href="#design">デザイン</a>
+        <a href="#faq">FAQ</a>
+        <button class="btn btn-primary btn-small nav-cta" type="button" data-open-order>先行購入相談</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Heartoo / Heart to you</p>
+          <h1>愛が、届く。</h1>
+          <p class="hero-sub">空中にハートを描き、愛する人へそっと放つ。彼女の胸元で柔らかな光が花開き、特別な香りが鼻をくすぐる。結婚指輪のように見えて、それ以上のものです。</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button" data-open-order>先行購入相談へ <span aria-hidden="true">→</span></button>
+            <a class="btn btn-ghost" href="#experience">愛を送る体験を見る</a>
+          </div>
+          <p class="hero-note">Edition / 試作品「ロマンチ」設計・開発中</p>
+        </div>
+        <figure class="hero-photo reveal">
+          <img src="upload/1884_0.jpg" alt="Heartooを手に、光のハートを受け取るふたり" width="467" height="662" fetchpriority="high">
+          <figcaption><span>THE MOMENT</span><span>♡を貴女に。</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section manifesto" id="story">
+      <div class="container manifesto-grid">
+        <div class="reveal">
+          <p class="eyebrow">Concept</p>
+          <h2>♡を貴女に。</h2>
+        </div>
+        <div class="manifesto-copy reveal">
+          <p>想像してみてください。空中にハートを描き、そっと自分の方へ引き寄せ、愛する人へやさしく押し出す。ハートは彼女の胸へと飛んでいき、柔らかな光となって花開き、特別な香りがふわりと彼女に届く。</p>
+          <p>ロマンチックだけではありません。CHESの入場や支払い、あらゆる日常にHeartooは溶け込みます。</p>
+          <p class="manifesto-sign">Heart to you, always.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section experience" id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">The Heartoo experience</p>
+          <h2>想いを描く。<br>愛が、花開く。</h2>
+          <p class="lead">誓いの指輪をはめた左手で、空中にハートを描く。その一瞬の仕草が、距離を越えて、光と香りに変わります。</p>
+        </div>
+        <div class="experience-stage reveal" id="experienceStage">
+          <div class="love-scene" aria-label="ハートを描いて相手に送り、光と香りが届くアニメーション">
+            <svg viewBox="0 0 1000 390" role="img" aria-hidden="true">
+              <text class="scene-label" x="70" y="42">YOU</text>
+              <text class="scene-label" x="842" y="42">HER</text>
+              <path class="scene-hand" d="M60 315c38-17 72-22 96-10 24 11 36 32 56 38 22 7 48-5 65-19M113 313c7-30 16-57 27-83 5-11 19-6 17 6l-5 40m4-25 10-58c2-12 19-11 19 2l-2 66m1-21 9-58c2-12 19-9 18 4l-3 68m2-19 11-45c3-11 19-7 17 5l-8 77"/>
+              <ellipse class="scene-ring" cx="177" cy="247" rx="15" ry="7" transform="rotate(-82 177 247)"/>
+              <path class="gesture-path" pathLength="1" d="M187 203C116 141 109 75 164 73c31-1 44 25 45 31 3-8 17-34 49-31 54 5 42 70-49 130-7 5-15 5-22 0Z"/>
+              <path class="send-path" d="M280 184C430 90 604 95 774 180"/>
+              <g transform="translate(268 169)"><g class="flying-heart"><path d="M15 28C-5 16 1-1 13 1c6 1 9 6 9 8 1-2 5-8 11-8 13 0 17 16-4 28-5 3-9 3-14-1Z" fill="#6dc4e6"/></g></g>
+              <path class="scene-hand" d="M728 337c26-24 53-34 81-33 29 1 55 14 80 38M786 306c12-28 24-49 38-64 9-9 22 1 15 12l-17 26m7-14 24-42c6-10 21-3 16 8l-22 51m9-17 26-38c7-10 21 0 14 10l-27 49"/>
+              <ellipse class="scene-ring" cx="838" cy="282" rx="15" ry="7" transform="rotate(-48 838 282)"/>
+              <g transform="translate(765 114)"><g class="received-heart"><path d="M50 91C-18 50 1-5 42 2c21 3 31 22 31 29 4-8 17-30 39-29 43 2 55 54-14 92-17 9-31 8-48-3Z" fill="#8ed8f2"/></g></g>
+              <path class="scent-wave s1" d="M796 236c-24-24 22-38 0-66"/>
+              <path class="scent-wave s2" d="M834 242c-29-28 25-42 0-78"/>
+              <path class="scent-wave s3" d="M871 236c-22-24 21-38 0-66"/>
+            </svg>
+          </div>
+          <button class="btn btn-primary experience-replay" id="replayExperience" type="button">♡ 愛を送る</button>
+        </div>
+        <div class="experience-steps reveal">
+          <div class="experience-step"><span>01</span><h3>描く</h3><p>左手の薬指で、空中にハートを描く。</p></div>
+          <div class="experience-step"><span>02</span><h3>引き寄せる</h3><p>生まれた光を、そっと自分の方へ。</p></div>
+          <div class="experience-step"><span>03</span><h3>放つ</h3><p>愛する人を想い、やさしく押し出す。</p></div>
+          <div class="experience-step"><span>04</span><h3>花開く</h3><p>彼女の胸元で、光のハートが揺らぐ。</p></div>
+          <div class="experience-step"><span>05</span><h3>香る</h3><p>光がほどける瞬間、特別な香りが鼻をくすぐる。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section features" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Features</p>
+          <h2>指輪のまま、<br>できること。</h2>
+          <p class="lead">機能を見せつけるのではなく、愛する人を想う仕草そのものを体験にする。Heartooはテクノロジーを主役にしません。</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <span class="feature-number">01</span>
+            <svg class="feature-icon" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 83S17 64 17 38c0-13 9-21 20-21 8 0 13 4 13 4s5-4 13-4c11 0 20 8 20 21 0 26-33 45-33 45Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <h3>空中に、愛を描く。</h3>
+            <p>左手で描いたハートを、やさしく相手へ放つ。画面もボタンも使わず、想う仕草をそのままメッセージにします。</p>
+          </article>
+          <article class="feature-card reveal">
+            <span class="feature-number">02</span>
+            <svg class="feature-icon" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 13v74M23 31c7-9 16-14 27-14 19 0 34 15 34 34S69 85 50 85c-13 0-24-7-30-17" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15 52 5 16 16-5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <h3>買い替えず、育てる。</h3>
+            <p>OTAアップデートで、体験はこれからも進化する。大切な指輪を手放さずに、新しい価値を受け取れます。</p>
+          </article>
+          <article class="feature-card reveal">
+            <span class="feature-number">03</span>
+            <svg class="feature-icon" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="32" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="16" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="50" r="3" fill="currentColor"/></svg>
+            <h3>光のあとに、香りが届く。</h3>
+            <p>相手の胸元で光のハートが花開き、揺らぎ、ほどける。その瞬間、特別な香りがふわりと立ち上がります。</p>
+          </article>
+          <article class="feature-card reveal">
+            <span class="feature-number">04</span>
+            <svg class="feature-icon" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 51h70M50 15c11 10 17 22 17 36S61 77 50 85C39 77 33 65 33 51s6-26 17-36Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <h3>地球の日常から、火星まで。</h3>
+            <p>同じ部屋でも、遠距離でも、いつか地球と火星に離れても。距離を越えて愛を届けるため、設計の基準を遠く置きます。</p>
+          </article>
+          <article class="feature-card reveal">
+            <span class="feature-number">05</span>
+            <svg class="feature-icon" viewBox="0 0 100 100" aria-hidden="true"><path d="M38 69a27 27 0 0 1 0-38M50 60a14 14 0 0 1 0-20M62 31a27 27 0 0 1 0 38" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="50" cy="50" r="3" fill="currentColor"/></svg>
+            <h3>SchoolParkへの入場も、EMUERの支払いも。</h3>
+            <p>NFCを搭載し、SchoolParkの入場券として、さらにEMUER決済にも使用可能。スマート結婚指輪でありながら、Heartooはあらゆる日常へ静かに溶け込みます。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section technology" id="technology">
+      <div class="container tech-grid">
+        <figure class="tech-photo reveal">
+          <img src="upload/1885_0.jpg" alt="火星の居住区を背景に、Heartooを着けたふたりが手を重ねる未来像" width="469" height="663" loading="lazy">
+          <figcaption>THE BOND / EARTH TO MARS</figcaption>
+        </figure>
+        <div class="reveal">
+          <p class="eyebrow">Technology</p>
+          <h2>ハードウェアに、<br>育つ魂を。</h2>
+          <p class="lead">ソフトウェアはハードウェアの魂。Heartooは、指輪の記憶をそのままに、体験だけを進化させる設計思想を採用します。</p>
+          <div class="tech-list">
+            <div class="tech-item"><span>01</span><div><h3>空中の軌跡を読む</h3><p>左手の動きを捉え、指輪の光の残像でハートを描く。画面に頼らない、身体的なインタラクションです。</p></div></div>
+            <div class="tech-item"><span>02</span><div><h3>光と香りを受け取る</h3><p>相手側では光が胸元で花開き、固形パフュームを穏やかに温めて香りを立たせます。</p></div></div>
+            <div class="tech-item"><span>03</span><div><h3>買い替えず、OTAで育てる</h3><p>指輪を交換することなく、家に置くケースを通じて体験とソフトウェアを磨き続けます。</p></div></div>
+            <div class="tech-item"><span>04</span><div><h3>火星を見据える設計</h3><p>距離・耐久性・保守性・安全性を長い時間軸で考える。火星でも動くことを、エンジニアリングの北極星に。</p></div></div>
+            <div class="tech-item"><span>05</span><div><h3>NFCでSchoolParkとつながる</h3><p>電池を使わないNFCで、SchoolParkへの入場とEMUER決済に対応。秘密鍵を指輪に保持しない設計で、利便性と安全性を両立します。</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section design" id="design">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Design</p>
+          <h2>0.1ミリも、<br>ガジェットに見せない。</h2>
+        </div>
+        <div class="design-split">
+          <div class="design-gallery reveal" aria-label="Heartooのリングデザインコンセプト">
+            <figure class="design-shot"><img src="upload/1881_0.jpg" alt="ローズゴールドとピンクストーンを用いたハート型のリングデザイン" width="469" height="650" loading="lazy"><figcaption>ROMANTIC FORM</figcaption></figure>
+            <figure class="design-shot"><img src="upload/1882_0.jpg" alt="シルバーとストーンを組み合わせた彫刻的なリングデザイン" width="468" height="658" loading="lazy"><figcaption>SCULPTED FORM</figcaption></figure>
+            <figure class="design-shot"><img src="upload/1883_0.jpg" alt="緩やかな曲線に小さな石を配した静かなリングデザイン" width="472" height="673" loading="lazy"><figcaption>QUIET FORM</figcaption></figure>
+          </div>
+          <div class="design-copy reveal">
+            <blockquote>「光っていない時は、<br>ただ静かに美しい<br>指輪であること。」</blockquote>
+            <div>
+              <p>機能のための出っ張りも、主張するディスプレイもいらない。視線を奪うのはテクノロジーではなく、指輪そのものの佇まいです。</p>
+              <div class="design-principles">
+                <div class="principle"><strong>Quiet</strong>機能を感じさせない静けさ</div>
+                <div class="principle"><strong>Timeless</strong>流行より、時間に耐える形</div>
+                <div class="principle"><strong>Intimate</strong>ふたりだけに意味がある体験</div>
+                <div class="principle"><strong>Precise</strong>細部まで妥協しない精度</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pillars">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Four standards</p>
+          <h2>Heartooをつくる、<br>4つの基準。</h2>
+        </div>
+        <div class="pillar-grid reveal">
+          <article class="pillar"><span class="roman">I</span><h3>美しいこと</h3><p>ティファニーやカルティエを越える。その意志を、すべての造形判断の起点に。</p></article>
+          <article class="pillar"><span class="roman">II</span><h3>強いこと</h3><p>地球の日常はもちろん、火星でも動く。その遠い基準から設計を考える。</p></article>
+          <article class="pillar"><span class="roman">III</span><h3>役立つこと</h3><p>できることを増やすためではなく、人の時間と関係を良くするための機能を。</p></article>
+          <article class="pillar"><span class="roman">IV</span><h3>ロマンチックであること</h3><p>テクノロジーの先にあるのは、効率ではなく、心が動く瞬間。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="container faq-grid">
+        <div class="faq-sticky reveal">
+          <p class="eyebrow">FAQ</p>
+          <h2>よくある<br>ご質問。</h2>
+          <p class="lead">先行購入相談では、現在の開発状況も含めて個別にご案内します。</p>
+        </div>
+        <div class="faq-list reveal">
+          <details open>
+            <summary>Heartooは、普通の結婚指輪と何が違いますか？</summary>
+            <div class="answer">Heartooは、静かな光とOTAアップデートによる進化を、美しい結婚指輪の中に溶け込ませるプロダクトです。大切な指輪を買い替えず、ふたりの時間とともに体験を育てていけることが、最大の違いです。</div>
+          </details>
+          <details>
+            <summary>光はいつも点灯していますか？</summary>
+            <div class="answer">いいえ。Heartooが大切にしているのは「光っていない時は、ただ静かに美しいこと」。光は、ふたりにとって意味のある瞬間だけ現れる設計を目指しています。</div>
+          </details>
+          <details>
+            <summary>香りはどのように届きますか？</summary>
+            <div class="answer">相手のHeartooに収めた固形パフュームをマイクロヒーターで穏やかに温め、光のハートがほどける瞬間に香りを立たせます。噴霧ではなく、交換式の香りカートリッジを想定しています。</div>
+          </details>
+          <details>
+            <summary>離れていても、ハートを送れますか？</summary>
+            <div class="answer">はい。同じ部屋だけでなく、遠距離や単身赴任でも成立する体験として設計しています。いつか地球と火星に離れたふたりにも愛を届けることが、Heartooの目指す未来です。</div>
+          </details>
+          <details>
+            <summary>毎日身につけられますか？</summary>
+            <div class="answer">日常的に身につける結婚指輪として開発しています。耐水性・耐久性・充電方法などの最終仕様は、検証の完了後に正式な数値とともに公開します。</div>
+          </details>
+          <details>
+            <summary>OTAアップデートとは何ですか？</summary>
+            <div class="answer">指輪を交換せず、ソフトウェアを通じて体験の改善や新しい機能を受け取る仕組みです。思い出のあるハードウェアを長く使い続けるための、Heartooの中核となる考え方です。</div>
+          </details>
+          <details>
+            <summary>価格と発売時期を教えてください。</summary>
+            <div class="answer">現在は試作品「ロマンチ」を設計・開発中です。価格、発売時期、購入方法は決まり次第、先行購入相談にお申し込みいただいた方へ優先してご案内します。</div>
+          </details>
+          <details>
+            <summary>サイズや仕上げは選べますか？</summary>
+            <div class="answer">先行購入相談では、ご希望のサイズ・仕上げ・単品またはペアをお聞きします。正式な選択肢は製品仕様の確定時にご案内します。</div>
+          </details>
+          <details>
+            <summary>個人情報や通信の安全性はどう考えていますか？</summary>
+            <div class="answer">毎日身につけるものだからこそ、取得する情報を必要最小限にし、安全な接続と更新を前提に設計します。具体的なプライバシー方針とセキュリティ仕様は、提供開始前に公開します。</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section purchase" id="purchase">
+      <div class="container purchase-grid">
+        <div class="reveal">
+          <p class="eyebrow">Early access</p>
+          <h2>ふたりの「一生もの」を、<br>ここから。</h2>
+          <p class="purchase-copy">試作品「ロマンチ」の設計・開発を進めながら、先行購入相談を受け付けています。ご希望を伺い、製品仕様・発売時期・購入方法を優先してご案内します。</p>
+          <div class="purchase-actions">
+            <button class="btn btn-primary" type="button" data-open-order>先行購入相談を申し込む <span aria-hidden="true">→</span></button>
+            <a class="btn btn-ghost" href="#faq">不安な点を確認する</a>
+          </div>
+        </div>
+        <div class="purchase-meta reveal">
+          <div><strong>相談は無料です</strong><span>申し込みだけで購入が確定することはありません。</span></div>
+          <div><strong>優先してご案内</strong><span>価格・発売時期・正式仕様を決定後にお知らせします。</span></div>
+          <div><strong>単品・ペアに対応予定</strong><span>ご希望の購入形態を事前にお聞きします。</span></div>
+          <div><strong>仕上げを選択</strong><span>プラチナ・ゴールド・ローズのご希望を承ります。</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div><a class="brand" href="#top">Heart<span>oo</span></a><p>♡を貴女に。— Heart to you.</p></div>
+      <div class="footer-links">
+        <a href="#story">理念</a><a href="#features">特徴</a><a href="#technology">技術</a><a href="#design">デザイン</a><a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta" id="mobileCta">
+    <span><strong>試作品「ロマンチ」</strong>設計・開発中</span>
+    <button class="btn btn-primary" type="button" data-open-order>申し込む</button>
+  </div>
+
+  <dialog id="orderDialog" aria-labelledby="orderTitle">
+    <div class="modal-head">
+      <div><p class="eyebrow">Early access</p><h2 id="orderTitle">先行購入相談</h2></div>
+      <button class="icon-button" type="button" data-close-order aria-label="閉じる">×</button>
+    </div>
+    <form class="order-form" id="orderForm">
+      <fieldset class="field">
+        <legend>ご希望の仕上げ</legend>
+        <div class="finish-options">
+          <label class="finish"><input type="radio" name="finish" value="プラチナ" checked><span><i class="swatch silver"></i>プラチナ</span></label>
+          <label class="finish"><input type="radio" name="finish" value="ゴールド"><span><i class="swatch gold"></i>ゴールド</span></label>
+          <label class="finish"><input type="radio" name="finish" value="ローズ"><span><i class="swatch rose"></i>ローズ</span></label>
+        </div>
+      </fieldset>
+      <div class="form-row">
+        <div class="field"><label for="quantity">購入形態</label><select id="quantity" name="quantity"><option>ペア</option><option>単品</option><option>未定・相談したい</option></select></div>
+        <div class="field"><label for="size">リングサイズ</label><select id="size" name="size"><option>未定・相談したい</option><option>5〜9号</option><option>10〜14号</option><option>15〜19号</option><option>20号以上</option></select></div>
+      </div>
+      <div class="field"><label for="name">お名前</label><input id="name" name="name" type="text" autocomplete="name" required placeholder="山田 太郎"></div>
+      <div class="field"><label for="email">メールアドレス</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.com"></div>
+      <label class="consent"><input type="checkbox" required><span>入力した内容を、Heartooの先行購入相談と製品案内のために利用することに同意します。</span></label>
+      <button class="btn btn-primary" type="submit">相談内容をメールで送る <span aria-hidden="true">→</span></button>
+      <p class="form-note">申し込みだけで購入や決済が確定することはありません。</p>
+    </form>
+  </dialog>
+
+  <script>
+    (() => {
+      const ORDER_EMAIL = 'takakiasaka1@gmail.com';
+      const header = document.getElementById('siteHeader');
+      const dialog = document.getElementById('orderDialog');
+      const form = document.getElementById('orderForm');
+
+      const updateHeader = () => header.classList.toggle('is-scrolled', scrollY > 24);
+      updateHeader();
+      addEventListener('scroll', updateHeader, { passive: true });
+
+      document.querySelectorAll('[data-open-order]').forEach(button => {
+        button.addEventListener('click', () => dialog.showModal());
+      });
+      document.querySelector('[data-close-order]').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', event => {
+        if (event.target === dialog) dialog.close();
+      });
+      addEventListener('keydown', event => {
+        if (event.key === 'Escape' && dialog.open) dialog.close();
+      });
+
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const data = new FormData(form);
+        const subject = 'Heartoo 試作品「ロマンチ」先行購入相談';
+        const body = [
+          'Heartoo 先行購入相談を希望します。',
+          '',
+          'お名前：' + data.get('name'),
+          'メールアドレス：' + data.get('email'),
+          '希望の仕上げ：' + data.get('finish'),
+          '購入形態：' + data.get('quantity'),
+          'リングサイズ：' + data.get('size'),
+          '',
+          '※このメールはHeartoo製品ページから作成されました。'
+        ].join('\n');
+        location.href = `mailto:${ORDER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
+
+      const experienceStage = document.getElementById('experienceStage');
+      const replayExperience = document.getElementById('replayExperience');
+      const playExperience = () => {
+        experienceStage.classList.remove('is-playing');
+        requestAnimationFrame(() => requestAnimationFrame(() => experienceStage.classList.add('is-playing')));
+      };
+      replayExperience.addEventListener('click', playExperience);
+      if ('IntersectionObserver' in window) {
+        const experienceObserver = new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) {
+            playExperience();
+            experienceObserver.disconnect();
+          }
+        }, { threshold: .35 });
+        experienceObserver.observe(experienceStage);
+      } else {
+        playExperience();
+      }
+
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .12 });
+        revealItems.forEach(item => observer.observe(item));
+      } else {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+      }
+    })();
+  </script>
+</body>
+</html>
