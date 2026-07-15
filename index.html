@@ -3,496 +3,251 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SchoolPark | 学ぶことが、価値になる。</title>
+<title>CHES | 合同会社型DAO SchoolPark</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;800&family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 
-:root {
-  --bg:    #f5f2ec;
-  --bg2:   #ede9e1;
-  --bg3:   #e4dfd4;
-  --bg4:   #dbd5c8;
-  --text:  #1a1714;
-  --text2: #4a4540;
-  --text3: #8a8278;
-  --acc:   #4a7c59;
-  --acc2:  #3d6649;
-  --acc3:  #c8ddc0;     /* light green tint */
-  --warm:  #b85c38;     /* secondary warm */
-  --card:  rgba(255,255,255,0.75);
-  --cb:    rgba(0,0,0,0.07);
-  --r-sm:  10px;
-  --r-md:  16px;
-  --r-lg:  24px;
+:root{
+  --bg:#000;
+  --bg2:#0c0c0c;
+  --line:rgba(255,255,255,.12);
+  --line2:rgba(255,255,255,.22);
+  --white:#f2f2f0;
+  --dim:#8f8f8f;
+  --dim2:#5a5a5a;
+  --mono:'JetBrains Mono',monospace;
+  --head:'Zen Kaku Gothic New',sans-serif;
+  --body:'Noto Sans JP',sans-serif;
 }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  overflow-x: hidden;
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:var(--body);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+a{color:inherit}
+
+.coord{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--dim2);text-transform:uppercase;}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 48px;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-brand{display:flex;flex-direction:column;text-decoration:none;}
+.nav-brand-mark{font-family:var(--head);font-weight:900;font-size:18px;letter-spacing:.08em;}
+.nav-brand-sub{font-family:var(--mono);font-size:8.5px;color:var(--dim);letter-spacing:.16em;margin-top:3px;}
+.nav-links{display:flex;gap:38px;list-style:none;}
+.nav-links a{font-size:11.5px;font-family:var(--mono);letter-spacing:.1em;text-decoration:none;color:var(--dim);transition:color .2s;text-transform:uppercase;}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line2);padding:10px 20px;text-decoration:none;color:var(--white);
+  transition:all .2s;
+}
+.nav-cta:hover{background:var(--white);color:#000;border-color:var(--white);}
+.nav-explore-wrap{position:relative;}
+.nav-explore-menu{
+  position:absolute;top:calc(100% + 14px);right:0;
+  display:flex;flex-direction:column;min-width:180px;
+  background:rgba(0,0,0,.95);border:1px solid var(--line2);
+  opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:opacity .2s,transform .2s,visibility .2s;
+}
+.nav-explore-wrap:hover .nav-explore-menu,
+.nav-explore-wrap.open .nav-explore-menu{opacity:1;visibility:visible;transform:none;}
+.nav-explore-menu a{
+  padding:14px 20px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;
+  color:var(--dim);text-decoration:none;border-bottom:1px solid var(--line);
+  transition:color .2s,background .2s;
+}
+.nav-explore-menu a:last-child{border-bottom:none;}
+.nav-explore-menu a:hover{color:var(--white);background:rgba(255,255,255,.05);}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:150px 48px 90px;position:relative;overflow:hidden;
+}
+.hero-video-bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:.32;filter:grayscale(.3) contrast(1.05);z-index:0;
+}
+.hero-video-scrim{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.75) 55%, #000 100%);
+}
+.hero-sound-btn{
+  position:relative;z-index:1;
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dim);background:rgba(0,0,0,.4);border:1px solid var(--line2);
+  padding:9px 18px;text-decoration:none;cursor:pointer;transition:all .2s;
+  margin-top:18px;
+}
+.hero-sound-btn:hover{color:var(--white);border-color:var(--white);}
+.hero-sound-btn .dot{width:5px;height:5px;border-radius:50%;background:#e0576f;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.video-modal{
+  position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.92);
+  display:none;align-items:center;justify-content:center;padding:40px;
+}
+.video-modal.open{display:flex;}
+.video-modal video{max-width:min(1100px,92vw);max-height:82vh;width:100%;border:1px solid var(--line2);}
+.video-modal-close{
+  position:absolute;top:28px;right:36px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--dim);
+  background:none;border:1px solid var(--line2);padding:9px 16px;cursor:pointer;transition:all .2s;
+}
+.video-modal-close:hover{color:var(--white);border-color:var(--white);}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 60% 46% at 50% 40%, black 12%, transparent 82%);
+  pointer-events:none;
+}
+.hero-top-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:auto;position:relative;z-index:1;}
+.hero-status{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;}
+
+.hero-mid{position:relative;z-index:1;margin:64px 0;}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;margin-bottom:30px;}
+.hero-title{font-family:var(--head);font-weight:900;font-size:clamp(80px,14vw,196px);line-height:.9;letter-spacing:-.01em;margin-bottom:36px;}
+.hero-sub{font-size:16px;color:var(--dim);max-width:600px;font-weight:300;line-height:1.95;margin-bottom:52px;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-solid{background:var(--white);color:#000;font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:16px 32px;text-decoration:none;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-solid:hover{opacity:.82}
+.btn-ghost{border:1px solid var(--line2);color:var(--white);font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;padding:16px 32px;text-decoration:none;transition:all .2s;}
+.btn-ghost:hover{background:rgba(255,255,255,.06)}
+
+.hero-coords-row{display:flex;gap:52px;flex-wrap:wrap;margin-top:80px;position:relative;z-index:1;border-top:1px solid var(--line);padding-top:28px;}
+.coord-item .coord-label{font-family:var(--mono);font-size:9.5px;color:var(--dim2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px;}
+.coord-item .coord-val{font-family:var(--mono);font-size:14px;color:var(--white);letter-spacing:.02em;}
+
+/* ===== SECTION COMMON ===== */
+section{padding:130px 48px;position:relative;}
+.sec-inner{max-width:1200px;margin:0 auto;}
+.sec-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--dim);text-transform:uppercase;margin-bottom:20px;}
+.sec-title{font-family:var(--head);font-weight:900;font-size:clamp(30px,4vw,58px);line-height:1.2;letter-spacing:-.01em;}
+.sec-desc{font-size:14.5px;color:var(--dim);max-width:440px;font-weight:300;line-height:1.9;}
+
+/* ===== PILLARS ===== */
+.pillars-bg{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);}
+.pillar{padding:60px 44px;border-right:1px solid var(--line);}
+.pillar:last-child{border-right:none;}
+.pillar-num{font-family:var(--mono);font-size:12px;color:var(--dim2);letter-spacing:.1em;margin-bottom:26px;}
+.pillar h3{font-family:var(--head);font-weight:700;font-size:22px;margin-bottom:16px;line-height:1.5;}
+.pillar p{font-size:13px;color:var(--dim);line-height:1.9;font-weight:300;}
+
+/* ===== STATEMENT ===== */
+.statement{padding:170px 48px;text-align:center;background:#000;}
+.stmt-mark{font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--dim);text-transform:uppercase;margin-bottom:44px;}
+.stmt-text{font-family:var(--head);font-weight:700;font-size:clamp(22px,3vw,40px);line-height:1.6;max-width:860px;margin:0 auto;color:var(--white);}
+.stmt-text .dim{color:var(--dim);font-weight:500;}
+.stmt-sign{margin-top:56px;font-family:var(--mono);font-size:11px;color:var(--dim2);letter-spacing:.1em;}
+
+/* ===== FLEET (4 brands) ===== */
+.fleet-card{
+  display:grid;grid-template-columns:160px 1fr;gap:48px;
+  padding:64px 48px;border-bottom:1px solid var(--line);
+  align-items:start;position:relative;overflow:hidden;
+}
+.fleet-card-bg{position:absolute;inset:0;z-index:0;opacity:.22;}
+.fleet-card-scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 55%,rgba(0,0,0,.25) 100%);}
+.fleet-index, .fleet-content{position:relative;z-index:1;}
+.fleet-index{font-family:var(--mono);font-size:13px;color:var(--dim2);letter-spacing:.1em;padding-top:6px;}
+.fleet-index .roman{display:block;font-family:var(--head);font-weight:900;font-size:40px;color:var(--white);margin-bottom:10px;letter-spacing:0;}
+.fleet-content h3{font-family:var(--head);font-weight:900;font-size:clamp(30px,3.4vw,44px);margin-bottom:8px;line-height:1.2;}
+.fleet-tagline{font-size:14px;color:var(--dim);font-weight:400;margin-bottom:22px;letter-spacing:.02em;font-family:var(--mono);}
+.fleet-content p{font-size:14px;color:var(--dim);line-height:1.95;font-weight:300;max-width:640px;margin-bottom:24px;}
+.fleet-status{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.06em;}
+.fleet-status .dot{width:5px;height:5px;border-radius:50%;background:var(--white);}
+.fleet-status.dim-dot .dot{background:var(--dim2);}
+
+@media(max-width:800px){
+  .fleet-card{grid-template-columns:1fr;gap:20px;padding:48px 22px;}
 }
 
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(245,242,236,0.88);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--cb);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 52px;
-}
-.nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.nav-mark {
-  width: 34px; height: 34px; border-radius: 9px;
-  background: var(--acc); display: flex; align-items: center; justify-content: center;
-}
-.nav-mark svg { color: #fff; }
-.nav-name { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); }
+/* ===== ROADMAP ===== */
+.roadmap-bg{background:var(--bg2);border-top:1px solid var(--line);}
+.roadmap-track{display:flex;flex-direction:column;margin-top:28px;}
+.phase-row{display:grid;grid-template-columns:130px 1fr 200px;gap:32px;align-items:center;padding:38px 0;border-bottom:1px solid var(--line);}
+.phase-row:last-child{border-bottom:none;}
+.phase-tag{font-family:var(--mono);font-size:13px;color:var(--dim2);letter-spacing:.1em;}
+.phase-tag.done{color:var(--white);}
+.phase-tag.active{color:var(--white);}
+.phase-body h4{font-family:var(--head);font-weight:700;font-size:22px;margin-bottom:8px;}
+.phase-body p{font-size:13px;color:var(--dim);font-weight:300;line-height:1.85;max-width:540px;}
+.phase-state{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:right;color:var(--dim2);}
+.phase-state.done{color:var(--dim);}
+.phase-state.active{color:var(--white);}
+@media(max-width:700px){.phase-row{grid-template-columns:1fr;gap:10px;text-align:left;}.phase-state{text-align:left;}}
 
-.nav-links { display: flex; gap: 28px; list-style: none; }
-.nav-links a { font-size: 13px; color: var(--text2); text-decoration: none; transition: color .2s; }
-.nav-links a:hover { color: var(--acc); }
+/* ===== EMUER + NFT ===== */
+.token-strip{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:64px;align-items:center;}
+.token-box{border:1px solid var(--line2);padding:48px;text-align:center;}
+.token-symbol{font-family:var(--head);font-weight:900;font-size:38px;color:var(--white);letter-spacing:.03em;}
+.token-chain{font-family:var(--mono);font-size:10.5px;color:var(--dim);letter-spacing:.1em;margin-top:10px;text-transform:uppercase;}
+.token-addr{font-family:var(--mono);font-size:10px;color:var(--dim2);margin-top:22px;background:rgba(255,255,255,.03);padding:9px 12px;word-break:break-all;}
+.token-list{list-style:none;display:flex;flex-direction:column;gap:16px;}
+.token-list li{display:flex;gap:14px;font-size:13.5px;color:var(--dim);line-height:1.8;font-weight:300;}
+.token-list li span{color:var(--dim2);flex-shrink:0;font-family:var(--mono);}
 
-.nav-cta {
-  background: var(--acc); color: #fff !important;
-  padding: 9px 22px; border-radius: 8px; font-weight: 700; font-size: 13px;
-  text-decoration: none; transition: opacity .2s;
-}
-.nav-cta:hover { opacity: .85; }
+/* ===== NFT SHOP ===== */
+.nft-shop-bg{background:var(--bg2);border-top:1px solid var(--line);}
+.nft-grid-ches{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;}
+.nft-card-ches{border:1px solid var(--line);background:var(--bg);transition:border-color .2s;}
+.nft-card-ches:hover{border-color:var(--line2);}
+.nft-thumb-ches{height:230px;overflow:hidden;position:relative;filter:grayscale(.25) contrast(1.05);}
+.nft-thumb-ches img{position:absolute;object-fit:cover;}
+.nft-tag-ches{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;background:rgba(0,0,0,.75);color:#fff;padding:5px 11px;text-transform:uppercase;border:1px solid var(--line2);}
+.nft-tag-ches.left{right:auto;left:14px;background:var(--white);color:#000;border:none;}
+.nft-body-ches{padding:32px;}
+.nft-body-ches h4{font-family:var(--head);font-weight:700;font-size:22px;margin-bottom:12px;}
+.nft-body-ches p{font-size:13px;color:var(--dim);line-height:1.85;margin-bottom:22px;font-weight:300;}
+.stock-row{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.stock-bar-ches{flex:1;height:2px;background:var(--line);overflow:hidden;}
+.stock-fill-ches{height:100%;background:var(--white);}
+.stock-label-ches{font-family:var(--mono);font-size:10.5px;color:var(--dim);white-space:nowrap;}
 
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  padding: 130px 52px 80px;
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center;
-  position: relative; overflow: hidden;
-  background: var(--bg);
-}
+/* ===== FOOTER ===== */
+footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
+.footer-grid{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:48px;margin-bottom:64px;}
+.footer-brand-name{font-family:var(--head);font-weight:900;font-size:20px;margin-bottom:14px;letter-spacing:.04em;}
+.footer-brand p{font-size:13px;color:var(--dim);line-height:1.85;font-weight:300;max-width:280px;}
+.footer-col h5{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--dim2);text-transform:uppercase;margin-bottom:18px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.footer-col a{font-size:13px;color:var(--dim);text-decoration:none;transition:color .2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:28px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--dim2);letter-spacing:.05em;}
 
-/* organic blobs */
-.blob {
-  position: absolute; border-radius: 50%;
-  pointer-events: none; filter: blur(60px); opacity: 0.35;
-}
-.blob-1 { width: 500px; height: 400px; background: var(--acc3); top: -80px; left: -100px; }
-.blob-2 { width: 400px; height: 350px; background: #d4e8c8; top: 100px; right: -80px; }
-.blob-3 { width: 300px; height: 300px; background: #e8d9c8; bottom: 0; left: 30%; }
-
-.hero-live {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 5px 14px; border-radius: 100px;
-  background: rgba(74,124,89,0.1); border: 1px solid rgba(74,124,89,0.25);
-  font-size: 11px; letter-spacing: .12em; color: var(--acc); margin-bottom: 36px;
-}
-.live-dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--acc);
-  animation: blink 2s ease-in-out infinite;
-}
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-
-.hero h1 {
-  font-family: 'Shippori Mincho B1', serif;
-  font-size: clamp(42px, 7vw, 80px);
-  line-height: 1.2; font-weight: 800;
-  color: var(--text); margin-bottom: 24px;
-  text-wrap: pretty;
-}
-.hero h1 em { font-style: normal; color: var(--acc); }
-
-.hero-sub {
-  font-size: 16px; color: var(--text2); line-height: 1.9;
-  max-width: 520px; font-weight: 300; margin-bottom: 44px;
+@media(max-width:900px){
+  nav{padding:16px 20px;}
+  .nav-links{display:none;}
+  section{padding:80px 20px;}
+  .hero{padding:120px 20px 60px;}
+  .pillars-grid{grid-template-columns:1fr;}
+  .pillar{border-right:none;border-bottom:1px solid var(--line);}
+  .token-strip{grid-template-columns:1fr;gap:40px;}
+  .nft-grid-ches{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
 }
 
-.hero-btns {
-  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
-  margin-bottom: 64px;
-}
-
-.btn-fill {
-  background: var(--acc); color: #fff;
-  padding: 14px 32px; border-radius: 10px; font-size: 14px; font-weight: 700;
-  text-decoration: none; border: none; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 8px;
-  transition: opacity .2s, transform .15s;
-}
-.btn-fill:hover { opacity: .85; transform: translateY(-2px); }
-
-.btn-out {
-  background: transparent; color: var(--acc);
-  padding: 14px 28px; border-radius: 10px; font-size: 14px; font-weight: 500;
-  border: 1.5px solid rgba(74,124,89,.35); text-decoration: none; cursor: pointer;
-  transition: all .2s;
-}
-.btn-out:hover { background: rgba(74,124,89,.07); transform: translateY(-2px); }
-
-.hero-note { font-size: 12px; color: var(--text3); margin-bottom: 72px; }
-
-/* stats */
-.hero-stats {
-  display: flex; gap: 48px; flex-wrap: wrap; justify-content: center;
-}
-.stat-item { text-align: center; }
-.stat-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 40px; color: var(--acc); line-height: 1;
-}
-.stat-label { font-size: 11px; color: var(--text3); letter-spacing: .08em; margin-top: 4px; }
-
-/* wave divider */
-.wave {
-  width: 100%; overflow: hidden; line-height: 0;
-  background: var(--bg);
-}
-.wave svg { display: block; }
-
-/* ── SECTION COMMONS ── */
-section { padding: 96px 52px; }
-.sec-inner { max-width: 1080px; margin: 0 auto; }
-.sec-label {
-  font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--acc); margin-bottom: 14px; font-weight: 700;
-}
-.sec-title {
-  font-family: 'Shippori Mincho B1', serif;
-  font-size: clamp(28px, 4vw, 46px); font-weight: 600;
-  line-height: 1.3; color: var(--text); margin-bottom: 14px;
-}
-.sec-sub {
-  font-size: 15px; color: var(--text2); line-height: 1.9;
-  font-weight: 300; max-width: 560px;
-}
-.divider { height: 1px; background: var(--cb); max-width: 1080px; margin: 0 auto; }
-
-/* ── FEATURES ── */
-.features-bg { background: var(--bg2); }
-
-.feat-grid {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
-  margin-top: 52px;
-}
-.feat-card {
-  background: var(--card); border: 1px solid var(--cb);
-  border-radius: var(--r-lg); padding: 36px 28px;
-  transition: transform .25s, box-shadow .25s;
-}
-.feat-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,0,0,.07); }
-
-.feat-icon {
-  width: 48px; height: 48px; border-radius: 12px;
-  background: rgba(74,124,89,.1); display: flex; align-items: center;
-  justify-content: center; font-size: 22px; margin-bottom: 18px;
-}
-.feat-card h3 { font-family: 'Shippori Mincho B1', serif; font-size: 19px; color: var(--text); margin-bottom: 10px; }
-.feat-card p { font-size: 13px; color: var(--text2); line-height: 1.85; }
-
-/* ── ROOMS ── */
-.rooms-grid {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
-  margin-top: 52px;
-}
-.room-card {
-  background: var(--card); border: 1px solid var(--cb);
-  border-radius: var(--r-lg); overflow: hidden;
-  transition: transform .25s, box-shadow .25s;
-  cursor: pointer;
-}
-.room-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,.08); }
-
-.room-thumb {
-  height: 160px; display: flex; align-items: center; justify-content: center;
-  font-size: 52px; position: relative; overflow: hidden;
-}
-.room-thumb-1 { background: linear-gradient(135deg,#d4e8c8 0%,#b8d4a8 100%); }
-.room-thumb-2 { background: linear-gradient(135deg,#c8d8e8 0%,#a8c0d8 100%); }
-.room-thumb-3 { background: linear-gradient(135deg,#e8d4c8 0%,#d4b8a8 100%); }
-
-.room-num {
-  position: absolute; top: 12px; left: 16px;
-  font-size: 11px; font-weight: 700; letter-spacing: .12em;
-  color: rgba(0,0,0,.35);
-}
-
-.room-body { padding: 24px; }
-.room-tag {
-  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em;
-  padding: 3px 9px; border-radius: 4px;
-  background: rgba(74,124,89,.1); color: var(--acc); margin-bottom: 10px;
-}
-.room-body h3 { font-family: 'Shippori Mincho B1', serif; font-size: 19px; color: var(--text); margin-bottom: 8px; }
-.room-body p { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 16px; }
-.room-link {
-  font-size: 13px; color: var(--acc); font-weight: 700; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 4px;
-}
-
-/* ── HOW TO START ── */
-.steps-bg { background: var(--bg2); }
-.steps-row {
-  display: flex; gap: 0; align-items: flex-start;
-  margin-top: 52px; position: relative;
-}
-.steps-row::before {
-  content: '';
-  position: absolute; top: 28px; left: 28px; right: 28px; height: 1px;
-  background: var(--cb); z-index: 0;
-}
-.step { flex: 1; text-align: center; padding: 0 20px; position: relative; z-index: 1; }
-.step-num {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: var(--acc); color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'DM Serif Display', serif; font-size: 22px;
-  margin: 0 auto 20px;
-}
-.step h3 { font-family: 'Shippori Mincho B1', serif; font-size: 18px; color: var(--text); margin-bottom: 8px; }
-.step p { font-size: 13px; color: var(--text2); line-height: 1.8; }
-
-/* ── TOKEN ── */
-.token-layout {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
-  margin-top: 52px;
-}
-.token-visual {
-  background: var(--card); border: 1px solid var(--cb);
-  border-radius: var(--r-lg); padding: 48px;
-  display: flex; flex-direction: column; align-items: center; gap: 24px;
-}
-.token-ring {
-  width: 160px; height: 160px; border-radius: 50%;
-  border: 2px solid rgba(74,124,89,.3);
-  display: flex; align-items: center; justify-content: center;
-  position: relative;
-}
-.token-ring::before {
-  content: ''; position: absolute; inset: -16px;
-  border-radius: 50%; border: 1px dashed rgba(74,124,89,.2);
-  animation: spin 18s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.token-name { font-family: 'DM Serif Display', serif; font-size: 38px; color: var(--acc); }
-.token-std { font-size: 11px; letter-spacing: .15em; color: var(--text3); }
-.token-addr {
-  font-family: monospace; font-size: 11px; color: var(--text3);
-  background: var(--bg2); padding: 6px 12px; border-radius: 6px;
-  word-break: break-all; text-align: center; max-width: 280px;
-}
-
-.token-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-.token-list li {
-  display: flex; align-items: flex-start; gap: 12px;
-  font-size: 14px; color: var(--text2); line-height: 1.6;
-}
-.token-list li span { font-size: 18px; flex-shrink: 0; margin-top: -2px; }
-
-/* ── VOICES ── */
-.voices-bg { background: var(--bg2); }
-.voices-grid {
-  display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
-  margin-top: 48px;
-}
-.voice-card {
-  background: var(--card); border: 1px solid var(--cb);
-  border-radius: var(--r-md); padding: 28px;
-}
-.stars { color: var(--acc); font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
-.voice-card blockquote {
-  font-size: 13px; color: var(--text2); line-height: 1.85;
-  font-style: italic; border: none; margin-bottom: 16px;
-}
-.voice-who { font-size: 11px; color: var(--text3); letter-spacing: .05em; }
-
-/* ── INVESTORS ── */
-.inv-grid {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 16px;
-  margin-top: 40px;
-}
-.inv-stat {
-  background: var(--card); border: 1px solid var(--cb);
-  border-radius: var(--r-md); padding: 24px; text-align: center;
-}
-.inv-num { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--acc); margin-bottom: 6px; }
-.inv-label { font-size: 12px; color: var(--text2); line-height: 1.5; }
-
-.inv-box {
-  margin-top: 40px; background: var(--card); border: 1px solid var(--cb);
-  border-radius: var(--r-lg); padding: 40px;
-  display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
-}
-.inv-box h3 { font-family: 'Shippori Mincho B1', serif; font-size: 26px; color: var(--text); margin-bottom: 12px; }
-.inv-box p { font-size: 14px; color: var(--text2); line-height: 1.8; }
-
-/* ── NFT SHOP ── */
-.nft-bg { background: var(--bg2); }
-.nft-shop-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px;
-}
-.nft-shop-card {
-  background: var(--card); border: 1px solid var(--cb);
-  border-radius: var(--r-lg); overflow: hidden;
-  transition: transform .25s, box-shadow .25s;
-}
-.nft-shop-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.08); }
-
-.nft-thumb {
-  height: 200px; display: flex; align-items: center; justify-content: center;
-  font-size: 14px; color: var(--text3); letter-spacing: .05em;
-  background: repeating-linear-gradient(
-    -45deg, var(--bg2), var(--bg2) 4px, var(--bg3) 4px, var(--bg3) 8px
-  );
-  position: relative;
-}
-.nft-platform-tag {
-  position: absolute; top: 12px; right: 12px;
-  background: var(--text); color: var(--bg); font-size: 10px; font-weight: 700;
-  letter-spacing: .1em; padding: 4px 10px; border-radius: 100px;
-}
-
-.nft-body { padding: 24px; }
-.nft-series { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--acc); font-weight: 700; margin-bottom: 6px; }
-.nft-body h3 { font-family: 'Shippori Mincho B1', serif; font-size: 22px; color: var(--text); margin-bottom: 10px; }
-.nft-body p { font-size: 13px; color: var(--text2); line-height: 1.8; margin-bottom: 20px; }
-
-.nft-stock {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-}
-.stock-bar {
-  flex: 1; height: 6px; border-radius: 3px; background: var(--bg3); overflow: hidden;
-}
-.stock-fill { height: 100%; border-radius: 3px; background: var(--acc); transition: width .8s ease; }
-.stock-label { font-size: 12px; color: var(--text3); white-space: nowrap; }
-
-.nft-link {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: var(--acc); color: #fff;
-  padding: 11px 22px; border-radius: 8px; font-size: 13px; font-weight: 700;
-  text-decoration: none; transition: opacity .2s;
-}
-.nft-link:hover { opacity: .85; }
-.nft-link.outline {
-  background: transparent; color: var(--acc);
-  border: 1.5px solid rgba(74,124,89,.35);
-}
-.nft-link.outline:hover { background: rgba(74,124,89,.07); }
-
-/* ── CONTACT ── */
-.contact-bg { background: var(--bg); }
-
-/* ── CTA BANNER ── */
-.cta-banner {
-  background: var(--acc); padding: 80px 52px; text-align: center;
-}
-.cta-banner h2 {
-  font-family: 'Shippori Mincho B1', serif; font-size: clamp(28px,4vw,48px);
-  color: #fff; margin-bottom: 12px;
-}
-.cta-banner p { font-size: 16px; color: rgba(255,255,255,.8); margin-bottom: 36px; font-weight: 300; }
-.btn-white {
-  background: #fff; color: var(--acc);
-  padding: 14px 36px; border-radius: 10px; font-size: 15px; font-weight: 700;
-  text-decoration: none; display: inline-block; transition: opacity .2s;
-}
-.btn-white:hover { opacity: .9; }
-
-/* ── FOOTER ── */
-footer {
-  background: var(--bg); padding: 60px 52px 40px;
-  border-top: 1px solid var(--cb);
-}
-.footer-grid {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px; max-width: 1080px; margin: 0 auto 48px;
-}
-.footer-brand .nav-name { font-size: 22px; display: block; margin-bottom: 12px; font-family: 'DM Serif Display', serif; color: var(--text); }
-.footer-brand p { font-size: 13px; color: var(--text3); line-height: 1.8; }
-.footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin-bottom: 16px; }
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.footer-col a { font-size: 13px; color: var(--text2); text-decoration: none; transition: color .2s; }
-.footer-col a:hover { color: var(--acc); }
-.footer-bottom {
-  max-width: 1080px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: 24px; border-top: 1px solid var(--cb);
-}
-.footer-copy { font-size: 12px; color: var(--text3); }
-.footer-sns { display: flex; gap: 12px; }
-.sns-btn {
-  width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--cb);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text3); text-decoration: none; transition: all .2s; font-size: 13px;
-}
-.sns-btn:hover { border-color: var(--acc); color: var(--acc); }
-
-/* ── LEGAL MODAL ── */
-.legal-overlay {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.55);
-  z-index: 9000;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.legal-overlay.open { display: flex; }
-.legal-modal {
-  background: #fafaf8;
-  border-radius: 14px;
-  width: 100%; max-width: 780px;
-  height: 82vh;
-  display: flex; flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0,0,0,.22);
-}
-.legal-modal-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 18px;
-  border-bottom: 1px solid var(--cb);
-  background: #f2ead8;
-  flex-shrink: 0;
-}
-.legal-modal-title { font-size: 13px; font-weight: 600; color: #5a4200; }
-.legal-modal-close {
-  background: none; border: none; cursor: pointer;
-  font-size: 20px; color: #888; line-height: 1;
-  padding: 2px 6px; border-radius: 6px;
-  transition: background .15s;
-}
-.legal-modal-close:hover { background: rgba(0,0,0,.08); }
-.legal-modal-frame {
-  flex: 1; border: none; width: 100%;
-}
-@media (max-width: 600px) {
-  .legal-modal { height: 90vh; border-radius: 10px; }
-  .legal-overlay { padding: 10px; }
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  nav { padding: 14px 20px; }
-  .nav-links { display: none; }
-  section { padding: 72px 20px; }
-  .feat-grid, .rooms-grid, .voices-grid { grid-template-columns: 1fr; }
-  .inv-grid { grid-template-columns: 1fr 1fr; }
-  .inv-box { grid-template-columns: 1fr; gap: 24px; }
-  .token-layout { grid-template-columns: 1fr; gap: 36px; }
-  .steps-row { flex-direction: column; gap: 32px; }
-  .steps-row::before { display: none; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .nft-shop-grid { grid-template-columns: 1fr; }
-  .hero { padding: 110px 20px 64px; }
-}
-
-/* ── REVEAL ANIMATIONS ── */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
-.reveal.visible { opacity: 1; transform: none; }
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
 </style>
 </head>
 <body>
@@ -500,466 +255,319 @@ footer {
 <!-- NAV -->
 <nav>
   <a class="nav-brand" href="#">
-    <img src="uploads/logo.jpg" alt="SchoolPark" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
-    <span class="nav-name">SchoolPark</span>
+    <div class="nav-brand-mark"><span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span></div>
+    <div class="nav-brand-sub">合同会社型DAO SchoolPark</div>
   </a>
   <ul class="nav-links">
-    <li><a href="#features">特徴</a></li>
-    <li><a href="#rooms">Room</a></li>
+    <li><a href="#pillars">理念</a></li>
+    <li><a href="#fleet">See one world</a></li>
     <li><a href="#tokenomics">EMUER</a></li>
-    <li><a href="#nft-shop">NFT</a></li>
-    <li><a href="#investors">投資家の方へ</a></li>
-    <li><a href="#contact">お問い合わせ</a></li>
+    <li><a href="#nft-shop">公式パス</a></li>
+    <li><a href="#tokenomics">投資家</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:10px;">
-    <a href="Emu.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--acc);text-decoration:none;border:1.5px solid rgba(74,124,89,0.3);padding:8px 16px;border-radius:100px;transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.background='rgba(74,124,89,0.07)'" onmouseout="this.style.background='transparent'">
-      ← Emuの資料
-    </a>
-    <a class="nav-cta" href="https://schoolpark-emu.vercel.app" target="_blank">Emuを体験 →</a>
+  <div class="nav-explore-wrap">
+    <a class="nav-cta" href="#fleet">探検しよう</a>
+    <div class="nav-explore-menu">
+      <a href="#brand-camellia" style="color:#e0576f;">Camellia</a>
+      <a href="#brand-heartoo" style="color:#a0d8ef;">Heartoo</a>
+      <a href="#brand-emu" style="color:#f08300;">Emu</a>
+      <a href="#brand-schoolpark" style="color:#d0e2be;">SchoolPark</a>
+    </div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-
-  <div class="hero-live">
-    <div class="live-dot"></div>
-    LIVE ON POLYGON MAINNET
+  <video class="hero-video-bg" autoplay muted loop playsinline id="heroBgVideo" src="uploads/ches-world.mp4"></video>
+  <div class="hero-video-scrim"></div>
+  <div class="hero-top-row" style="position:relative;z-index:1;">
+    <div style="flex:1;"></div>
+    <div class="coord">FUKUOKA, JP</div>
   </div>
 
-  <h1>学ぶことが、<br><em>価値になる。</em></h1>
-  <p class="hero-sub">お金・ネット・人生のリテラシーを、Web3で体験しながら学べる<br>コミュニティプラットフォーム。</p>
-
-  <div class="hero-btns">
-    <a class="btn-fill" href="https://schoolpark-emu.vercel.app" target="_blank">✦ 今すぐ無料で体験</a>
-    <a class="btn-out" href="#about">SchoolParkとは →</a>
-  </div>
-
-  <p class="hero-note">接続0円・MetaMask不要でゲストとして体験できます</p>
-
-  <div class="hero-stats">
-    <div class="stat-item">
-      <div class="stat-num">3</div>
-      <div class="stat-label">学習ルーム</div>
-    </div>
-    <div class="stat-item" style="color:var(--cb);">|</div>
-    <div class="stat-item">
-      <div class="stat-num">100+</div>
-      <div class="stat-label">目標接続数（進行中）</div>
-    </div>
-    <div class="stat-item" style="color:var(--cb);">|</div>
-    <div class="stat-item">
-      <div class="stat-num">0円</div>
-      <div class="stat-label">ゲスト参加費用</div>
-    </div>
-    <div class="stat-item" style="color:var(--cb);">|</div>
-    <div class="stat-item">
-      <div class="stat-num" style="font-size:26px;">MATIC</div>
-      <div class="stat-label">Polygon mainnet</div>
+  <div class="hero-mid" style="position:relative;z-index:1;">
+    <div class="hero-eyebrow">合同会社型DAO SchoolPark</div>
+    <h1 class="hero-title"><span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span></h1>
+    <p class="hero-sub">旺盛、冷静、時に激しく、本気で楽しもう。</p>
+    <div class="hero-actions">
+      <div class="nav-explore-wrap" style="display:inline-block;">
+        <a href="#fleet" class="btn-solid">探検しよう</a>
+        <div class="nav-explore-menu">
+          <a href="#brand-camellia" style="color:#e0576f;">Camellia</a>
+          <a href="#brand-heartoo" style="color:#a0d8ef;">Heartoo</a>
+          <a href="#brand-emu" style="color:#f08300;">Emu</a>
+          <a href="#brand-schoolpark" style="color:#d0e2be;">SchoolPark</a>
+        </div>
+      </div>
+      <a href="#fleet" class="btn-ghost">See one world</a>
+      <button class="hero-sound-btn" style="margin-top:0;" onclick="document.getElementById('videoModal').classList.add('open');document.getElementById('modalVideo').play();">
+        <span class="dot"></span>映像を見る
+      </button>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section id="features" class="features-bg">
+<!-- VIDEO MODAL -->
+<div class="video-modal" id="videoModal">
+  <button class="video-modal-close" onclick="document.getElementById('videoModal').classList.remove('open');document.getElementById('modalVideo').pause();">✕ 閉じる</button>
+  <video id="modalVideo" src="uploads/ches-world.mp4" controls></video>
+</div>
+
+<!-- PILLARS -->
+<section id="pillars" class="pillars-bg">
   <div class="sec-inner">
-    <p class="sec-label reveal">// FEATURES</p>
-    <h2 class="sec-title reveal">SchoolParkが<br>選ばれる3つの理由</h2>
-    <p class="sec-sub reveal">「なんとなく怖い」Web3を、体験から理解へ。学校では教えてくれないリテラシーを、コミュニティで育てます。</p>
-
-    <div class="feat-grid">
-      <div class="feat-card reveal">
-        <div class="feat-icon">🪙</div>
-        <h3>学ぶことがトークンになる</h3>
-        <p>投稿・リアクション・議論——あなたの行動がそのままEMUERトークンとしてPolygon上に刻まれます。勉強が報われる、新しい学習体験。</p>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon">👨‍👩‍👧</div>
-        <h3>親子でも、初心者でも</h3>
-        <p>MetaMask不要のゲストモードから始められます。「なんとなく怖い」Web3を、体験から自然に理解できます。</p>
-      </div>
-      <div class="feat-card reveal">
-        <div class="feat-icon">🏛️</div>
-        <h3>DAO型コミュニティ</h3>
-        <p>LLC.DAO SchoolParkはトークン保有者が運営に参加できる分散型組織。あなたの貢献がコミュニティの方向を決めます。</p>
-      </div>
+    <div class="sec-eyebrow">Three Pillars</div>
+    <h2 class="sec-title" style="margin-bottom:0;">学校より学べて<br>公園より楽しめて<br>会社より稼げる場所を。</h2>
+  </div>
+  <div class="pillars-grid" style="margin-top:72px;">
+    <div class="pillar reveal">
+      <div class="pillar-num">01</div>
+      <h3>学校より学べる</h3>
+      <p>体験と経験を通じて、知識を知恵に昇華させる。教科書ではなく、実践から学ぶリテラシー。</p>
+    </div>
+    <div class="pillar reveal">
+      <div class="pillar-num">02</div>
+      <h3>公園より楽しい</h3>
+      <p>無我夢中で遊べる場所。星座、議論、イベント——遊びの中に学びと発見がある。</p>
+    </div>
+    <div class="pillar reveal">
+      <div class="pillar-num">03</div>
+      <h3>会社より稼げる</h3>
+      <p>投稿・貢献・活動がEMUERになる。頑張りがそのまま報酬に変わる、生きた知識の経済圏。</p>
     </div>
   </div>
 </section>
 
-<!-- ROOMS -->
-<section id="rooms">
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="stmt-mark">CHES宣言</div>
+  <p class="stmt-text">
+    私は、ここにCHESを宣言する。<br>
+    <span style="color:#e0576f;">Camellia</span>、<span style="color:#a0d8ef;">Heartoo</span>、<span style="color:#f08300;">Emu</span>、<span style="color:#d0e2be;">SchoolPark</span>。<br><br>
+    旺盛、冷静、時に激しく、本気で楽しもう。
+  </p>
+  <div class="stmt-sign">—— 2026年7月 合同会社型DAO SchoolPark</div>
+</section>
+
+<!-- FLEET: 4 BRANDS -->
+<section id="fleet" style="padding-bottom:0;">
   <div class="sec-inner">
-    <p class="sec-label reveal">// ROOMS</p>
-    <h2 class="sec-title reveal">3つの学びの部屋</h2>
-    <p class="sec-sub reveal">お金・ネット・人生のリテラシーから、リアルタイム議論、星座で見る行動記録まで。</p>
-
-    <div class="rooms-grid">
-      <div class="room-card reveal">
-        <div class="room-thumb room-thumb-1">
-          📚
-          <span class="room-num">01</span>
-        </div>
-        <div class="room-body">
-          <span class="room-tag">学び</span>
-          <h3>Room 1 リテラシー教室</h3>
-          <p>お金の増やし方・守り方、ネット詐欺の見抜き方、感情コントロール……生きる力を学ぶコンテンツ。</p>
-          <a class="room-link" href="https://schoolpark-emu.vercel.app" target="_blank">入る →</a>
-        </div>
-      </div>
-      <div class="room-card reveal">
-        <div class="room-thumb room-thumb-2">
-          🌌
-          <span class="room-num">02</span>
-        </div>
-        <div class="room-body">
-          <span class="room-tag">遊び</span>
-          <h3>Room 2 星座コンステレーション</h3>
-          <p>あなたの行動が星として宇宙に生まれる。投稿・購入・議論の記録が、世界で唯一の星座になります。</p>
-          <a class="room-link" href="https://schoolpark-emu.vercel.app" target="_blank">見る →</a>
-        </div>
-      </div>
-      <div class="room-card reveal">
-        <div class="room-thumb room-thumb-3">
-          💬
-          <span class="room-num">03</span>
-        </div>
-        <div class="room-body">
-          <span class="room-tag">交流</span>
-          <h3>Room 3 リアルタイム議論</h3>
-          <p>毎日のトピックに意見を出し合う。論破ではなく「合意」を目指す議論の場。連続参加で特別な星が生まれます。</p>
-          <a class="room-link" href="https://schoolpark-emu.vercel.app" target="_blank">参加する →</a>
-        </div>
-      </div>
-    </div>
+    <div class="sec-eyebrow">The one world</div>
+    <h2 class="sec-title">SchoolPark、<br>それは一つの世界。</h2>
   </div>
 </section>
 
-<!-- HOW TO START -->
-<section id="howtostart" class="steps-bg">
-  <div class="sec-inner">
-    <p class="sec-label reveal">// HOW TO START</p>
-    <h2 class="sec-title reveal">はじめ方、<br>たった3ステップ</h2>
-
-    <div class="steps-row">
-      <div class="step reveal">
-        <div class="step-num">01</div>
-        <h3>接続する or ゲストで入る</h3>
-        <p>MetaMaskで接続するか、ゲストとして無料体験。どちらも0円で始められます。</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">02</div>
-        <h3>ルームを探索する</h3>
-        <p>3つのルームを自由に移動。投稿・リアクション・議論でEMUERを獲得していきます。</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">03</div>
-        <h3>貢献がトークンになる</h3>
-        <p>GoodされるほどEMUER増加。取引所でNFTに交換したり、DAOの意思決定に参加できます。</p>
-      </div>
-    </div>
+<div class="fleet-card" id="brand-camellia">
+  <div class="fleet-card-bg"><image-slot id="bg-camellia" shape="rect" placeholder="Camelliaの画像をドロップ"></image-slot></div>
+  <div class="fleet-card-scrim"></div>
+  <div class="fleet-index"><span class="roman">I</span>Camellia</div>
+  <div class="fleet-content">
+    <h3 style="color:#e0576f;">Camellia</h3>
+    <div class="fleet-tagline">「もう一度、自分を好きになる」— 女性ウェルネス/女性ウェルビーイング</div>
+    <p>女性ウェルネス/女性ウェルビーイングプラットフォーム。美・健康・こころ・性・学び，お金・つながりの6領域から、女性の人生を等しく支える。</p>
+    <div style="margin-top:24px;"><a href="#" class="btn-ghost" style="padding:12px 24px;font-size:11px;">もっと詳しく見る</a></div>
   </div>
-</section>
+</div>
+
+<div class="fleet-card" id="brand-heartoo">
+  <div class="fleet-card-bg"><image-slot id="bg-heartoo" shape="rect" placeholder="Heartooの画像をドロップ"></image-slot></div>
+  <div class="fleet-card-scrim"></div>
+  <div class="fleet-index"><span class="roman">II</span>Heartoo</div>
+  <div class="fleet-content">
+    <h3 style="color:#a0d8ef;">Heartoo</h3>
+    <div class="fleet-tagline">「♡を貴女に」— スマート結婚指輪</div>
+    <p>空中にハートを描いてフリックで放つと、相手に光のハートが届く。NFCでSchoolPark入場とEMUER決済にも使用可能。</p>
+    <div style="margin-top:24px;"><a href="#" class="btn-ghost" style="padding:12px 24px;font-size:11px;">製品を購入する</a></div>
+  </div>
+</div>
+
+<div class="fleet-card" id="brand-emu">
+  <div class="fleet-card-bg"><image-slot id="bg-emu" shape="rect" placeholder="Emuの画像をドロップ"></image-slot></div>
+  <div class="fleet-card-scrim"></div>
+  <div class="fleet-index"><span class="roman">III</span>Emu</div>
+  <div class="fleet-content">
+    <h3 style="color:#f08300;">Emu</h3>
+    <div class="fleet-tagline">Education community — 分散型SNS</div>
+    <p>学校では学べない、教えてくれない、本当に大切な情報を共有する新しい学びの場。</p>
+    <div style="margin-top:24px;"><a href="https://schoolpark-emu.vercel.app/" target="_blank" class="btn-ghost" style="padding:12px 24px;font-size:11px;">知識を共有する</a></div>
+  </div>
+</div>
+
+<div class="fleet-card" id="brand-schoolpark" style="border-bottom:none;">
+  <div class="fleet-card-bg"><image-slot id="bg-schoolpark" shape="rect" placeholder="SchoolParkの画像をドロップ"></image-slot></div>
+  <div class="fleet-card-scrim"></div>
+  <div class="fleet-index"><span class="roman">IV</span>SchoolPark</div>
+  <div class="fleet-content">
+    <h3 style="color:#d0e2be;">SchoolPark</h3>
+    <div class="fleet-tagline">最高に楽しい心躍る場所</div>
+    <p>DXR — 分散型複合現実<br>Decentralized Mixed Reality。オンラインとオフラインの境界が消える最終形。</p>
+    <div style="margin-top:24px;"><a href="https://schoolpark-emu.vercel.app/" target="_blank" class="btn-ghost" style="padding:12px 24px;font-size:11px;">体験する</a></div>
+  </div>
+</div>
 
 <!-- TOKEN -->
 <section id="tokenomics">
   <div class="sec-inner">
-    <p class="sec-label reveal">// EMUER TOKEN</p>
-    <h2 class="sec-title reveal">EMUERの<br>使い道</h2>
+    <div class="sec-eyebrow">EMUER</div>
+    <h2 class="sec-title">EMUER　<span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span>を流れるトークン。</h2>
+    <p class="sec-desc" style="margin-top:16px;max-width:720px;">
+      CHESは4つのブランドではない。一つの世界。<br>
+      Camelliaは、女性を。Heartooは、カップルや夫婦を。Emuは、知的好奇心や学びに満ち溢れた大人や子供を。SchoolParkは、家族を。<br><br>
+      その世界を貫く共通トークンがEMUER。Emuで集めて、Camelliaで育てて、Heartooで支払い、SchoolParkで使う。<br><br>
+      EMUERはトークンの名前であり、この世界で生きる人たちの呼び名でもある。学んだ人、貢献した人、誰かの役に立った人——その全員がEMUERだ。<br><br>
+      人が学び、育ち、愛し、集い、その価値が一つのトークンとして世界を巡っていく。その光景のすべてが、分散型複合現実（DXR）。<br><br>
+      そしてその場所は、学校より学べて、公園より楽しくて、会社より稼げる。国籍にも、学歴にも、義務教育にも——何にも縛られない。<br><br>
+      それこそが、SchoolParkなのです。
+    </p>
 
-    <div class="token-layout">
-      <div class="token-visual reveal">
-        <div class="token-ring">
-          <div>
-            <div class="token-name">EMUER</div>
-            <div class="token-std">ERC-20 on Polygon</div>
-          </div>
-        </div>
+    <div class="token-strip">
+      <div class="token-box reveal">
+        <div class="token-symbol">EMUER</div>
+        <div class="token-chain">ERC-20 on Polygon Mainnet</div>
         <div class="token-addr">0x4418d5250Dae4b1125ADFCD5C0779B1412E4a964</div>
-        <p style="font-size:12px;color:var(--text3);text-align:center;line-height:1.7;">学習行動（投稿・Good・Change）から<br>自動で付与される報酬トークン。<br>投機ではなく「貢献の証明」として設計。</p>
       </div>
-
       <ul class="token-list reveal">
-        <li><span>📚</span>Room 1プレミアムコンテンツの解放</li>
-        <li><span>🎪</span>親子イベント・スペースへの優先参加</li>
-        <li><span>🗳️</span>DAO投票権（SchoolParkの意思決定）</li>
-        <li><span>🔓</span>Emu内カスタム機能の解放</li>
-        <li><span>💎</span>公式NFTをEMUERで割引購入</li>
-        <li><span>🏅</span>月額ステーキングで有料会員相当に</li>
+        <li><span>—</span>投稿・Good・Changeなど活動によって自動付与</li>
+        <li><span>—</span>Emu内取引所でNFTと交換可能</li>
+        <li><span>—</span>公式NFTの割引購入に使用可能</li>
+        <li><span>—</span>将来的にHeartooのNFC決済とも接続予定</li>
+        <li><span>—</span>イベント限定ポイントとしても利用（換金なし）</li>
       </ul>
     </div>
   </div>
 </section>
 
 <!-- NFT SHOP -->
-<section id="nft-shop" class="nft-bg">
+<section id="nft-shop" class="nft-shop-bg">
   <div class="sec-inner">
-    <p class="sec-label reveal">// OFFICIAL NFT</p>
-    <h2 class="sec-title reveal">SchoolPark / Emu<br>公式NFT</h2>
-    <p class="sec-sub reveal">保有することでEmu内の機能が解放され、SchoolParkからの特別な優遇を受けられます。</p>
+    <div class="sec-eyebrow">Official NFT</div>
+    <h2 class="sec-title">SchoolPark公式パス</h2>
+    <p class="sec-desc" style="margin-top:16px;">保有することでCHESの一員となり、SchoolParkからの特別な優遇を受けられます。</p>
 
-    <div class="nft-shop-grid">
-      <!-- 第1弾 -->
-      <div class="nft-shop-card reveal">
-        <div class="nft-thumb" style="background:none;overflow:hidden;position:relative;padding:0;">
-          <img src="uploads/pasted-1776756474395-0.png" style="position:absolute;height:480px;width:auto;top:-195px;left:-75px;" alt="とびら NFT">
-          <span class="nft-platform-tag">HEXA</span>
+    <div class="nft-grid-ches">
+      <div class="nft-card-ches">
+        <div class="nft-thumb-ches">
+          <img src="uploads/pasted-1776756474395-0.png" style="height:480px;width:auto;top:-195px;left:-75px;">
+          <span class="nft-tag-ches left">第1弾 — 有料</span>
+          <span class="nft-tag-ches">HEXA</span>
         </div>
-        <div class="nft-body">
-          <div class="nft-series">第1弾 — 有料NFT</div>
-          <h3>とびら</h3>
-          <p>SchoolPark / Emu公式第1弾NFT。HEXAにて販売中。保有でEmuのフル機能が解放されます。</p>
-          <div class="nft-stock">
-            <div class="stock-bar">
-              <div class="stock-fill" style="width:58%;"></div>
-            </div>
-            <span class="stock-label">残り 5 / 12</span>
+        <div class="nft-body-ches">
+          <h4>とびら</h4>
+          <p>SchoolPark公式パス第一弾</p>
+          <div class="stock-row">
+            <div class="stock-bar-ches"><div class="stock-fill-ches" style="width:58%;"></div></div>
+            <span class="stock-label-ches">残り 5 / 12</span>
           </div>
-          <a class="nft-link" href="https://nft.hexanft.com/users/N2IgWc7ul2vOsQ" target="_blank">
-            HEXAで購入する →
-          </a>
+          <a href="https://nft.hexanft.com/users/N2IgWc7ul2vOsQ" target="_blank" class="btn-solid" style="padding:13px 24px;">HEXAで購入する</a>
         </div>
       </div>
 
-      <!-- 第2弾 -->
-      <div class="nft-shop-card reveal">
-        <div class="nft-thumb" style="background:none;overflow:hidden;position:relative;padding:0;">
-          <img src="uploads/pasted-1776756967728-0.png" style="position:absolute;height:420px;width:auto;top:-105px;left:-275px;" alt="冷蔵庫くん NFT">
-          <span class="nft-platform-tag">OpenSea</span>
+      <div class="nft-card-ches">
+        <div class="nft-thumb-ches">
+          <img src="uploads/pasted-1776756967728-0.png" style="height:420px;width:auto;top:-105px;left:-275px;">
+          <span class="nft-tag-ches left" style="background:transparent;border:1px solid var(--line2);color:#fff;">第2弾 — オファー</span>
+          <span class="nft-tag-ches">OpenSea</span>
         </div>
-        <div class="nft-body">
-          <div class="nft-series">第2弾 — オファー形式</div>
-          <h3>冷蔵庫くん</h3>
-          <p>OpenSeaにてオファー形式で販売中。あなたの価格提案をお待ちしています。</p>
-          <div class="nft-stock">
-            <div class="stock-bar">
-              <div class="stock-fill" style="width:5%;"></div>
-            </div>
-            <span class="stock-label">残り 19 / 20</span>
+        <div class="nft-body-ches">
+          <h4>冷蔵庫くん</h4>
+          <p>SchoolPark公式パス第二弾</p>
+          <div class="stock-row">
+            <div class="stock-bar-ches"><div class="stock-fill-ches" style="width:5%;"></div></div>
+            <span class="stock-label-ches">残り 19 / 20</span>
           </div>
-          <a class="nft-link" href="https://opensea.io/collection/school-parkemuoffisialnft" target="_blank">
-            OpenSeaで見る →
-          </a>
+          <a href="https://opensea.io/collection/school-parkemuoffisialnft" target="_blank" class="btn-solid" style="padding:13px 24px;">Openseaで購入する</a>
+        </div>
+      </div>
+
+      <div class="nft-card-ches">
+        <div class="nft-thumb-ches" style="background:#000;">
+          <video src="uploads/799903138.939278.mp4" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
+          <span class="nft-tag-ches left" style="background:transparent;border:1px solid var(--line2);color:#fff;">第3弾</span>
+          <span class="nft-tag-ches">HEXA</span>
+        </div>
+        <div class="nft-body-ches">
+          <h4>Duo Soles</h4>
+          <p>SchoolPark公式パス第三弾</p>
+          <div class="stock-row">
+            <div class="stock-bar-ches"><div class="stock-fill-ches" style="width:0%;"></div></div>
+            <span class="stock-label-ches">ノーマル残り15/15　プレミアム残り5/5</span>
+          </div>
+          <a href="https://nft.hexanft.com/list/keyword/Duo%E3%80%80Soles" target="_blank" class="btn-solid" style="padding:13px 24px;">HEXAで購入する</a>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- VOICES -->
-<section id="voices" class="voices-bg">
-  <div class="sec-inner">
-    <p class="sec-label reveal">// VOICES</p>
-    <h2 class="sec-title reveal">ユーザーの声</h2>
-
-    <div class="voices-grid">
-      <!-- Voice 1 -->
-      <div class="voice-card reveal">
-        <div class="stars">★★★★★</div>
-        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px;">
-          <div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--acc);margin-bottom:4px;">Q. 購入の決め手は？</div>
-            <p style="font-size:13px;color:var(--text2);line-height:1.75;">SchoolParkに兴味をもったから。</p>
-          </div>
-          <div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--acc);margin-bottom:4px;">Q. 持っていて良かった瞬間は？</div>
-            <p style="font-size:13px;color:var(--text2);line-height:1.75;">他の人の投稿を見て初めて、Emuというサービスの面白さを実感しました。</p>
-          </div>
-          <div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--acc);margin-bottom:4px;">Q. 1,500円の価格について？</div>
-            <p style="font-size:13px;color:var(--text2);line-height:1.75;">妥当だと思います。今後の使い勝池次第では安いになるかも。</p>
-          </div>
-        </div>
-        <div class="voice-who">有料NFT購入ユーザー</div>
-      </div>
-
-      <!-- Voice 2 -->
-      <div class="voice-card reveal" style="grid-column:span 2;">
-        <div class="stars">★★★★★</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;">
-          <div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--acc);margin-bottom:4px;">Q. 購入を迼っている人に一言</div>
-            <p style="font-size:13px;color:var(--text2);line-height:1.8;">NFT界隈が盛り上がっていないと知りながら、このような取り組みを行う代表者の熱意に乗っかってみてはいかがでしょうか。</p>
-          </div>
-          <div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--acc);margin-bottom:4px;">Q. 購入の決め手は？</div>
-            <p style="font-size:13px;color:var(--text2);line-height:1.8;">詳しくはありませんが、SchoolParkとやらが気になったため。</p>
-          </div>
-        </div>
-        <div style="font-size:11px;color:var(--text3);line-height:1.7;border-top:1px solid var(--cb);padding-top:12px;margin-top:4px;">※ 以上は実際にEmuを使用しかつHEXAで有料NFTを購入した方たちに行ったインタビューをもとに一部抜粋しました。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- INVESTORS -->
-<section id="investors">
-  <div class="sec-inner">
-    <p class="sec-label reveal">// FOR INVESTORS</p>
-    <h2 class="sec-title reveal">投資家・<br>パートナーの方へ</h2>
-
-    <div class="inv-grid">
-      <div class="inv-stat reveal">
-        <div class="inv-num">25%</div>
-        <div class="inv-label">ブロックチェーン教育市場CAGR（〜2030年）</div>
-      </div>
-      <div class="inv-stat reveal">
-        <div class="inv-num">125M</div>
-        <div class="inv-label">日本語圏Web3教育市場（ほぼ未開拓）</div>
-      </div>
-      <div class="inv-stat reveal">
-        <div class="inv-num">3層</div>
-        <div class="inv-label">有料NFT / 無料NFT / ゲスト のアクセス設計</div>
-      </div>
-      <div class="inv-stat reveal">
-        <div class="inv-num" style="font-size:22px;">Polygon</div>
-        <div class="inv-label">mainnet稼働中・スマコン・エアドロシステム実装済み</div>
-      </div>
-    </div>
-
-    <div class="inv-box reveal">
-      <div>
-        <h3>シードラウンド資金調達中</h3>
-        <p>LLC.DAO SchoolParkは、日本語圏唯一のWeb3教育SocialFiプラットフォームとして、シード調達300〜500万円を目指しています。<br>Polygon Grants・Gitcoin・Open Campusへの申請進行中。</p>
-      </div>
-      <div>
-        <a class="btn-fill" href="https://schoolpark-emu.vercel.app/?contact=investor" target="_blank" rel="noopener">📄 ピッチデックを請求する</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="contact-bg">
-  <div class="sec-inner">
-    <p class="sec-label reveal">// CONTACT</p>
-    <h2 class="sec-title reveal">お問い合わせ</h2>
-    <p class="sec-sub reveal" style="margin-bottom:36px;">ご質問・イベント申込・取材・投資家の方は、種別を選んでご連絡ください。クリックするとSchoolParkアプリ内の問い合わせフォーム（別タブ）が開きます。</p>
-
-    <div class="feat-grid" style="grid-template-columns:repeat(2,1fr);margin-top:0;">
-      <a class="feat-card reveal" href="https://schoolpark-emu.vercel.app/?contact=general" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
-        <div class="feat-icon">💬</div>
-        <h3>一般的なご質問</h3>
-        <p>サービスに関するご質問・ご意見はこちら。</p>
-      </a>
-      <a class="feat-card reveal" href="https://schoolpark-emu.vercel.app/?contact=event" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
-        <div class="feat-icon">🎪</div>
-        <h3>イベント申込</h3>
-        <p>体験会・ワークショップへのお申込みはこちら。</p>
-      </a>
-      <a class="feat-card reveal" href="https://schoolpark-emu.vercel.app/?contact=media" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
-        <div class="feat-icon">📰</div>
-        <h3>取材・メディア</h3>
-        <p>取材・掲載のご依頼はこちら。</p>
-      </a>
-      <a class="feat-card reveal" href="https://schoolpark-emu.vercel.app/?contact=investor" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
-        <div class="feat-icon">💰</div>
-        <h3>投資家・提携</h3>
-        <p>出資・業務提携のご相談はこちら。</p>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BANNER -->
-<div class="cta-banner">
-  <h2>今すぐ、<br>学びをはじめよう。</h2>
-  <p>接続0円。MetaMask不要。ゲストとして今日から体験できます。</p>
-  <a class="btn-white" href="https://schoolpark-emu.vercel.app" target="_blank">✦ Emuを無料で体験する</a>
-</div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <span class="nav-name">SchoolPark</span>
-      <p>お金・ネット・人生のリテラシーを<br>Web3で体験しながら学べる<br>コミュニティプラットフォーム</p>
+      <div class="footer-brand-name"><span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span></div>
+      <p>合同会社型DAO SchoolPark。<br>Camellia・Heartoo・Emu・SchoolParkを展開して世界を創る。</p>
     </div>
     <div class="footer-col">
-      <h4>プロダクト</h4>
+      <h5>World</h5>
       <ul>
-        <li><a href="https://schoolpark-emu.vercel.app" target="_blank">Emu dApp</a></li>
-        <li><a href="#">Room 1</a></li>
-        <li><a href="#">Room 2</a></li>
-        <li><a href="#">Room 3</a></li>
+        <li><a href="#fleet" style="color:#e0576f;">Camellia</a></li>
+        <li><a href="#fleet" style="color:#a0d8ef;">Heartoo</a></li>
+        <li><a href="Emu Landing Page.html" style="color:#f08300;">Emu</a></li>
+        <li><a href="#fleet" style="color:#d0e2be;">SchoolPark</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Ecosystem</h5>
+      <ul>
         <li><a href="#tokenomics">EMUER Token</a></li>
+        <li><a href="#nft-shop">公式パス</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>SchoolPark</h4>
+      <h5>Links</h5>
       <ul>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Events</a></li>
-        <li><a href="#">News</a></li>
-        <li><a href="#investors">Investors</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>リンク</h4>
-      <ul>
-        <li><a href="https://schoolpark-emu.vercel.app" target="_blank">Emu を体験</a></li>
-        <li><a href="https://nft.hexanft.com/users/N2IgWc7ul2vOsQ" target="_blank">HEXA（NFT購入）</a></li>
+        <li><a href="https://x.com/DAO_SchoolPark" target="_blank">X</a></li>
+        <li><a href="https://nft.hexanft.com/users/N2IgWc7ul2vOsQ" target="_blank">HEXA</a></li>
         <li><a href="https://opensea.io/collection/school-parkemuoffisialnft" target="_blank">OpenSea</a></li>
-        <li><a href="javascript:void(0)" onclick="openLegalModal('https://schoolpark-emu.vercel.app/terms.html')">利用規約</a></li>
-        <li><a href="javascript:void(0)" onclick="openLegalModal('https://schoolpark-emu.vercel.app/legal/tokusho.html')">特定商取引法に基づく表記</a></li>
-        <li><a href="javascript:void(0)" onclick="openLegalModal('https://schoolpark-emu.vercel.app/privacy.html')">プライバシーポリシー</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="https://schoolpark-emu.vercel.app/?contact=general" target="_blank" rel="noopener">問い合わせ</a></li>
+        <li><a href="https://schoolpark-emu.vercel.app/?contact=investor" target="_blank" rel="noopener">投資家/取材</a></li>
+        <li><a href="terms.html">利用規約</a></li>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+        <li><a href="legal/tokusho.html">特商法表記</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2026 LLC.DAO SchoolPark. All rights reserved.</div>
-    <div class="footer-sns">
-      <a class="sns-btn" href="https://x.com" target="_blank">𝕏</a>
-      <a class="sns-btn" href="https://schoolpark-emu.vercel.app" target="_blank">▸</a>
-    </div>
+    <span>© 2026 合同会社型DAO SchoolPark. ALL RIGHTS RESERVED.</span>
+    <span><span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span> — <span style="color:#e0576f;">CAMELLIA</span> / <span style="color:#a0d8ef;">HEARTOO</span> / <span style="color:#f08300;">EMU</span> / <span style="color:#d0e2be;">SCHOOLPARK</span></span>
   </div>
 </footer>
 
-<!-- LEGAL MODAL -->
-<div class="legal-overlay" id="legalOverlay" onclick="closeLegalModal(event)">
-  <div class="legal-modal">
-    <div class="legal-modal-bar">
-      <span class="legal-modal-title" id="legalModalTitle"></span>
-      <button class="legal-modal-close" onclick="closeLegalModal(null)">✕</button>
-    </div>
-    <iframe class="legal-modal-frame" id="legalModalFrame" src="" title="法的情報"></iframe>
-  </div>
-</div>
-
+<script src="image-slot.js"></script>
 <script>
-// Scroll reveal
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-// Legal modal
-const legalTitles = {
-  'terms.html':        '利用規約',
-  'tokusho.html':      '特定商取引法に基づく表記',
-  'privacy.html':      'プライバシーポリシー',
-};
-function openLegalModal(url) {
-  const key = Object.keys(legalTitles).find(k => url.includes(k)) || '';
-  document.getElementById('legalModalTitle').textContent = legalTitles[key] || '法的情報';
-  document.getElementById('legalModalFrame').src = url;
-  document.getElementById('legalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeLegalModal(e) {
-  if (e && e.target !== document.getElementById('legalOverlay')) return;
-  document.getElementById('legalOverlay').classList.remove('open');
-  document.getElementById('legalModalFrame').src = '';
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeLegalModal(null);
+// tap-to-toggle explore menu on touch devices
+document.querySelectorAll('.nav-explore-wrap').forEach(wrap => {
+  wrap.querySelector('.nav-cta, .btn-solid').addEventListener('click', e => {
+    if (window.matchMedia('(hover: none)').matches) {
+      e.preventDefault();
+      wrap.classList.toggle('open');
+    }
+  });
 });
-
+document.addEventListener('click', e => {
+  document.querySelectorAll('.nav-explore-wrap').forEach(wrap => {
+    if (!wrap.contains(e.target)) wrap.classList.remove('open');
+  });
+});
 </script>
 </body>
 </html>
