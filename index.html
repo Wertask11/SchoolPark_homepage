@@ -385,39 +385,6 @@ section { padding: 96px 52px; }
 
 /* ── CONTACT ── */
 .contact-bg { background: var(--bg); }
-.contact-tabs {
-  display: flex; gap: 4px; margin-bottom: 32px; flex-wrap: wrap;
-}
-.ctab {
-  padding: 9px 18px; border-radius: 8px; border: 1px solid var(--cb);
-  background: transparent; font-size: 13px; color: var(--text2);
-  cursor: pointer; transition: all .2s; font-family: 'Noto Sans JP', sans-serif;
-}
-.ctab:hover { border-color: rgba(74,124,89,.3); color: var(--acc); }
-.ctab.active { background: var(--acc); color: #fff; border-color: var(--acc); }
-
-.contact-form { display: none; flex-direction: column; gap: 16px; max-width: 560px; }
-.contact-form.active { display: flex; }
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group label { font-size: 12px; font-weight: 700; color: var(--text2); letter-spacing: .04em; }
-.form-group input, .form-group textarea, .form-group select {
-  padding: 12px 14px; border-radius: 8px; border: 1.5px solid var(--cb);
-  background: var(--card); font-size: 14px; color: var(--text);
-  font-family: 'Noto Sans JP', sans-serif;
-  transition: border-color .2s;
-  outline: none;
-}
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-  border-color: rgba(74,124,89,.5);
-}
-.form-group textarea { min-height: 120px; resize: vertical; }
-.form-submit {
-  align-self: flex-start; background: var(--acc); color: #fff;
-  padding: 13px 28px; border-radius: 8px; border: none;
-  font-size: 14px; font-weight: 700; cursor: pointer;
-  font-family: 'Noto Sans JP', sans-serif; transition: opacity .2s;
-}
-.form-submit:hover { opacity: .85; }
 
 /* ── CTA BANNER ── */
 .cta-banner {
@@ -859,7 +826,7 @@ footer {
         <p>LLC.DAO SchoolParkは、日本語圏唯一のWeb3教育SocialFiプラットフォームとして、シード調達300〜500万円を目指しています。<br>Polygon Grants・Gitcoin・Open Campusへの申請進行中。</p>
       </div>
       <div>
-        <a class="btn-fill" href="#contact">📄 ピッチデックを請求する</a>
+        <a class="btn-fill" href="https://schoolpark-emu.vercel.app/?contact=investor" target="_blank" rel="noopener">📄 ピッチデックを請求する</a>
       </div>
     </div>
   </div>
@@ -870,53 +837,30 @@ footer {
   <div class="sec-inner">
     <p class="sec-label reveal">// CONTACT</p>
     <h2 class="sec-title reveal">お問い合わせ</h2>
-    <p class="sec-sub reveal" style="margin-bottom:36px;">ご質問・イベント申込・取材・投資家の方は、種別を選んでご連絡ください。</p>
+    <p class="sec-sub reveal" style="margin-bottom:36px;">ご質問・イベント申込・取材・投資家の方は、種別を選んでご連絡ください。クリックするとSchoolParkアプリ内の問い合わせフォーム（別タブ）が開きます。</p>
 
-    <div class="contact-tabs" id="contactTabs">
-      <button class="ctab active" data-tab="general">一般</button>
-      <button class="ctab" data-tab="event">イベント申込</button>
-      <button class="ctab" data-tab="media">取材・メディア</button>
-      <button class="ctab" data-tab="investor">投資家・提携</button>
+    <div class="feat-grid" style="grid-template-columns:repeat(2,1fr);margin-top:0;">
+      <a class="feat-card reveal" href="https://schoolpark-emu.vercel.app/?contact=general" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
+        <div class="feat-icon">💬</div>
+        <h3>一般的なご質問</h3>
+        <p>サービスに関するご質問・ご意見はこちら。</p>
+      </a>
+      <a class="feat-card reveal" href="https://schoolpark-emu.vercel.app/?contact=event" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
+        <div class="feat-icon">🎪</div>
+        <h3>イベント申込</h3>
+        <p>体験会・ワークショップへのお申込みはこちら。</p>
+      </a>
+      <a class="feat-card reveal" href="https://schoolpark-emu.vercel.app/?contact=media" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
+        <div class="feat-icon">📰</div>
+        <h3>取材・メディア</h3>
+        <p>取材・掲載のご依頼はこちら。</p>
+      </a>
+      <a class="feat-card reveal" href="https://schoolpark-emu.vercel.app/?contact=investor" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
+        <div class="feat-icon">💰</div>
+        <h3>投資家・提携</h3>
+        <p>出資・業務提携のご相談はこちら。</p>
+      </a>
     </div>
-
-    <form class="contact-form active" id="tab-general">
-      <div class="form-group"><label>お名前 *</label><input type="text" placeholder="山田 太郎"></div>
-      <div class="form-group"><label>メールアドレス *</label><input type="email" placeholder="your@email.com"></div>
-      <div class="form-group"><label>お問い合わせ内容 *</label><textarea placeholder="お気軽にどうぞ"></textarea></div>
-      <button type="submit" class="form-submit">送信する →</button>
-    </form>
-
-    <form class="contact-form" id="tab-event">
-      <div class="form-group"><label>お名前 *</label><input type="text"></div>
-      <div class="form-group"><label>メールアドレス *</label><input type="email"></div>
-      <div class="form-group"><label>お子様の年齢</label>
-        <select><option>選択してください</option><option>未就学児</option><option>小学生</option><option>中学生</option><option>高校生</option><option>子どもなし（大人のみ）</option></select>
-      </div>
-      <div class="form-group"><label>参加人数</label>
-        <select><option>選択してください</option><option>1名</option><option>2名（親子）</option><option>3〜5名</option><option>6名以上（団体）</option></select>
-      </div>
-      <div class="form-group"><label>ご要望・ご質問</label><textarea></textarea></div>
-      <button type="submit" class="form-submit">イベント申込を送信 →</button>
-    </form>
-
-    <form class="contact-form" id="tab-media">
-      <div class="form-group"><label>会社名・媒体名 *</label><input type="text"></div>
-      <div class="form-group"><label>担当者名 *</label><input type="text"></div>
-      <div class="form-group"><label>メールアドレス *</label><input type="email"></div>
-      <div class="form-group"><label>取材・掲載内容 *</label><textarea></textarea></div>
-      <button type="submit" class="form-submit">取材依頼を送信 →</button>
-    </form>
-
-    <form class="contact-form" id="tab-investor">
-      <div class="form-group"><label>会社名・ファンド名 *</label><input type="text"></div>
-      <div class="form-group"><label>お名前・役職 *</label><input type="text"></div>
-      <div class="form-group"><label>メールアドレス *</label><input type="email"></div>
-      <div class="form-group"><label>投資規模・関心領域</label>
-        <select><option>選択してください</option><option>〜100万円（グラント・補助金）</option><option>100〜500万円（シード）</option><option>500万〜1000万円</option><option>1000万円以上</option><option>業務提携（資金以外）</option></select>
-      </div>
-      <div class="form-group"><label>メッセージ *</label><textarea></textarea></div>
-      <button type="submit" class="form-submit">ピッチデック・面談を申し込む →</button>
-    </form>
   </div>
 </section>
 
@@ -987,16 +931,6 @@ footer {
 </div>
 
 <script>
-// Contact tabs
-document.getElementById('contactTabs').addEventListener('click', e => {
-  const btn = e.target.closest('.ctab');
-  if (!btn) return;
-  document.querySelectorAll('.ctab').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.contact-form').forEach(f => f.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-});
-
 // Scroll reveal
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -1026,16 +960,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLegalModal(null);
 });
 
-// Form submit
-document.querySelectorAll('.contact-form').forEach(form => {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = form.querySelector('.form-submit');
-    btn.textContent = '✅ 送信しました！';
-    btn.disabled = true;
-    btn.style.background = '#4a7c59';
-  });
-});
 </script>
 </body>
 </html>
