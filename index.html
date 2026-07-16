@@ -568,6 +568,20 @@ document.addEventListener('click', e => {
     if (!wrap.contains(e.target)) wrap.classList.remove('open');
   });
 });
+
+// ブランドカードへのジャンプ先を、固定ヘッダーに隠れず縦中央に来るよう調整
+document.querySelectorAll('a[href^="#brand-"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.getElementById(link.getAttribute('href').slice(1));
+    if (!target) return;
+    e.preventDefault();
+    const rect = target.getBoundingClientRect();
+    const targetCenter = rect.top + window.scrollY + rect.height / 2;
+    const scrollTarget = targetCenter - window.innerHeight / 2;
+    window.scrollTo({ top: Math.max(0, scrollTarget), behavior: 'smooth' });
+    document.querySelectorAll('.nav-explore-wrap').forEach(wrap => wrap.classList.remove('open'));
+  });
+});
 </script>
 </body>
 </html>
