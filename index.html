@@ -166,6 +166,8 @@ section{padding:130px 48px;position:relative;}
   align-items:start;position:relative;overflow:hidden;
 }
 .fleet-card-bg{position:absolute;inset:0;z-index:0;opacity:.22;}
+.fleet-card-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease;}
+.fleet-card-bg img.is-active{opacity:1;}
 .fleet-card-scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 55%,rgba(0,0,0,.25) 100%);}
 .fleet-index, .fleet-content{position:relative;z-index:1;}
 .fleet-index{font-family:var(--mono);font-size:13px;color:var(--dim2);letter-spacing:.1em;padding-top:6px;}
@@ -358,7 +360,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 </section>
 
 <div class="fleet-card" id="brand-camellia">
-  <div class="fleet-card-bg"><image-slot id="bg-camellia" shape="rect" placeholder="Camelliaの画像をドロップ"></image-slot></div>
+  <div class="fleet-card-bg" data-bg-rotator><img src="uploads/bg-camellia-1.png" class="is-active" alt=""></div>
   <div class="fleet-card-scrim"></div>
   <div class="fleet-index"><span class="roman">I</span>Camellia</div>
   <div class="fleet-content">
@@ -370,7 +372,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 </div>
 
 <div class="fleet-card" id="brand-heartoo">
-  <div class="fleet-card-bg"><image-slot id="bg-heartoo" shape="rect" placeholder="Heartooの画像をドロップ"></image-slot></div>
+  <div class="fleet-card-bg" data-bg-rotator><img src="uploads/bg-heartoo-1.png" class="is-active" alt=""></div>
   <div class="fleet-card-scrim"></div>
   <div class="fleet-index"><span class="roman">II</span>Heartoo</div>
   <div class="fleet-content">
@@ -382,7 +384,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 </div>
 
 <div class="fleet-card" id="brand-emu">
-  <div class="fleet-card-bg"><image-slot id="bg-emu" shape="rect" placeholder="Emuの画像をドロップ"></image-slot></div>
+  <div class="fleet-card-bg" data-bg-rotator><img src="uploads/bg-emu-1.png" class="is-active" alt=""></div>
   <div class="fleet-card-scrim"></div>
   <div class="fleet-index"><span class="roman">III</span>Emu</div>
   <div class="fleet-content">
@@ -394,7 +396,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 </div>
 
 <div class="fleet-card" id="brand-schoolpark" style="border-bottom:none;">
-  <div class="fleet-card-bg"><image-slot id="bg-schoolpark" shape="rect" placeholder="SchoolParkの画像をドロップ"></image-slot></div>
+  <div class="fleet-card-bg" data-bg-rotator><img src="uploads/bg-schoolpark-1.jpg" class="is-active" alt=""></div>
   <div class="fleet-card-scrim"></div>
   <div class="fleet-index"><span class="roman">IV</span>SchoolPark</div>
   <div class="fleet-content">
@@ -547,7 +549,6 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
   </div>
 </footer>
 
-<script src="image-slot.js"></script>
 <script>
 const io = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
@@ -581,6 +582,18 @@ document.querySelectorAll('a[href^="#brand-"]').forEach(link => {
     window.scrollTo({ top: Math.max(0, scrollTarget), behavior: 'smooth' });
     document.querySelectorAll('.nav-explore-wrap').forEach(wrap => wrap.classList.remove('open'));
   });
+});
+
+// 各ブランドカードの背景画像。画像が複数登録されている場合は時間差でクロスフェード
+document.querySelectorAll('[data-bg-rotator]').forEach(rotator => {
+  const imgs = rotator.querySelectorAll('img');
+  if (imgs.length <= 1) return;
+  let i = 0;
+  setInterval(() => {
+    imgs[i].classList.remove('is-active');
+    i = (i + 1) % imgs.length;
+    imgs[i].classList.add('is-active');
+  }, 7000);
 });
 </script>
 </body>
