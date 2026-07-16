@@ -55,6 +55,11 @@ nav{
   transition:all .2s;
 }
 .nav-cta:hover{background:var(--white);color:#000;border-color:var(--white);}
+.mobile-menu-btn{
+  display:none;align-items:center;justify-content:center;
+  width:38px;height:38px;background:transparent;border:1px solid var(--line2);
+  color:var(--white);cursor:pointer;font-size:16px;order:2;margin-left:12px;
+}
 .nav-explore-wrap{position:relative;}
 .nav-explore-menu{
   position:absolute;top:calc(100% + 14px);right:0;
@@ -76,7 +81,7 @@ nav{
 /* ===== HERO ===== */
 .hero{
   min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  padding:130px 48px 64px;position:relative;overflow:hidden;
+  padding:130px 48px 64px;position:relative;overflow:visible;
 }
 .hero-video-bg{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
@@ -238,8 +243,20 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding-top:28px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--dim2);letter-spacing:.05em;}
 
 @media(max-width:900px){
-  nav{padding:16px 20px;}
-  .nav-links{display:none;}
+  nav{padding:16px 20px;flex-wrap:wrap;}
+  .mobile-menu-btn{display:flex;}
+  .nav-links{
+    display:none;order:3;flex-basis:100%;flex-direction:column;gap:0;
+    margin-top:16px;padding-top:16px;border-top:1px solid var(--line);
+  }
+  nav.mobile-nav-open .nav-links{display:flex;}
+  .nav-links a{padding:12px 4px;border-bottom:1px solid var(--line);}
+  .nav-links li:last-child a{border-bottom:none;}
+  .hero-explore-wrap .nav-explore-menu{
+    left:0;right:auto;top:auto;bottom:calc(100% + 14px);
+    max-width:calc(100vw - 40px);transform:translateY(6px);
+  }
+  .hero-explore-wrap.open .nav-explore-menu{transform:none;}
   section{padding:64px 20px;}
   .hero{padding:100px 20px 48px;}
   .pillars-grid{grid-template-columns:1fr;}
@@ -277,6 +294,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
       <a href="#brand-schoolpark" style="color:#d0e2be;">SchoolPark</a>
     </div>
   </div>
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="メニュー">☰</button>
 </nav>
 
 <!-- HERO -->
@@ -293,7 +311,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
     <h1 class="hero-title"><span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span></h1>
     <p class="hero-sub">旺盛、冷静、時に激しく、本気で楽しもう。</p>
     <div class="hero-actions">
-      <div class="nav-explore-wrap" style="display:inline-block;">
+      <div class="nav-explore-wrap hero-explore-wrap" style="display:inline-block;">
         <a href="#fleet" class="btn-solid">探検しよう</a>
         <div class="nav-explore-menu">
           <a href="#brand-camellia" style="color:#e0576f;">Camellia</a>
@@ -569,6 +587,16 @@ document.addEventListener('click', e => {
   document.querySelectorAll('.nav-explore-wrap').forEach(wrap => {
     if (!wrap.contains(e.target)) wrap.classList.remove('open');
   });
+});
+
+// ハンバーガーメニュー（スマホ・タブレット用ナビ）
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navEl = document.querySelector('nav');
+mobileMenuBtn.addEventListener('click', () => {
+  navEl.classList.toggle('mobile-nav-open');
+});
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => navEl.classList.remove('mobile-nav-open'));
 });
 
 // ブランドカードへのジャンプ先を、固定ヘッダーに隠れず縦中央に来るよう調整
