@@ -166,17 +166,14 @@ section{padding:96px 48px;position:relative;}
 
 /* ===== FLEET (4 brands) ===== */
 .fleet-card{
-  display:grid;grid-template-columns:160px 1fr;gap:48px;
   padding:56px 48px;border-bottom:1px solid var(--line);
-  align-items:start;position:relative;overflow:hidden;
+  position:relative;overflow:hidden;
 }
 .fleet-card-bg{position:absolute;inset:0;z-index:0;opacity:.5;}
 .fleet-card-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease;}
 .fleet-card-bg img.is-active{opacity:1;}
 .fleet-card-scrim{position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.4) 55%,rgba(0,0,0,.15) 100%);}
-.fleet-index, .fleet-content{position:relative;z-index:1;}
-.fleet-index{font-family:var(--mono);font-size:13px;color:var(--dim2);letter-spacing:.1em;padding-top:6px;}
-.fleet-index .roman{display:block;font-family:var(--head);font-weight:900;font-size:40px;color:var(--white);margin-bottom:10px;letter-spacing:0;}
+.fleet-content{position:relative;z-index:1;}
 .fleet-content h3{font-family:var(--head);font-weight:900;font-size:clamp(30px,3.4vw,44px);margin-bottom:8px;line-height:1.2;}
 .fleet-tagline{font-size:14px;color:var(--dim);font-weight:400;margin-bottom:22px;letter-spacing:.02em;font-family:var(--mono);}
 .fleet-content p{font-size:14px;color:var(--dim);line-height:1.95;font-weight:300;max-width:640px;margin-bottom:24px;}
@@ -185,7 +182,7 @@ section{padding:96px 48px;position:relative;}
 .fleet-status.dim-dot .dot{background:var(--dim2);}
 
 @media(max-width:800px){
-  .fleet-card{grid-template-columns:1fr;gap:20px;padding:40px 22px;}
+  .fleet-card{padding:40px 22px;}
   .fleet-card-scrim{background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.3) 55%,rgba(0,0,0,.6) 100%);}
 }
 
@@ -381,7 +378,6 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 <div class="fleet-card" id="brand-camellia">
   <div class="fleet-card-bg" data-bg-rotator><img src="uploads/bg-camellia-1.png" class="is-active" alt=""></div>
   <div class="fleet-card-scrim"></div>
-  <div class="fleet-index"><span class="roman">I</span>Camellia</div>
   <div class="fleet-content">
     <h3 style="color:#e0576f;">Camellia</h3>
     <div class="fleet-tagline">「もう一度、自分を好きになる」— 女性ウェルネス/女性ウェルビーイング</div>
@@ -393,7 +389,6 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 <div class="fleet-card" id="brand-heartoo">
   <div class="fleet-card-bg" data-bg-rotator><img src="uploads/bg-heartoo-1.png" class="is-active" alt=""></div>
   <div class="fleet-card-scrim"></div>
-  <div class="fleet-index"><span class="roman">II</span>Heartoo</div>
   <div class="fleet-content">
     <h3 style="color:#a0d8ef;">Heartoo</h3>
     <div class="fleet-tagline">「♡を貴女に」— スマート結婚指輪</div>
@@ -405,7 +400,6 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 <div class="fleet-card" id="brand-emu">
   <div class="fleet-card-bg" data-bg-rotator><img src="uploads/bg-emu-1.png" class="is-active" alt=""><img src="uploads/bg-emu-2.png" alt=""></div>
   <div class="fleet-card-scrim"></div>
-  <div class="fleet-index"><span class="roman">III</span>Emu</div>
   <div class="fleet-content">
     <h3 style="color:#f08300;">Emu</h3>
     <div class="fleet-tagline">Education community — 分散型SNS</div>
@@ -417,7 +411,6 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 <div class="fleet-card" id="brand-schoolpark" style="border-bottom:none;">
   <div class="fleet-card-bg" data-bg-rotator><img src="uploads/bg-schoolpark-1.jpg" class="is-active" alt=""><img src="uploads/bg-schoolpark-2.png" alt=""></div>
   <div class="fleet-card-scrim"></div>
-  <div class="fleet-index"><span class="roman">IV</span>SchoolPark</div>
   <div class="fleet-content">
     <h3 style="color:#d0e2be;">SchoolPark</h3>
     <div class="fleet-tagline">最高に楽しい心躍る場所</div>
