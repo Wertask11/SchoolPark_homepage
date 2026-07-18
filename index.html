@@ -164,6 +164,14 @@ section{padding:96px 48px;position:relative;}
 .stmt-text .dim{color:var(--dim);font-weight:500;}
 .stmt-sign{margin-top:56px;font-family:var(--mono);font-size:11px;color:var(--dim2);letter-spacing:.1em;}
 
+/* ===== GLOBAL REACH (world.html 埋め込み) ===== */
+.world-bg{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.world-frame{max-width:1200px;margin:0 auto;border:1px solid var(--line2);background:#04070f;overflow:hidden;}
+.world-frame iframe{display:block;width:100%;height:min(72vh,660px);min-height:420px;border:0;}
+@media(max-width:900px){
+  .world-frame iframe{height:min(64vh,520px);min-height:360px;}
+}
+
 /* ===== FLEET (4 brands) ===== */
 .fleet-card{
   padding:56px 48px;border-bottom:1px solid var(--line);
@@ -365,6 +373,18 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
     旺盛、冷静、時に激しく、本気で楽しもう。
   </p>
   <div class="stmt-sign">—— 2026年7月 合同会社型DAO SchoolPark</div>
+</section>
+
+<!-- GLOBAL REACH (世界地図ビジュアライゼーション埋め込み) -->
+<section id="world" class="world-bg">
+  <div class="sec-inner">
+    <div class="sec-eyebrow">Global Reach</div>
+    <h2 class="sec-title" style="margin-bottom:14px;">世界に広がる、<br>学びの輪。</h2>
+    <p class="sec-desc" style="margin-bottom:40px;">CHESの活動は、いま世界中へ。検索や応援がリアルタイムで地球に灯ります。ドラッグで地球を回して、応援を灯してみてください。</p>
+  </div>
+  <div class="world-frame">
+    <iframe src="world.html" title="SchoolPark × CHES — 世界地図ビジュアライゼーション" loading="lazy"></iframe>
+  </div>
 </section>
 
 <!-- FLEET: 4 BRANDS -->
