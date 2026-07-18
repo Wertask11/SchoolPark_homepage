@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>SchoolPark × CHES — Global Reach Visualization (Demo)</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #04070f;
+    overflow: hidden;
+    font-family: "Hiragino Sans", "Yu Gothic", "Helvetica Neue", Arial, sans-serif;
+  }
+  #container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+  #globe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+  }
+  #globe:active {
+    cursor: grabbing;
+  }
+  .overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 36px 40px;
+    box-sizing: border-box;
+  }
+  .header {
+    color: #eaf4ff;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .logo .x {
+    color: #4fa8ff;
+    font-weight: 400;
+    margin: 0 4px;
+  }
+  .tagline {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #8fa8c4;
+    letter-spacing: 0.03em;
+  }
+  .stats {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #eaf4ff;
+  }
+  .percent {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-shadow: 0 0 30px rgba(79, 168, 255, 0.65);
+    transition: opacity 0.4s ease;
+  }
+  .percent-label {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #8fa8c4;
+    letter-spacing: 0.04em;
+  }
+  .badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    text-align: center;
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+  }
+  .badge.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .badge-title {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 40px rgba(120, 200, 255, 0.9);
+  }
+  .badge-sub {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #cfe6ff;
+    letter-spacing: 0.03em;
+  }
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #6f88a4;
+  }
+  .note {
+    font-size: 11px;
+    letter-spacing: 0.02em;
+  }
+  #restart {
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #eaf4ff;
+    font-size: 12px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease;
+  }
+  #restart:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+  .footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cheer-wrap {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #cheerBtn {
+    pointer-events: auto;
+    background: rgba(80, 220, 140, 0.12);
+    border: 1px solid rgba(120, 220, 160, 0.35);
+    color: #d8ffe6;
+    font-size: 12px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+  #cheerBtn:hover {
+    background: rgba(80, 220, 140, 0.22);
+  }
+  #cheerBtn:active {
+    transform: scale(0.95);
+  }
+  .cheer-count {
+    font-size: 11px;
+    color: #8fd6ac;
+    min-width: 14px;
+  }
+  #searchStat {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #cfe3f5;
+    letter-spacing: 0.01em;
+  }
+  #markers {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+  }
+  .marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 22px;
+    line-height: 1;
+    pointer-events: none;
+    will-change: transform, opacity;
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.65));
+  }
+  #activityLog {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    pointer-events: none;
+    z-index: 8;
+  }
+  .log-entry {
+    background: rgba(4, 12, 24, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(140, 190, 255, 0.12);
+    border-radius: 10px;
+    padding: 7px 12px;
+    font-size: 11.5px;
+    color: #cfe3f5;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .log-entry.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #shareBtn {
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #eaf4ff;
+    font-size: 12px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease;
+  }
+  #shareBtn:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  @media (max-width: 700px) {
+    .overlay {
+      padding: 16px 14px;
+    }
+    .header {
+      max-width: 62%;
+    }
+    .logo {
+      font-size: 16px;
+    }
+    .tagline {
+      font-size: 10.5px;
+      line-height: 1.4;
+    }
+    .stats {
+      width: 90%;
+    }
+    .percent {
+      font-size: 38px;
+    }
+    .percent-label {
+      font-size: 11px;
+    }
+    .badge-title {
+      font-size: 24px;
+    }
+    .badge-sub {
+      font-size: 12px;
+    }
+    #activityLog {
+      top: 68px;
+      right: 14px;
+      left: 14px;
+      width: auto;
+    }
+    .log-entry {
+      font-size: 10.5px;
+      padding: 6px 10px;
+    }
+    .footer {
+      justify-content: center;
+    }
+    .footer-actions {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+    #cheerBtn, #shareBtn, #restart, #searchStat {
+      font-size: 11px;
+      padding: 7px 12px;
+    }
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="globe"></canvas>
+  <div id="markers"></div>
+  <div id="activityLog"></div>
+  <div class="overlay">
+    <div class="header">
+      <div class="logo">SchoolPark<span class="x">×</span>CHES</div>
+      <div class="tagline">広がる学びの輪 — Global Reach Visualization (Concept Demo)</div>
+    </div>
+    <div class="stats">
+      <div class="percent" id="percent">0%</div>
+      <div class="percent-label">利用が確認された地域の割合</div>
+    </div>
+    <div class="badge" id="badge">
+      <div class="badge-title">100% Reached</div>
+      <div class="badge-sub">世界中に学びが広がりました</div>
+    </div>
+    <div class="footer">
+      <div class="footer-actions">
+        <div id="searchStat">🔎 検索数 <span id="searchCountEl">0</span></div>
+        <div class="cheer-wrap">
+          <button id="cheerBtn">👍 応援する</button>
+          <span class="cheer-count" id="cheerCount">0</span>
+        </div>
+        <button id="shareBtn">𝕏 でシェア</button>
+        <button id="restart">再読み込み</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+(async function () {
+  var canvas = document.getElementById('globe');
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x04070f);
+
+  var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  var BASE_Z = 14.5;
+  var REVEAL_Z = 20;
+  camera.position.set(0, 1.5, BASE_Z);
+  camera.lookAt(0, 0, 0);
+
+  window.addEventListener('resize', function () {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  function makeGlowTexture(color, size) {
+    var c = document.createElement('canvas');
+    c.width = c.height = size;
+    var ctx = c.getContext('2d');
+    var g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    g.addColorStop(0, color + ', 1)');
+    g.addColorStop(0.4, color + ', 0.5)');
+    g.addColorStop(1, color + ', 0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(c);
+  }
+
+  var dotTexture = makeGlowTexture('rgba(180, 225, 255', 128);
+  var atmosphereTexture = makeGlowTexture('rgba(90, 170, 255', 512);
+
+  var globeGroup = new THREE.Group();
+  scene.add(globeGroup);
+
+  var RADIUS = 5;
+
+  renderer.outputEncoding = THREE.sRGBEncoding;
+
+  var earthMaterial = new THREE.MeshBasicMaterial({ color: 0x0e3763 });
+  var core = new THREE.Mesh(new THREE.SphereGeometry(RADIUS, 64, 48), earthMaterial);
+  globeGroup.add(core);
+
+  var debugStatusEl = document.getElementById('debugStatus');
+  function setStatus(msg) {
+    if (debugStatusEl) debugStatusEl.textContent = msg;
+  }
+
+  function applyTexture(tex) {
+    tex.encoding = THREE.sRGBEncoding;
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    tex.minFilter = THREE.LinearMipmapLinearFilter;
+    tex.magFilter = THREE.LinearFilter;
+    earthMaterial.map = tex;
+    earthMaterial.color.set(0xffffff);
+    earthMaterial.needsUpdate = true;
+    setStatus('earth texture: loaded (' + tex.image.width + 'x' + tex.image.height + ')');
+  }
+
+  var EARTH_URLS = [
+    'https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg',
+    'https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg',
+    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/textures/planets/earth_atmos_2048.jpg',
+    'https://unpkg.com/three@0.128.0/examples/textures/planets/earth_atmos_2048.jpg',
+    'https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg'
+  ];
+
+  function tryLoad(index) {
+    if (index >= EARTH_URLS.length) {
+      setStatus('earth texture: FAILED to load (all sources blocked) - showing flat color');
+      return;
+    }
+    setStatus('earth texture: loading from source ' + (index + 1) + '...');
+    new THREE.TextureLoader().load(
+      EARTH_URLS[index],
+      applyTexture,
+      undefined,
+      function () { tryLoad(index + 1); }
+    );
+  }
+  tryLoad(0);
+
+  var atmosphere = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: atmosphereTexture,
+    color: 0x5aaaff,
+    transparent: true,
+    opacity: 0.18,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  }));
+  atmosphere.scale.set(RADIUS * 3.4, RADIUS * 3.4, 1);
+  scene.add(atmosphere);
+
+  function makeStarfield() {
+    var count = 2200;
+    var positions = new Float32Array(count * 3);
+    for (var i = 0; i < count; i++) {
+      var r = 60 + Math.random() * 220;
+      var theta = Math.random() * Math.PI * 2;
+      var phi = Math.acos(2 * Math.random() - 1);
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = r * Math.cos(phi);
+    }
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    var mat = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.7,
+      sizeAttenuation: true,
+      map: dotTexture,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    return new THREE.Points(geo, mat);
+  }
+  scene.add(makeStarfield());
+
+  function latLonToVector3(lat, lon, radius) {
+    var phi = (90 - lat) * (Math.PI / 180);
+    var theta = (lon + 180) * (Math.PI / 180);
+    return new THREE.Vector3(
+      -radius * Math.sin(phi) * Math.cos(theta),
+      radius * Math.cos(phi),
+      radius * Math.sin(phi) * Math.sin(theta)
+    );
+  }
+
+  var CITY_POOL = [
+    ['東京', 35.68, 139.69], ['大阪', 34.69, 135.50], ['名古屋', 35.18, 136.91], ['福岡', 33.59, 130.40], ['札幌', 43.06, 141.35],
+    ['仙台', 38.27, 140.87], ['広島', 34.40, 132.46], ['京都', 35.01, 135.77], ['神戸', 34.69, 135.20], ['那覇', 26.21, 127.68],
+    ['ソウル', 37.57, 126.98], ['台北', 25.03, 121.56], ['上海', 31.23, 121.47], ['香港', 22.32, 114.17], ['シンガポール', 1.35, 103.82],
+    ['バンコク', 13.76, 100.50], ['ムンバイ', 19.08, 72.88], ['ドバイ', 25.20, 55.27], ['シドニー', -33.87, 151.21], ['ロンドン', 51.51, -0.13],
+    ['パリ', 48.85, 2.35], ['ベルリン', 52.52, 13.40], ['マドリード', 40.42, -3.70], ['ニューヨーク', 40.71, -74.01], ['ロサンゼルス', 34.05, -118.24],
+    ['トロント', 43.65, -79.38], ['サンパウロ', -23.55, -46.63], ['カイロ', 30.04, 31.24], ['ナイロビ', -1.29, 36.82], ['ヨハネスブルグ', -26.20, 28.05]
+  ];
+
+  var EVENT_TYPES = {
+    search: { emoji: '🔎', label: 'ホームページを検索しました', life: 5000 },
+    cheer: { emoji: '👍', label: '応援しました', life: 4500 },
+    signup: { emoji: '🎓', label: '新規登録しました', life: 5500 }
+  };
+
+  var logEl = document.getElementById('activityLog');
+  function addLogEntry(text) {
+    var el = document.createElement('div');
+    el.className = 'log-entry';
+    el.textContent = text;
+    logEl.insertBefore(el, logEl.firstChild);
+    requestAnimationFrame(function () { el.classList.add('show'); });
+    while (logEl.children.length > 5) {
+      logEl.removeChild(logEl.lastChild);
+    }
+    setTimeout(function () {
+      el.classList.remove('show');
+      setTimeout(function () {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      }, 500);
+    }, 6000);
+  }
+
+  var markersEl = document.getElementById('markers');
+  var activeMarkers = [];
+  var markerScratch = new THREE.Vector3();
+
+  function spawnMarker(lat, lon, emoji, lifeMs) {
+    var local = latLonToVector3(lat, lon, RADIUS * 1.03);
+    var el = document.createElement('div');
+    el.className = 'marker';
+    el.textContent = emoji;
+    markersEl.appendChild(el);
+    activeMarkers.push({ el: el, local: local, age: 0, life: lifeMs });
+  }
+
+  function randomCity() {
+    return CITY_POOL[Math.floor(Math.random() * CITY_POOL.length)];
+  }
+
+  function updateMarkers(delta) {
+    if (activeMarkers.length === 0) return;
+    globeGroup.updateMatrixWorld(true);
+    var camDirNorm = camera.position.clone().normalize();
+    var vw = window.innerWidth, vh = window.innerHeight;
+    for (var i = activeMarkers.length - 1; i >= 0; i--) {
+      var m = activeMarkers[i];
+      m.age += delta * 1000;
+      var lifeT = m.age / m.life;
+      if (lifeT >= 1) {
+        markersEl.removeChild(m.el);
+        activeMarkers.splice(i, 1);
+        continue;
+      }
+      var world = markerScratch.copy(m.local).applyMatrix4(globeGroup.matrixWorld);
+      var normalDir = world.clone().normalize();
+      var facing = normalDir.dot(camDirNorm);
+      var edgeFade = smoothstep(-0.08, 0.18, facing);
+
+      var screen = world.clone().project(camera);
+      var x = (screen.x * 0.5 + 0.5) * vw;
+      var y = (1 - (screen.y * 0.5 + 0.5)) * vh;
+
+      var fadeIn = smoothstep(0, 0.12, lifeT);
+      var fadeOut = 1 - smoothstep(0.78, 1, lifeT);
+      var pop = lifeT < 0.15 ? smoothstep(0, 0.15, lifeT) : 1;
+      var opacity = fadeIn * fadeOut * edgeFade;
+
+      m.el.style.transform = 'translate(' + (x - 11) + 'px, ' + (y - 11) + 'px) scale(' + pop.toFixed(2) + ')';
+      m.el.style.opacity = opacity.toFixed(2);
+    }
+  }
+
+  function renderEvent(typeKey, city) {
+    var type = EVENT_TYPES[typeKey];
+    if (!type || !city) return;
+    spawnMarker(city[1], city[2], type.emoji, type.life);
+    addLogEntry(city[0] + 'から' + type.label);
+  }
+
+  var SUPABASE_URL = 'https://ceexvhtoeddpdipjrsnr.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_Z_q60LyJmrCohKSwd2cYNQ_RnVJCuli';
+  var supabaseClient = null;
+  var supaStatusEl = document.getElementById('supaStatus');
+  function setSupaStatus(msg) {
+    if (supaStatusEl) supaStatusEl.textContent = msg;
+  }
+
+  var cheerBtn = document.getElementById('cheerBtn');
+  var cheerCountEl = document.getElementById('cheerCount');
+  var cheerCount = 0;
+  var searchCountEl = document.getElementById('searchCountEl');
+  var searchCount = 0;
+  var totalEventCount = 0;
+  var TOTAL_TARGET = 100;
+  var myCity = null;
+
+  var recentSelfEvents = [];
+  function markSelf(typeKey, city) {
+    recentSelfEvents.push({ type: typeKey, lat: city[1], lon: city[2], time: Date.now() });
+  }
+  function consumeIfSelf(row) {
+    var now = Date.now();
+    for (var i = recentSelfEvents.length - 1; i >= 0; i--) {
+      var e = recentSelfEvents[i];
+      if (now - e.time > 5000) {
+        recentSelfEvents.splice(i, 1);
+        continue;
+      }
+      if (e.type === row.type && Math.abs(e.lat - row.lat) < 0.001 && Math.abs(e.lon - row.lon) < 0.001) {
+        recentSelfEvents.splice(i, 1);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function insertEvent(typeKey, city) {
+    if (!city) return;
+    renderEvent(typeKey, city);
+    markSelf(typeKey, city);
+    totalEventCount++;
+    if (typeKey === 'cheer') {
+      cheerCount++;
+      cheerCountEl.textContent = cheerCount;
+    }
+    if (typeKey === 'search') {
+      searchCount++;
+      searchCountEl.textContent = searchCount;
+    }
+    if (!supabaseClient) return;
+    supabaseClient.from('events').insert({
+      type: typeKey,
+      city_name: city[0],
+      lat: city[1],
+      lon: city[2]
+    }).then(function (res) {
+      if (res.error) setSupaStatus('supabase: insert failed - ' + res.error.message);
+    });
+  }
+
+  cheerBtn.addEventListener('click', function () {
+    insertEvent('cheer', myCity || randomCity());
+  });
+
+  var currentPct = 0;
+  var SHARE_URL = 'https://school-park-homepage.vercel.app/world.html';
+  var shareBtn = document.getElementById('shareBtn');
+  var shareBtnDefaultLabel = shareBtn.textContent;
+
+  function buildShareText() {
+    return '🌏 SchoolPark × CHES、広がる学びの輪。\n応援はもう' + cheerCount + '件集まっています！\nあなたの応援も、この地図に灯してみませんか？\n#SchoolPark #CHES';
+  }
+
+  function copyTextFallback(text) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function copyShareText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }).catch(function () {
+        return copyTextFallback(text);
+      });
+    }
+    return Promise.resolve(copyTextFallback(text));
+  }
+
+  shareBtn.addEventListener('click', function () {
+    var text = buildShareText();
+    var intentUrl = 'https://x.com/intent/tweet?text=' + encodeURIComponent(text);
+    if (SHARE_URL) intentUrl += '&url=' + encodeURIComponent(SHARE_URL);
+
+    window.open(intentUrl, '_blank', 'noopener');
+
+    copyShareText(text).then(function (ok) {
+      shareBtn.textContent = ok ? 'コピーしました！Xに貼り付け' : 'コピー失敗';
+      setTimeout(function () { shareBtn.textContent = shareBtnDefaultLabel; }, 2600);
+    });
+  });
+
+  function fetchMyLocationByIP() {
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 3500);
+    return fetch('https://ipapi.co/json/', { signal: controller.signal })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        clearTimeout(timeout);
+        if (d && typeof d.latitude === 'number' && typeof d.longitude === 'number') {
+          myCity = [d.city || d.country_name || '不明な地域', d.latitude, d.longitude];
+        }
+      })
+      .catch(function () { clearTimeout(timeout); });
+  }
+
+  function reverseGeocode(lat, lon) {
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 4000);
+    var url = 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=' + lat + '&longitude=' + lon + '&localityLanguage=ja';
+    return fetch(url, { signal: controller.signal })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        clearTimeout(timeout);
+        if (!d) return null;
+        return d.city || d.locality || d.principalSubdivision || null;
+      })
+      .catch(function () { clearTimeout(timeout); return null; });
+  }
+
+  function fetchMyLocationPrecise() {
+    return new Promise(function (resolve) {
+      if (!window.isSecureContext || !navigator.geolocation) { resolve(false); return; }
+      var settled = false;
+      var timer = setTimeout(function () {
+        if (!settled) { settled = true; resolve(false); }
+      }, 7000);
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          var lat = pos.coords.latitude, lon = pos.coords.longitude;
+          reverseGeocode(lat, lon).then(function (name) {
+            myCity = [name || 'あなたの現在地', lat, lon];
+            resolve(true);
+          });
+        },
+        function () {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          resolve(false);
+        },
+        { enableHighAccuracy: true, timeout: 6500, maximumAge: 300000 }
+      );
+    });
+  }
+
+  function fetchMyLocation() {
+    return fetchMyLocationPrecise().then(function (gotPrecise) {
+      if (gotPrecise) return;
+      return fetchMyLocationByIP();
+    });
+  }
+
+  function initSupabase() {
+    if (!window.supabase || !SUPABASE_URL || !SUPABASE_KEY) {
+      setSupaStatus('supabase: not configured');
+      return;
+    }
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    setSupaStatus('supabase: connected');
+
+    supabaseClient
+      .channel('events-realtime')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'events' }, function (payload) {
+        var row = payload.new;
+        if (consumeIfSelf(row)) return;
+        renderEvent(row.type, [row.city_name, row.lat, row.lon]);
+        totalEventCount++;
+        if (row.type === 'cheer') {
+          cheerCount++;
+          cheerCountEl.textContent = cheerCount;
+        }
+        if (row.type === 'search') {
+          searchCount++;
+          searchCountEl.textContent = searchCount;
+        }
+      })
+      .subscribe();
+
+    supabaseClient.from('events').select('*').order('created_at', { ascending: false }).limit(15)
+      .then(function (res) {
+        if (res.error || !res.data) return;
+        var rows = res.data.slice().reverse();
+        rows.forEach(function (row, i) {
+          setTimeout(function () {
+            renderEvent(row.type, [row.city_name, row.lat, row.lon]);
+          }, i * 350);
+        });
+      });
+
+    supabaseClient.from('events').select('id', { count: 'exact', head: true }).eq('type', 'cheer')
+      .then(function (res) {
+        if (typeof res.count === 'number') {
+          cheerCount = res.count;
+          cheerCountEl.textContent = cheerCount;
+        }
+      });
+
+    supabaseClient.from('events').select('id', { count: 'exact', head: true }).eq('type', 'search')
+      .then(function (res) {
+        if (typeof res.count === 'number') {
+          searchCount = res.count;
+          searchCountEl.textContent = searchCount;
+        }
+      });
+
+    supabaseClient.from('events').select('id', { count: 'exact', head: true })
+      .then(function (res) {
+        if (typeof res.count === 'number') {
+          totalEventCount = res.count;
+        }
+      });
+
+    fetchMyLocation().then(function () {
+      insertEvent('search', myCity || randomCity());
+    });
+  }
+  initSupabase();
+
+  var percentEl = document.getElementById('percent');
+  var badgeEl = document.getElementById('badge');
+  var restartBtn = document.getElementById('restart');
+
+  var dragging = false;
+  var dragStartX = 0, dragStartY = 0;
+  var manualRotY = 0, manualRotX = 0;
+  var baseRotY = 0, baseRotX = -0.1;
+  var autoRotate = true;
+
+  var resumeRotateTimer = null;
+
+  canvas.addEventListener('pointerdown', function (e) {
+    dragging = true;
+    autoRotate = false;
+    if (resumeRotateTimer) {
+      clearTimeout(resumeRotateTimer);
+      resumeRotateTimer = null;
+    }
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+  });
+  window.addEventListener('pointerup', function () {
+    dragging = false;
+    resumeRotateTimer = setTimeout(function () {
+      autoRotate = true;
+    }, 1200);
+  });
+  window.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var dx = e.clientX - dragStartX;
+    var dy = e.clientY - dragStartY;
+    manualRotY += dx * 0.005;
+    manualRotX += dy * 0.005;
+    manualRotX = Math.max(-1.1, Math.min(1.1, manualRotX));
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+  });
+
+  restartBtn.addEventListener('click', function () {
+    location.reload();
+  });
+
+  function smoothstep(a, b, x) {
+    var t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+    return t * t * (3 - 2 * t);
+  }
+
+  var clock = new THREE.Clock();
+  var revealAmount = 0;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    var delta = clock.getDelta();
+
+    var pct = Math.max(0, Math.min(100, Math.round((totalEventCount / TOTAL_TARGET) * 100)));
+    percentEl.textContent = pct + '%';
+    currentPct = pct;
+
+    var targetReveal = pct >= 100 ? 1 : 0;
+    revealAmount += (targetReveal - revealAmount) * 0.02;
+    if (pct >= 100) {
+      badgeEl.classList.add('show');
+    } else {
+      badgeEl.classList.remove('show');
+    }
+
+    atmosphere.material.opacity = 0.18 + revealAmount * 0.32;
+    var atmScale = RADIUS * 3.4 * (1 + revealAmount * 0.25);
+    atmosphere.scale.set(atmScale, atmScale, 1);
+
+    var targetZ = BASE_Z + (REVEAL_Z - BASE_Z) * revealAmount;
+    camera.position.z += (targetZ - camera.position.z) * 0.05;
+    camera.position.y = 1.5 - revealAmount * 0.8;
+    camera.lookAt(0, 0, 0);
+
+    if (autoRotate) {
+      baseRotY += delta * 0.06;
+    }
+    globeGroup.rotation.y = baseRotY + manualRotY;
+    globeGroup.rotation.x = baseRotX + manualRotX;
+
+    updateMarkers(delta);
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+})();
+</script>
+</body>
+</html>
