@@ -648,10 +648,13 @@
 
   shareBtn.addEventListener('click', function () {
     var text = buildShareText();
-    var intentUrl = 'https://x.com/intent/tweet?text=' + encodeURIComponent(text);
+    // twitter.com/intent/tweet は投稿文のプリフィルが最も安定（x.comへ自動リダイレクト）
+    var intentUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
     if (SHARE_URL) intentUrl += '&url=' + encodeURIComponent(SHARE_URL);
 
-    window.open(intentUrl, '_blank', 'noopener');
+    // 第3引数(features)を渡すとポップアップ扱いでブロックされやすいため、通常タブで開く
+    var shareWin = window.open(intentUrl, '_blank');
+    if (shareWin) { shareWin.opener = null; }
 
     copyShareText(text).then(function (ok) {
       shareBtn.textContent = ok ? 'コピーしました！Xに貼り付け' : 'コピー失敗';
