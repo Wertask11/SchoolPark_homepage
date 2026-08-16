@@ -288,6 +288,9 @@
     }
   }
 </style>
+<script>window.CHES_TITLE_KEY = "wld.doc.title";</script>
+<script src="i18n.js" defer></script>
+<script src="i18n-world.js" defer></script>
 </head>
 <body>
 <div id="container">
@@ -297,21 +300,21 @@
   <div class="overlay">
     <div class="header">
       <div class="logo">SchoolPark<span class="x">×</span>CHES</div>
-      <div class="tagline">広がる学びの輪 — Global Reach Visualization (Concept Demo)</div>
+      <div class="tagline" data-i18n="wld.001">広がる学びの輪 — Global Reach Visualization (Concept Demo)</div>
     </div>
     <div class="badge" id="badge">
       <div class="badge-title">100% Reached</div>
-      <div class="badge-sub">世界中に学びが広がりました</div>
+      <div class="badge-sub" data-i18n="wld.002">世界中に学びが広がりました</div>
     </div>
     <div class="footer">
       <div class="footer-actions">
-        <div id="searchStat">🔎 検索数 <span id="searchCountEl">0</span></div>
+        <div id="searchStat"><span data-i18n="wld.003">🔎 検索数</span> <span id="searchCountEl">0</span></div>
         <div class="cheer-wrap">
-          <button id="cheerBtn">👍 応援する</button>
+          <button id="cheerBtn" data-i18n="wld.004">👍 応援する</button>
           <span class="cheer-count" id="cheerCount">0</span>
         </div>
-        <button id="shareBtn">𝕏 でシェア</button>
-        <button id="restart">再読み込み</button>
+        <button id="shareBtn" data-i18n="wld.005">𝕏 でシェア</button>
+        <button id="restart" data-i18n="wld.006">再読み込み</button>
       </div>
     </div>
   </div>

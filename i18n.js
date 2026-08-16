@@ -343,6 +343,7 @@
   };
 
   var current = "ja";
+  var ready = false;
 
   function supported(code) {
     for (var i = 0; i < LANGS.length; i++) if (LANGS[i].code === code) return true;
@@ -382,13 +383,17 @@
     scope.querySelectorAll("[data-i18n-html]").forEach(function (el) {
       el.innerHTML = t(el.getAttribute("data-i18n-html"));
     });
+    scope.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+      el.setAttribute("placeholder", t(el.getAttribute("data-i18n-placeholder")));
+    });
     scope.querySelectorAll("[data-i18n-title]").forEach(function (el) {
       el.setAttribute("title", t(el.getAttribute("data-i18n-title")));
     });
     scope.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
       el.setAttribute("aria-label", t(el.getAttribute("data-i18n-aria")));
     });
-    document.title = t("doc.title");
+    // ページごとにキーを変えられる。指定が無ければトップページのものを使う
+    document.title = t(window.CHES_TITLE_KEY || "doc.title");
   }
 
   function syncSelects() {
@@ -412,7 +417,28 @@
     document.documentElement.setAttribute("lang", localeTag());
     syncSelects();
     apply();
+    broadcastToFrames(code);
   }
+
+  /* 同じオリジンなので localStorage は共有され、読み込み時は揃う。
+     切り替えたその場で反映させるため、開いている iframe にも伝える。 */
+  function broadcastToFrames(code) {
+    try {
+      document.querySelectorAll(iframe).forEach(function (frame) {
+        try {
+          if (frame.contentWindow) {
+            frame.contentWindow.postMessage({ type: "emu-lang", lang: code }, location.origin);
+          }
+        } catch (e) {}
+      });
+    } catch (e) {}
+  }
+
+  window.addEventListener("message", function (event) {
+    if (event.origin !== location.origin || !event.data) return;
+    if (event.data.type !== "emu-lang") return;
+    if (event.data.lang && event.data.lang !== current) setChesLang(event.data.lang);
+  });
 
   function init() {
     var saved = null;
@@ -421,12 +447,27 @@
     document.documentElement.setAttribute("lang", localeTag());
     syncSelects();
     apply();
+    ready = true;
     document.addEventListener("change", function (e) {
       var select = e.target.closest && e.target.closest("[data-lang-select]");
       if (select) setChesLang(select.value);
     });
   }
 
+  /* ページごとの辞書を後から足す。
+     各ページは i18n.js のあとに i18n-<ページ名>.js を読み込み、
+     この関数で自分のぶんだけ登録する。defer なので順番は保たれる。 */
+  function register(parts) {
+    Object.keys(parts).forEach(function (lang) {
+      if (!DICT[lang]) DICT[lang] = {};
+      var table = parts[lang];
+      Object.keys(table).forEach(function (key) { DICT[lang][key] = table[key]; });
+    });
+    // 初期化のあとに登録された場合は、その場で反映する
+    if (ready) apply();
+  }
+
+  window.registerChesI18n = register;
   window.CHES_LANGS = LANGS;
   window.chesT = t;
   window.setChesLang = setChesLang;
