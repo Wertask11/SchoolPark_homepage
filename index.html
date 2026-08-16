@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CHES | 合同会社型DAO SchoolPark</title>
+<script src="i18n.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -55,6 +56,16 @@ nav{
   transition:all .2s;
 }
 .nav-cta:hover{background:var(--white);color:#000;border-color:var(--white);}
+/* 言語切替。ナビの他のリンクに合わせて控えめに */
+.lang-select{
+  background:transparent;border:1px solid var(--line2);color:var(--dim);
+  border-radius:4px;padding:5px 8px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.08em;cursor:pointer;
+}
+.lang-select:hover{color:var(--white);border-color:var(--white);}
+.lang-select option{background:#0b0b0d;color:#fff;}
+/* スマホではハンバーガーの左に並べる */
+@media (max-width:900px){ .lang-select{margin-left:auto;margin-right:8px;} }
 .mobile-menu-btn{
   display:none;align-items:center;justify-content:center;
   width:38px;height:38px;background:transparent;border:1px solid var(--line2);
@@ -217,7 +228,10 @@ section{padding:96px 48px;position:relative;}
 .token-addr{font-family:var(--mono);font-size:10px;color:var(--dim2);margin-top:22px;background:rgba(255,255,255,.03);padding:9px 12px;word-break:break-all;}
 .token-list{list-style:none;display:flex;flex-direction:column;gap:16px;}
 .token-list li{display:flex;gap:14px;font-size:13.5px;color:var(--dim);line-height:1.8;font-weight:300;}
-.token-list li span{color:var(--dim2);flex-shrink:0;font-family:var(--mono);}
+/* 縮まないのは行頭の「—」だけ。本文まで flex-shrink:0 にすると、
+   単語で折り返す言語（英語など）で行が縮まず横にはみ出す */
+.token-list li>span:first-child{color:var(--dim2);flex-shrink:0;font-family:var(--mono);}
+.token-list li>span:not(:first-child){min-width:0;}
 
 /* ===== NFT SHOP ===== */
 .nft-shop-bg{background:var(--bg2);border-top:1px solid var(--line);}
@@ -281,17 +295,17 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 <nav>
   <a class="nav-brand" href="#">
     <div class="nav-brand-mark"><span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span></div>
-    <div class="nav-brand-sub">合同会社型DAO SchoolPark</div>
+    <div class="nav-brand-sub" data-i18n="org.name">合同会社型DAO SchoolPark</div>
   </a>
   <ul class="nav-links">
-    <li><a href="#pillars">理念</a></li>
-    <li><a href="#fleet">See one world</a></li>
-    <li><a href="#tokenomics">EMUER</a></li>
-    <li><a href="#nft-shop">公式パス</a></li>
-    <li><a href="#tokenomics">投資家</a></li>
+    <li><a href="#pillars" data-i18n="nav.pillars">理念</a></li>
+    <li><a href="#fleet" data-i18n="nav.world">See one world</a></li>
+    <li><a href="#tokenomics" data-i18n="nav.token">EMUER</a></li>
+    <li><a href="#nft-shop" data-i18n="nav.pass">公式パス</a></li>
+    <li><a href="#tokenomics" data-i18n="nav.investor">投資家</a></li>
   </ul>
   <div class="nav-explore-wrap">
-    <a class="nav-cta" href="#fleet">探検しよう</a>
+    <a class="nav-cta" href="#fleet" data-i18n="nav.explore">探検しよう</a>
     <div class="nav-explore-menu">
       <a href="#brand-camellia" style="color:#e0576f;">Camellia</a>
       <a href="#brand-heartoo" style="color:#a0d8ef;">Heartoo</a>
@@ -299,7 +313,10 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
       <a href="#brand-schoolpark" style="color:#d0e2be;">SchoolPark</a>
     </div>
   </div>
-  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="メニュー">☰</button>
+  <!-- 言語切替。メニューの中に入れるとスマホで閉じている間は見えないので、
+       ハンバーガーの隣に常に出しておく -->
+  <select class="lang-select" data-lang-select aria-label="Language" data-i18n-title="nav.lang"></select>
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="メニュー" data-i18n-aria="nav.menu">☰</button>
 </nav>
 
 <!-- HERO -->
@@ -312,12 +329,12 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
   </div>
 
   <div class="hero-mid" style="position:relative;z-index:1;">
-    <div class="hero-eyebrow">合同会社型DAO SchoolPark</div>
+    <div class="hero-eyebrow" data-i18n="org.name">合同会社型DAO SchoolPark</div>
     <h1 class="hero-title"><span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span></h1>
-    <p class="hero-sub">旺盛、冷静、時に激しく、本気で楽しもう。</p>
+    <p class="hero-sub" data-i18n="hero.sub">旺盛、冷静、時に激しく、本気で楽しもう。</p>
     <div class="hero-actions">
       <div class="nav-explore-wrap hero-explore-wrap" style="display:inline-block;">
-        <a href="#fleet" class="btn-solid">探検しよう</a>
+        <a href="#fleet" class="btn-solid" data-i18n="nav.explore">探検しよう</a>
         <div class="nav-explore-menu">
           <a href="#brand-camellia" style="color:#e0576f;">Camellia</a>
           <a href="#brand-heartoo" style="color:#a0d8ef;">Heartoo</a>
@@ -325,9 +342,9 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
           <a href="#brand-schoolpark" style="color:#d0e2be;">SchoolPark</a>
         </div>
       </div>
-      <a href="#fleet" class="btn-ghost">See one world</a>
+      <a href="#fleet" class="btn-ghost" data-i18n="nav.world">See one world</a>
       <button class="hero-sound-btn" style="margin-top:0;" onclick="document.getElementById('videoModal').classList.add('open');document.getElementById('modalVideo').play();">
-        <span class="dot"></span>映像を見る
+        <span class="dot"></span><span data-i18n="hero.watch">映像を見る</span>
       </button>
     </div>
   </div>
@@ -335,7 +352,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 
 <!-- VIDEO MODAL -->
 <div class="video-modal" id="videoModal">
-  <button class="video-modal-close" onclick="document.getElementById('videoModal').classList.remove('open');document.getElementById('modalVideo').pause();">✕ 閉じる</button>
+  <button class="video-modal-close" onclick="document.getElementById('videoModal').classList.remove('open');document.getElementById('modalVideo').pause();" data-i18n="hero.close">✕ 閉じる</button>
   <video id="modalVideo" src="uploads/ches-world.mp4" controls></video>
 </div>
 
@@ -343,44 +360,44 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 <section id="pillars" class="pillars-bg">
   <div class="sec-inner">
     <div class="sec-eyebrow">Three Pillars</div>
-    <h2 class="sec-title" style="margin-bottom:0;">学校より学べて<br>公園より楽しめて<br>会社より稼げる場所を。</h2>
+    <h2 class="sec-title" style="margin-bottom:0;" data-i18n-html="pillars.title">学校より学べて<br>公園より楽しめて<br>会社より稼げる場所を。</h2>
   </div>
   <div class="pillars-grid" style="margin-top:48px;">
     <div class="pillar reveal">
       <div class="pillar-num">01</div>
-      <h3>学校より学べる</h3>
-      <p>体験と経験を通じて、知識を知恵に昇華させる。教科書ではなく、実践から学ぶリテラシー。</p>
+      <h3 data-i18n="pillars.1.h">学校より学べる</h3>
+      <p data-i18n="pillars.1.p">体験と経験を通じて、知識を知恵に昇華させる。教科書ではなく、実践から学ぶリテラシー。</p>
     </div>
     <div class="pillar reveal">
       <div class="pillar-num">02</div>
-      <h3>公園より楽しい</h3>
-      <p>無我夢中で遊べる場所。星座、議論、イベント——遊びの中に学びと発見がある。</p>
+      <h3 data-i18n="pillars.2.h">公園より楽しい</h3>
+      <p data-i18n="pillars.2.p">無我夢中で遊べる場所。星座、議論、イベント——遊びの中に学びと発見がある。</p>
     </div>
     <div class="pillar reveal">
       <div class="pillar-num">03</div>
-      <h3>会社より稼げる</h3>
-      <p>投稿・貢献・活動がEMUERになる。頑張りがそのまま報酬に変わる、生きた知識の経済圏。</p>
+      <h3 data-i18n="pillars.3.h">会社より稼げる</h3>
+      <p data-i18n="pillars.3.p">投稿・貢献・活動がEMUERになる。頑張りがそのまま報酬に変わる、生きた知識の経済圏。</p>
     </div>
   </div>
 </section>
 
 <!-- STATEMENT -->
 <section class="statement">
-  <div class="stmt-mark">CHES宣言</div>
+  <div class="stmt-mark" data-i18n="stmt.mark">CHES宣言</div>
   <p class="stmt-text">
-    私は、ここにCHESを宣言する。<br>
+    <span data-i18n="stmt.line1">私は、ここにCHESを宣言する。</span><br>
     <span style="color:#e0576f;">Camellia</span>、<span style="color:#a0d8ef;">Heartoo</span>、<span style="color:#f08300;">Emu</span>、<span style="color:#d0e2be;">SchoolPark</span>。<br><br>
-    旺盛、冷静、時に激しく、本気で楽しもう。
+    <span data-i18n="stmt.line2">旺盛、冷静、時に激しく、本気で楽しもう。</span>
   </p>
-  <div class="stmt-sign">—— 2026年7月 合同会社型DAO SchoolPark</div>
+  <div class="stmt-sign" data-i18n="stmt.sign">—— 2026年7月 合同会社型DAO SchoolPark</div>
 </section>
 
 <!-- GLOBAL REACH (世界地図ビジュアライゼーション埋め込み) -->
 <section id="world" class="world-bg">
   <div class="sec-inner">
     <div class="sec-eyebrow">Global Reach</div>
-    <h2 class="sec-title" style="margin-bottom:14px;">世界に広がる、<br>学びの輪。</h2>
-    <p class="sec-desc" style="margin-bottom:40px;">CHESの活動は、いま世界中へ。検索や応援がリアルタイムで地球に灯ります。ドラッグで地球を回して、応援を灯してみてください。</p>
+    <h2 class="sec-title" style="margin-bottom:14px;" data-i18n-html="world.title">世界に広がる、<br>学びの輪。</h2>
+    <p class="sec-desc" style="margin-bottom:40px;" data-i18n="world.desc">CHESの活動は、いま世界中へ。検索や応援がリアルタイムで地球に灯ります。ドラッグで地球を回して、応援を灯してみてください。</p>
   </div>
   <div class="world-frame">
     <iframe src="world.html" title="SchoolPark × CHES — 世界地図ビジュアライゼーション" loading="lazy" allow="geolocation"></iframe>
@@ -391,7 +408,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 <section id="fleet" style="padding-bottom:0;">
   <div class="sec-inner">
     <div class="sec-eyebrow">The one world</div>
-    <h2 class="sec-title">SchoolPark、<br>それは一つの世界。</h2>
+    <h2 class="sec-title" data-i18n-html="fleet.title">SchoolPark、<br>それは一つの世界。</h2>
   </div>
 </section>
 
@@ -400,9 +417,9 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
   <div class="fleet-card-scrim"></div>
   <div class="fleet-content">
     <h3 style="color:#e0576f;">Camellia</h3>
-    <div class="fleet-tagline">「もう一度、自分を好きになる」— 女性ウェルネス/女性ウェルビーイング</div>
-    <p>女性ウェルネス/女性ウェルビーイングプラットフォーム。美・健康・こころ・性・学び，お金・つながりの6領域から、女性の人生を等しく支える。</p>
-    <div style="margin-top:24px;"><a href="Camellia.html" class="btn-ghost" style="padding:12px 24px;font-size:11px;">もっと詳しく見る</a></div>
+    <div class="fleet-tagline" data-i18n="fleet.camellia.tag">「もう一度、自分を好きになる」— 女性ウェルネス/女性ウェルビーイング</div>
+    <p data-i18n="fleet.camellia.p">女性ウェルネス/女性ウェルビーイングプラットフォーム。美・健康・こころ・性・学び，お金・つながりの6領域から、女性の人生を等しく支える。</p>
+    <div style="margin-top:24px;"><a href="Camellia.html" class="btn-ghost" style="padding:12px 24px;font-size:11px;" data-i18n="fleet.camellia.btn">もっと詳しく見る</a></div>
   </div>
 </div>
 
@@ -411,9 +428,9 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
   <div class="fleet-card-scrim"></div>
   <div class="fleet-content">
     <h3 style="color:#a0d8ef;">Heartoo</h3>
-    <div class="fleet-tagline">「♡を貴女に」— スマート結婚指輪</div>
-    <p>空中にハートを描いてフリックで放つと、相手に光のハートが届く。NFCでSchoolPark入場とEMUER決済にも使用可能。</p>
-    <div style="margin-top:24px;"><a href="Heartoo.html" class="btn-ghost" style="padding:12px 24px;font-size:11px;">製品を購入する</a></div>
+    <div class="fleet-tagline" data-i18n="fleet.heartoo.tag">「♡を貴女に」— スマート結婚指輪</div>
+    <p data-i18n="fleet.heartoo.p">空中にハートを描いてフリックで放つと、相手に光のハートが届く。NFCでSchoolPark入場とEMUER決済にも使用可能。</p>
+    <div style="margin-top:24px;"><a href="Heartoo.html" class="btn-ghost" style="padding:12px 24px;font-size:11px;" data-i18n="fleet.heartoo.btn">製品を購入する</a></div>
   </div>
 </div>
 
@@ -422,9 +439,9 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
   <div class="fleet-card-scrim"></div>
   <div class="fleet-content">
     <h3 style="color:#f08300;">Emu</h3>
-    <div class="fleet-tagline">Education community — 分散型SNS</div>
-    <p>学校では学べない、教えてくれない、本当に大切な情報を共有する新しい学びの場。</p>
-    <div style="margin-top:24px;"><a href="https://schoolpark-emu.vercel.app/" target="_blank" class="btn-ghost" style="padding:12px 24px;font-size:11px;">知識を共有する</a></div>
+    <div class="fleet-tagline" data-i18n="fleet.emu.tag">Education community — 分散型SNS</div>
+    <p data-i18n="fleet.emu.p">学校では学べない、教えてくれない、本当に大切な情報を共有する新しい学びの場。</p>
+    <div style="margin-top:24px;"><a href="https://schoolpark-emu.vercel.app/" target="_blank" class="btn-ghost" style="padding:12px 24px;font-size:11px;" data-i18n="fleet.emu.btn">知識を共有する</a></div>
   </div>
 </div>
 
@@ -433,9 +450,9 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
   <div class="fleet-card-scrim"></div>
   <div class="fleet-content">
     <h3 style="color:#d0e2be;">SchoolPark</h3>
-    <div class="fleet-tagline">最高に楽しい心躍る場所</div>
-    <p>DXR — 分散型複合現実<br>Decentralized Mixed Reality。オンラインとオフラインの境界が消える最終形。</p>
-    <div style="margin-top:24px;"><a href="https://schoolpark-emu.vercel.app/" target="_blank" class="btn-ghost" style="padding:12px 24px;font-size:11px;">体験する</a></div>
+    <div class="fleet-tagline" data-i18n="fleet.sp.tag">最高に楽しい心躍る場所</div>
+    <p data-i18n-html="fleet.sp.p">DXR — 分散型複合現実<br>Decentralized Mixed Reality。オンラインとオフラインの境界が消える最終形。</p>
+    <div style="margin-top:24px;"><a href="https://schoolpark-emu.vercel.app/" target="_blank" class="btn-ghost" style="padding:12px 24px;font-size:11px;" data-i18n="fleet.sp.btn">体験する</a></div>
   </div>
 </div>
 
@@ -443,8 +460,8 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 <section id="tokenomics">
   <div class="sec-inner">
     <div class="sec-eyebrow">EMUER</div>
-    <h2 class="sec-title">EMUER　<span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span>を流れるトークン。</h2>
-    <p class="sec-desc" style="margin-top:16px;max-width:720px;">
+    <h2 class="sec-title">EMUER　<span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span><span data-i18n="token.title">を流れるトークン。</span></h2>
+    <p class="sec-desc" style="margin-top:16px;max-width:720px;" data-i18n-html="token.desc">
       CHESは4つのブランドではない。一つの世界。<br>
       Camelliaは、女性を。Heartooは、カップルや夫婦を。Emuは、知的好奇心や学びに満ち溢れた大人や子供を。SchoolParkは、家族を。<br><br>
       その世界を貫く共通トークンがEMUER。Emuで集めて、Camelliaで育てて、Heartooで支払い、SchoolParkで使う。<br><br>
@@ -461,11 +478,11 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
         <div class="token-addr">0x4418d5250Dae4b1125ADFCD5C0779B1412E4a964</div>
       </div>
       <ul class="token-list reveal">
-        <li><span>—</span>投稿・Good・Changeなど活動によって自動付与</li>
-        <li><span>—</span>Emu内取引所でNFTと交換可能</li>
-        <li><span>—</span>公式NFTの割引購入に使用可能</li>
-        <li><span>—</span>将来的にHeartooのNFC決済とも接続予定</li>
-        <li><span>—</span>イベント限定ポイントとしても利用（換金なし）</li>
+        <li><span>—</span><span data-i18n="token.li1">投稿・Good・Changeなど活動によって自動付与</span></li>
+        <li><span>—</span><span data-i18n="token.li2">Emu内取引所でNFTと交換可能</span></li>
+        <li><span>—</span><span data-i18n="token.li3">公式NFTの割引購入に使用可能</span></li>
+        <li><span>—</span><span data-i18n="token.li4">将来的にHeartooのNFC決済とも接続予定</span></li>
+        <li><span>—</span><span data-i18n="token.li5">イベント限定ポイントとしても利用（換金なし）</span></li>
       </ul>
     </div>
   </div>
@@ -475,58 +492,58 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
 <section id="nft-shop" class="nft-shop-bg">
   <div class="sec-inner">
     <div class="sec-eyebrow">Official NFT</div>
-    <h2 class="sec-title">SchoolPark公式パス</h2>
-    <p class="sec-desc" style="margin-top:16px;">保有することでCHESの一員となり、SchoolParkからの特別な優遇を受けられます。</p>
+    <h2 class="sec-title" data-i18n="nft.title">SchoolPark公式パス</h2>
+    <p class="sec-desc" style="margin-top:16px;" data-i18n="nft.desc">保有することでCHESの一員となり、SchoolParkからの特別な優遇を受けられます。</p>
 
     <div class="nft-grid-ches">
       <div class="nft-card-ches">
         <div class="nft-thumb-ches">
           <img src="uploads/pasted-1776756474395-0.png" style="height:480px;width:auto;top:-195px;left:-75px;">
-          <span class="nft-tag-ches left">第1弾 — 有料</span>
+          <span class="nft-tag-ches left" data-i18n="nft.1.tag">第1弾 — 有料</span>
           <span class="nft-tag-ches">HEXA</span>
         </div>
         <div class="nft-body-ches">
           <h4>とびら</h4>
-          <p>SchoolPark公式パス第一弾</p>
+          <p data-i18n="nft.1.sub">SchoolPark公式パス第一弾</p>
           <div class="stock-row">
             <div class="stock-bar-ches"><div class="stock-fill-ches" style="width:58%;"></div></div>
-            <span class="stock-label-ches">残り 5 / 12</span>
+            <span class="stock-label-ches"><span data-i18n="nft.left">残り</span> 5 / 12</span>
           </div>
-          <a href="https://nft.hexanft.com/users/N2IgWc7ul2vOsQ" target="_blank" class="btn-solid" style="padding:13px 24px;">HEXAで購入する</a>
+          <a href="https://nft.hexanft.com/users/N2IgWc7ul2vOsQ" target="_blank" class="btn-solid" style="padding:13px 24px;" data-i18n="nft.buyHexa">HEXAで購入する</a>
         </div>
       </div>
 
       <div class="nft-card-ches">
         <div class="nft-thumb-ches">
           <img src="uploads/pasted-1776756967728-0.png" style="height:420px;width:auto;top:-105px;left:-275px;">
-          <span class="nft-tag-ches left" style="background:transparent;border:1px solid var(--line2);color:#fff;">第2弾 — オファー</span>
+          <span class="nft-tag-ches left" style="background:transparent;border:1px solid var(--line2);color:#fff;" data-i18n="nft.2.tag">第2弾 — オファー</span>
           <span class="nft-tag-ches">OpenSea</span>
         </div>
         <div class="nft-body-ches">
           <h4>冷蔵庫くん</h4>
-          <p>SchoolPark公式パス第二弾</p>
+          <p data-i18n="nft.2.sub">SchoolPark公式パス第二弾</p>
           <div class="stock-row">
             <div class="stock-bar-ches"><div class="stock-fill-ches" style="width:5%;"></div></div>
-            <span class="stock-label-ches">残り 19 / 20</span>
+            <span class="stock-label-ches"><span data-i18n="nft.left">残り</span> 19 / 20</span>
           </div>
-          <a href="https://opensea.io/collection/school-parkemuoffisialnft" target="_blank" class="btn-solid" style="padding:13px 24px;">Openseaで購入する</a>
+          <a href="https://opensea.io/collection/school-parkemuoffisialnft" target="_blank" class="btn-solid" style="padding:13px 24px;" data-i18n="nft.buyOpensea">Openseaで購入する</a>
         </div>
       </div>
 
       <div class="nft-card-ches">
         <div class="nft-thumb-ches" style="background:#000;">
           <video src="uploads/799903138.939278.mp4" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
-          <span class="nft-tag-ches left" style="background:transparent;border:1px solid var(--line2);color:#fff;">第3弾</span>
+          <span class="nft-tag-ches left" style="background:transparent;border:1px solid var(--line2);color:#fff;" data-i18n="nft.3.tag">第3弾</span>
           <span class="nft-tag-ches">HEXA</span>
         </div>
         <div class="nft-body-ches">
           <h4>Duo Soles</h4>
-          <p>SchoolPark公式パス第三弾</p>
+          <p data-i18n="nft.3.sub">SchoolPark公式パス第三弾</p>
           <div class="stock-row">
             <div class="stock-bar-ches"><div class="stock-fill-ches" style="width:0%;"></div></div>
-            <span class="stock-label-ches">ノーマル残り15/15　プレミアム残り5/5</span>
+            <span class="stock-label-ches"><span data-i18n="nft.normal">ノーマル残り</span>15/15　<span data-i18n="nft.premium">プレミアム残り</span>5/5</span>
           </div>
-          <a href="https://nft.hexanft.com/list/keyword/Duo%E3%80%80Soles" target="_blank" class="btn-solid" style="padding:13px 24px;">HEXAで購入する</a>
+          <a href="https://nft.hexanft.com/list/keyword/Duo%E3%80%80Soles" target="_blank" class="btn-solid" style="padding:13px 24px;" data-i18n="nft.buyHexa">HEXAで購入する</a>
         </div>
       </div>
     </div>
@@ -538,7 +555,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="footer-brand-name"><span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span></div>
-      <p>合同会社型DAO SchoolPark。<br>Camellia・Heartoo・Emu・SchoolParkを展開して世界を創る。</p>
+      <p data-i18n-html="foot.brand">合同会社型DAO SchoolPark。<br>Camellia・Heartoo・Emu・SchoolParkを展開して世界を創る。</p>
     </div>
     <div class="footer-col">
       <h5>World</h5>
@@ -553,7 +570,7 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
       <h5>Ecosystem</h5>
       <ul>
         <li><a href="#tokenomics">EMUER Token</a></li>
-        <li><a href="#nft-shop">公式パス</a></li>
+        <li><a href="#nft-shop" data-i18n="foot.pass">公式パス</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -567,16 +584,16 @@ footer{padding:84px 48px 42px;border-top:1px solid var(--line);}
     <div class="footer-col">
       <h5>Legal</h5>
       <ul>
-        <li><a href="https://schoolpark-emu.vercel.app/?contact=general" target="_blank" rel="noopener">問い合わせ</a></li>
-        <li><a href="https://schoolpark-emu.vercel.app/?contact=investor" target="_blank" rel="noopener">投資家/取材</a></li>
-        <li><a href="terms.html">利用規約</a></li>
-        <li><a href="privacy.html">プライバシーポリシー</a></li>
-        <li><a href="legal/tokusho.html">特商法表記</a></li>
+        <li><a href="https://schoolpark-emu.vercel.app/?contact=general" target="_blank" rel="noopener" data-i18n="foot.contact">問い合わせ</a></li>
+        <li><a href="https://schoolpark-emu.vercel.app/?contact=investor" target="_blank" rel="noopener" data-i18n="foot.investor">投資家/取材</a></li>
+        <li><a href="terms.html" data-i18n="foot.terms">利用規約</a></li>
+        <li><a href="privacy.html" data-i18n="foot.privacy">プライバシーポリシー</a></li>
+        <li><a href="legal/tokusho.html" data-i18n="foot.tokusho">特商法表記</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 合同会社型DAO SchoolPark. ALL RIGHTS RESERVED.</span>
+    <span data-i18n="foot.rights">© 2026 合同会社型DAO SchoolPark. ALL RIGHTS RESERVED.</span>
     <span><span style="color:#e0576f;">C</span><span style="color:#a0d8ef;">H</span><span style="color:#f08300;">E</span><span style="color:#d0e2be;">S</span> — <span style="color:#e0576f;">CAMELLIA</span> / <span style="color:#a0d8ef;">HEARTOO</span> / <span style="color:#f08300;">EMU</span> / <span style="color:#d0e2be;">SCHOOLPARK</span></span>
   </div>
 </footer>
