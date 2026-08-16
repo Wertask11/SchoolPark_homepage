@@ -982,6 +982,15 @@ footer {
 <script src="i18n-emu.js" defer></script>
 <style>.lang-select{background:transparent;border:1px solid rgba(255,255,255,.25);color:inherit;border-radius:6px;padding:6px 9px;font-size:12px;letter-spacing:.06em;cursor:pointer;font-family:inherit;margin-right:8px;}
 .lang-select option{background:#14120f;color:#fff;}</style>
+<style>
+@media (max-width:640px){
+  /* グリッド／フレックスの子は既定で min-width:auto のため、英語の長い一文が
+     縮まずページごと横に広がっていた。縮めるようにし、長い語も折り返す。 */
+  [style*="grid-template-columns"], [style*="grid-template-columns"] > *,
+  [style*="display:flex"] > * { min-width:0; }
+  [style*="grid-template-columns"] { overflow-wrap:anywhere; }
+}
+</style>
 </head>
 <body data-theme="dusk">
 

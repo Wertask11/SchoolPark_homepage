@@ -35,12 +35,27 @@ table{width:100%;border-collapse:collapse;margin:0 0 8px;}
 .foot a:hover{color:var(--white);}
 @media(max-width:640px){.info-table th{width:120px;font-size:10px;}.info-table td{font-size:12.5px;}}
 </style>
+<script>window.CHES_TITLE_KEY = "tok.doc.title";</script>
+<script src="../i18n.js" defer></script>
+<script src="../i18n-tokusho.js" defer></script>
+<style>.lang-select{background:#fff;border:1px solid #ddd;color:#555;border-radius:6px;padding:6px 9px;font-size:12px;cursor:pointer;font-family:inherit;margin:10px 0;}
+.lang-note{margin:6px 0 0;padding:9px 12px;background:#f6f5f2;border-left:3px solid #ccc;color:#666;font-size:12px;line-height:1.7;}</style>
+<style>
+@media (max-width:640px){
+  /* 英語などでは見出しが折り返せず表が広がり、ページごと横スクロールしていた。
+     表の中だけスクロールさせて、ページ本体は動かないようにする */
+  table{ display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; }
+}
+</style>
 </head>
 <body>
 <div class="wrap">
   <a class="back" href="../index.html" data-i18n="tok.001">← CHESに戻る</a>
   <h1 data-i18n="tok.002">特定商取引法に基づく表記</h1>
   <div class="updated" data-i18n="tok.003">最終更新日: 2026年5月7日｜運営: 合同会社型DAO SchoolPark</div>
+  <!-- 訳と原文が食い違ったときにどちらが正かを明示する -->
+  <select class="lang-select" data-lang-select aria-label="Language" data-i18n-title="nav.lang"></select>
+    <p class="lang-note" data-i18n="tok.note"></p>
 
   <table class="info-table">
     <tr><th data-i18n="tok.004">販売業者</th><td data-i18n="tok.005">合同会社型DAO SchoolPark</td></tr>
@@ -104,8 +119,8 @@ table{width:100%;border-collapse:collapse;margin:0 0 8px;}
 
   <h2 data-i18n="tok.056">動作環境</h2>
   <table class="info-table">
-    <tr><th data-i18n="tok.057">PCブラウザ</th><td data-i18n-html="tok.058">最新版のChrome / Firefox / Safari / Edge<br>MetaMask拡張機能が必要（NFT購入・EMUER利用時）</td></tr>
-    <tr><th data-i18n-html="tok.059">スマートフォン・<br>タブレット</th><td data-i18n-html="tok.060">MetaMaskアプリ内ブラウザよりアクセス（iOS / Android）<br><span class="note">※ 標準ブラウザ（Safari / Chrome）ではウォレット機能が制限される場合があります。</span></td></tr>
+    <tr><th data-i18n="tok.057">PCブラウザ</th><td data-i18n-html="tok.058">最新版のChrome / Firefox / Safari / Edge<br><span class="note">※ NFTの購入とEMUERの受け取りにはMetaMask等のウォレットが必要です。</span></td></tr>
+    <tr><th data-i18n-html="tok.059">スマートフォン・<br>タブレット</th><td data-i18n-html="tok.060">ふだんお使いのブラウザ（Safari / Chrome など）でご利用いただけます（iOS / Android）。<br><span class="note">※ NFTの購入とEMUERの受け取りは、MetaMaskアプリ内のブラウザからお願いします。</span></td></tr>
   </table>
 
   <h2 data-i18n="tok.061">特記事項</h2>

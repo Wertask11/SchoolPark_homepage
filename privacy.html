@@ -33,12 +33,27 @@ td{padding:10px 10px;border:1px solid var(--line);color:var(--dim);font-weight:3
 .foot a:hover{color:var(--white);}
 @media(max-width:640px){table{font-size:11.5px;}th,td{padding:8px;}}
 </style>
+<script>window.CHES_TITLE_KEY = "prv.doc.title";</script>
+<script src="i18n.js" defer></script>
+<script src="i18n-privacy.js" defer></script>
+<style>.lang-select{background:#fff;border:1px solid #ddd;color:#555;border-radius:6px;padding:6px 9px;font-size:12px;cursor:pointer;font-family:inherit;margin:10px 0;}
+.lang-note{margin:6px 0 0;padding:9px 12px;background:#f6f5f2;border-left:3px solid #ccc;color:#666;font-size:12px;line-height:1.7;}</style>
+<style>
+@media (max-width:640px){
+  /* 英語などでは見出しが折り返せず表が広がり、ページごと横スクロールしていた。
+     表の中だけスクロールさせて、ページ本体は動かないようにする */
+  table{ display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; }
+}
+</style>
 </head>
 <body>
 <div class="wrap">
   <a class="back" href="index.html" data-i18n="prv.001">← CHESに戻る</a>
   <h1 data-i18n="prv.002">プライバシーポリシー</h1>
   <div class="updated" data-i18n-html="prv.003">最終更新日: 2026年5月7日（2026年3月22日制定）｜運営: 合同会社型DAO SchoolPark<br>個人情報保護法・電気通信事業法（2023年6月改正）に準拠</div>
+  <!-- 訳と原文が食い違ったときにどちらが正かを明示する -->
+  <select class="lang-select" data-lang-select aria-label="Language" data-i18n-title="nav.lang"></select>
+    <p class="lang-note" data-i18n="prv.note"></p>
 
   <h2 data-i18n="prv.004">第1条（基本方針）</h2>
   <p data-i18n="prv.005">合同会社型DAO SchoolPark（以下「当社」）は、個人情報保護法、電気通信事業法および関連法令を遵守し、ユーザーのプライバシー保護に努めます。</p>
