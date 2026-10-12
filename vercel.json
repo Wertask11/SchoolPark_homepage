@@ -1,0 +1,44 @@
+{
+  "redirects": [
+    {
+      "source": "/Emu Landing Page.html",
+      "destination": "/Emu.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/Emu%20Landing%20Page.html",
+      "destination": "/Emu.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/SchoolPark_ホームページ",
+      "destination": "/schoolpark.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/SchoolPark_ホームページ/",
+      "destination": "/schoolpark.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/SchoolPark_ホームページ/index.html",
+      "destination": "/schoolpark.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/SchoolPark_%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8",
+      "destination": "/schoolpark.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/SchoolPark_%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8/",
+      "destination": "/schoolpark.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/SchoolPark_%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8/index.html",
+      "destination": "/schoolpark.html",
+      "statusCode": 301
+    }
+  ]
+}
