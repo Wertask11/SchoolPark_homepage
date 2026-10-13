@@ -1,0 +1,31 @@
+/* 共通ナビ・フッター（index / schoolpark / business / Emu）。
+   979px以下はハンバーガー。開閉は site.js。 */
+.site-nav{position:sticky;top:0;z-index:200;background:rgba(0,0,0,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.12);font-family:'Noto Sans JP',sans-serif;color:#f2f2f0}
+.site-nav-in{max-width:1320px;margin:0 auto;padding:14px clamp(16px,3vw,40px);display:flex;align-items:center;gap:20px}
+.site-brand{display:flex;flex-direction:column;justify-content:center;min-height:44px;text-decoration:none;color:#f2f2f0;flex:none}
+.site-mark{font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;line-height:1.1}
+.site-sub{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:#8f8f8f;margin-top:3px}
+.site-links{display:flex;gap:28px;margin-left:auto;align-items:center}
+.site-pair{display:flex;align-items:center;gap:6px}
+.site-x{color:#8f8f8f;font-size:14px}
+.site-link{font-size:14px;text-decoration:none;color:#8f8f8f;min-height:44px;display:inline-flex;align-items:center}
+.site-link.is-active,.site-link[aria-current="page"]{color:#f2f2f0}
+.site-link:hover,.site-link:focus-visible{color:#f2f2f0}
+.site-tools{display:flex;align-items:center;gap:10px}
+.site-lang{width:104px;background:transparent;border:1px solid rgba(255,255,255,.22);color:#bdbdbb;padding:8px;font-family:'JetBrains Mono',monospace;font-size:12px;min-height:40px;cursor:pointer}
+.site-lang option{background:#0b0b0d;color:#fff}
+.site-cta{background:#f2f2f0;color:#000;font-family:'Zen Kaku Gothic New',sans-serif;font-weight:700;font-size:14px;padding:11px 20px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap}
+.site-cta:hover,.site-cta:focus-visible{opacity:.85;color:#000}
+.site-burger{display:none;width:44px;height:44px;background:transparent;border:1px solid rgba(255,255,255,.22);color:#f2f2f0;font-size:18px;cursor:pointer;align-items:center;justify-content:center}
+.site-menu{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.12);padding:4px 20px 20px}
+.site-menu[hidden]{display:none}
+.site-menu a{padding:14px 4px;min-height:48px;border-bottom:1px solid rgba(255,255,255,.12);text-decoration:none;font-size:16px;color:#f2f2f0}
+.site-menu a.site-menu-sub{padding-left:20px;font-size:15px;color:#bdbdbb}
+.site-menu a.site-menu-cta{margin-top:16px;border:0;background:#f2f2f0;color:#000;font-family:'Zen Kaku Gothic New',sans-serif;font-weight:700;text-align:center;padding:14px 20px}
+@media (max-width:979px){
+  .site-links,.site-cta{display:none}
+  .site-tools{margin-left:auto}
+  .site-burger{display:inline-flex}
+}
+@media (min-width:980px){.site-menu{display:none !important}}
+.site-footer a:hover,.site-footer a:focus-visible{color:#f2f2f0 !important}

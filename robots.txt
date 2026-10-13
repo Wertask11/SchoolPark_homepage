@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://school-park-homepage.vercel.app/sitemap.xml
