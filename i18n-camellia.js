@@ -140,7 +140,7 @@ registerChesI18n({
       "cam.lp.001": "今日の自分を知って、<br>今日の自分に合う<br>一歩を選ぶ。",
       "cam.lp.002": "Camelliaは、1分くらいの「今日のCheck」から、今日の自分に合う過ごし方を一緒に考えるウェルビーイングアプリです。",
       "cam.lp.003": "今日のCheckをはじめる",
-      "cam.lp.004": "登録せずに試せます",
+      "cam.lp.004": "18〜45歳の女性のためのアプリです",
       "cam.lp.005": "Camelliaの、1日の流れ",
       "cam.lp.006": "アプリの中と同じ順番で進みます。",
       "cam.lp.007": "今日のCheck",
@@ -161,13 +161,13 @@ registerChesI18n({
       "cam.lp.022": "診断や治療は行いません。体調に不安があるときは、医療機関にご相談ください。",
       "cam.lp.023": "年齢ではなく、あなたの記録で",
       "cam.lp.024": "お伝えする内容は、年齢ではなくあなた自身の記録の積み重ねに合わせて変わります。",
-      "cam.lp.025": "まずは気軽に使ってみてください。記録の扱いは<a href=\"https://camellia-beta.vercel.app/privacy.html\" rel=\"noopener\" target=\"_blank\">プライバシーポリシー</a>に記載しています。",
-      "cam.lp.026": "準備中",
-      "cam.lp.027": "Circle（つながり）・Place（場所）・SchoolParkとの連携",
+      "cam.lp.025": "LINE・Google・SchoolPark Passportのどれかでログインして始めます。記録の扱いは<a href=\"https://camellia-beta.vercel.app/privacy.html\" rel=\"noopener\" target=\"_blank\">プライバシーポリシー</a>に記載しています。",
+      "cam.lp.026": "デモ公開中",
+      "cam.lp.027": "Place（場所）：リリースに向けて、実店舗の方と協力して準備しています",
       "cam.lp.028": "よくある質問",
       "cam.lp.029": "登録は必要ですか？",
       "cam.lp.030": "＋",
-      "cam.lp.031": "「登録せずに試す」から、すぐに今日のCheckをはじめられます。",
+      "cam.lp.031": "はい。LINE・Google・SchoolPark Passportのどれかでログインして始めます。Camelliaは18〜45歳の女性に向けたサービスです。",
       "cam.lp.032": "「今日の一枚」はいつ引けますか？",
       "cam.lp.033": "今日のCheckのあとに引けます。気持ちを整えるきっかけとして、気軽にお使いください。",
       "cam.lp.034": "体調の相談に使えますか？",
@@ -177,7 +177,9 @@ registerChesI18n({
       "cam.lp.038": "利用規約",
       "cam.lp.039": "プライバシーポリシー",
       "cam.lp.040": "お問い合わせ",
-      "cam.lp.041": "合同会社型DAO　SchoolPark / CHES / Camellia"
+      "cam.lp.041": "合同会社型DAO　SchoolPark / CHES / Camellia",
+      "cam.lp.044": "公開中",
+      "cam.lp.045": "Circle（つながり）・SchoolPark Passportでのログイン"
   }
 });
 /* LP-RENEWAL-2026-10:END */
