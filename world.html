@@ -24,6 +24,8 @@
     width: 100%;
     height: 100%;
     cursor: grab;
+    /* なぞっているあいだ、ページのスクロールと取り合わない（スマホでカクつく原因だった） */
+    touch-action: none;
   }
   #globe:active {
     cursor: grabbing;
@@ -301,10 +303,6 @@
     <div class="header">
       <div class="logo">SchoolPark<span class="x">×</span>CHES</div>
       <div class="tagline" data-i18n="wld.001">広がる学びの輪 — Global Reach Visualization (Concept Demo)</div>
-    </div>
-    <div class="badge" id="badge">
-      <div class="badge-title">100% Reached</div>
-      <div class="badge-sub" data-i18n="wld.002">世界中に学びが広がりました</div>
     </div>
     <div class="footer">
       <div class="footer-actions">
@@ -796,42 +794,55 @@
   initSupabase();
 
   var percentEl = document.getElementById('percent');
-  var badgeEl = document.getElementById('badge');
   var restartBtn = document.getElementById('restart');
 
+  /* 動かし方。指（マウス）の動きは「目標の向き」に足し、実際の向きは毎フレーム
+     その目標をなめらかに追いかける。離したときの速さは慣性として残し、少しずつ止める。
+     自動回転は、触ったら止め、離してしばらくしたら速さを少しずつ戻す（急に動き出さない）。 */
   var dragging = false;
   var dragStartX = 0, dragStartY = 0;
-  var manualRotY = 0, manualRotX = 0;
+  var manualRotY = 0, manualRotX = 0;          // 実際の向き
+  var targetRotY = 0, targetRotX = 0;          // 目標の向き
+  var velY = 0, velX = 0;                      // 離したあとの慣性（ラジアン/秒）
+  var lastMoveAt = 0;
   var baseRotY = 0, baseRotX = -0.1;
-  var autoRotate = true;
-
-  var resumeRotateTimer = null;
+  var AUTO_SPEED = 0.06;                       // 自動回転の速さ（ラジアン/秒）
+  var autoSpeed = AUTO_SPEED;
+  var idleSince = 0;                           // 最後に触った時刻（自動回転を戻すまでの待ち）
+  var DRAG_GAIN = 0.005;
+  var X_LIMIT = 1.1;
 
   canvas.addEventListener('pointerdown', function (e) {
     dragging = true;
-    autoRotate = false;
-    if (resumeRotateTimer) {
-      clearTimeout(resumeRotateTimer);
-      resumeRotateTimer = null;
-    }
+    velY = velX = 0;
     dragStartX = e.clientX;
     dragStartY = e.clientY;
+    lastMoveAt = performance.now();
+    try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
   });
-  window.addEventListener('pointerup', function () {
+  function endDrag() {
+    if (!dragging) return;
     dragging = false;
-    resumeRotateTimer = setTimeout(function () {
-      autoRotate = true;
-    }, 1200);
-  });
+    // しばらく動かさずに離したときは、慣性を残さない
+    if (performance.now() - lastMoveAt > 80) velY = velX = 0;
+    idleSince = performance.now();
+  }
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
   window.addEventListener('pointermove', function (e) {
     if (!dragging) return;
-    var dx = e.clientX - dragStartX;
-    var dy = e.clientY - dragStartY;
-    manualRotY += dx * 0.005;
-    manualRotX += dy * 0.005;
-    manualRotX = Math.max(-1.1, Math.min(1.1, manualRotX));
+    var now = performance.now();
+    var dt = Math.max(1, now - lastMoveAt) / 1000;
+    var dy = (e.clientX - dragStartX) * DRAG_GAIN;
+    var dx = (e.clientY - dragStartY) * DRAG_GAIN;
+    targetRotY += dy;
+    targetRotX = Math.max(-X_LIMIT, Math.min(X_LIMIT, targetRotX + dx));
+    // 速さは少しならして持つ（1回の大きな動きで飛ばない）
+    velY = velY * 0.6 + (dy / dt) * 0.4;
+    velX = velX * 0.6 + (dx / dt) * 0.4;
     dragStartX = e.clientX;
     dragStartY = e.clientY;
+    lastMoveAt = now;
   });
 
   restartBtn.addEventListener('click', function () {
@@ -848,7 +859,8 @@
 
   function animate() {
     requestAnimationFrame(animate);
-    var delta = clock.getDelta();
+    // タブを戻したときなどに、溜まった時間で一気に回らないように
+    var delta = Math.min(clock.getDelta(), 0.05);
 
     var pct = Math.max(0, Math.min(100, Math.round((totalEventCount / TOTAL_TARGET) * 100)));
     if (percentEl) percentEl.textContent = pct + '%';
@@ -856,11 +868,6 @@
 
     var targetReveal = pct >= 100 ? 1 : 0;
     revealAmount += (targetReveal - revealAmount) * 0.02;
-    if (pct >= 100) {
-      badgeEl.classList.add('show');
-    } else {
-      badgeEl.classList.remove('show');
-    }
 
     atmosphere.material.opacity = 0.18 + revealAmount * 0.32;
     var atmScale = RADIUS * 3.4 * (1 + revealAmount * 0.25);
@@ -871,9 +878,21 @@
     camera.position.y = 1.5 - revealAmount * 0.8;
     camera.lookAt(0, 0, 0);
 
-    if (autoRotate) {
-      baseRotY += delta * 0.06;
+    if (!dragging) {
+      // 慣性：離したあとも少し流れて、なめらかに止まる
+      targetRotY += velY * delta;
+      targetRotX = Math.max(-X_LIMIT, Math.min(X_LIMIT, targetRotX + velX * delta));
+      var decay = Math.pow(0.04, delta);       // 1秒でおよそ4%まで落ちる
+      velY *= decay; velX *= decay;
     }
+    // 自動回転：触っているあいだは止め、離して1秒たったら少しずつ元の速さへ
+    var wantAuto = !dragging && performance.now() - idleSince > 1000 ? AUTO_SPEED : 0;
+    autoSpeed += (wantAuto - autoSpeed) * (1 - Math.pow(0.1, delta));
+    baseRotY += delta * autoSpeed;
+    // 実際の向きは目標をなめらかに追う（フレームの速さに左右されない）
+    var follow = 1 - Math.pow(0.0005, delta);
+    manualRotY += (targetRotY - manualRotY) * follow;
+    manualRotX += (targetRotX - manualRotX) * follow;
     globeGroup.rotation.y = baseRotY + manualRotY;
     globeGroup.rotation.x = baseRotX + manualRotX;
 
