@@ -1,0 +1,129 @@
+{
+  "version": "2026-11-01",
+  "noticeDate": "2026-10-15",
+  "effectiveAt": "2026-10-31T15:00:00.000Z",
+  "retainedLimitsActive": true,
+  "monthlyPeriod": "Asia/Tokyo-calendar-month",
+  "plans": [
+    {
+      "key": "guest",
+      "amount": 0,
+      "role": "見学して、少し試す",
+      "post": 0,
+      "request": 0,
+      "answer": 0,
+      "ichinichi": 0,
+      "discussion": 0,
+      "library": 1,
+      "guestPlay": 3,
+      "saved": 10,
+      "notes": 3,
+      "storage": {
+        "saved": 10,
+        "notes": 3,
+        "drafts": 1
+      },
+      "announcedStorage": {
+        "saved": 10,
+        "notes": 3,
+        "drafts": 1
+      },
+      "readerScope": "latest-20",
+      "dialogue": false,
+      "dialogueOpportunitiesPer30Days": 0
+    },
+    {
+      "key": "light",
+      "amount": 500,
+      "role": "自分も参加する",
+      "post": 5,
+      "request": 1,
+      "answer": 5,
+      "ichinichi": 7,
+      "discussion": 0,
+      "library": 30,
+      "guestPlay": 9999,
+      "saved": 100,
+      "notes": 30,
+      "storage": {
+        "saved": 100,
+        "notes": 30,
+        "drafts": 30
+      },
+      "announcedStorage": {
+        "saved": 100,
+        "notes": 30,
+        "drafts": 30
+      },
+      "readerScope": "all-public",
+      "dialogue": false,
+      "dialogueOpportunitiesPer30Days": 0
+    },
+    {
+      "key": "plus",
+      "amount": 3000,
+      "role": "継続して蓄積・研究する",
+      "post": 30,
+      "request": 10,
+      "answer": 30,
+      "ichinichi": 31,
+      "discussion": 10,
+      "library": 1000,
+      "guestPlay": 9999,
+      "saved": 1000,
+      "notes": 1000,
+      "storage": {
+        "saved": 1000,
+        "notes": 1000,
+        "drafts": 1000
+      },
+      "announcedStorage": {
+        "saved": 1000,
+        "notes": 1000,
+        "drafts": 1000
+      },
+      "readerScope": "all-public",
+      "dialogue": false,
+      "dialogueOpportunitiesPer30Days": 0
+    },
+    {
+      "key": "pro",
+      "amount": 10000,
+      "role": "人と話しながら進める",
+      "post": 1000000,
+      "request": 10,
+      "answer": 30,
+      "ichinichi": 31,
+      "discussion": 10,
+      "library": 1000,
+      "guestPlay": 9999,
+      "saved": 1000,
+      "notes": 1000,
+      "storage": {
+        "saved": 1000,
+        "notes": 1000,
+        "drafts": 1000
+      },
+      "announcedStorage": {
+        "saved": 1000,
+        "notes": 1000,
+        "drafts": 1000
+      },
+      "readerScope": "all-public",
+      "dialogue": true,
+      "dialogueOpportunitiesPer30Days": 4
+    }
+  ],
+  "ai": {
+    "analysesPerPassportPerDay": 3,
+    "analysesGlobalPerDay": 10,
+    "embeddingsGlobalPerDay": 60,
+    "guaranteed": false
+  },
+  "officialPass": {
+    "plan": "plus",
+    "preservesExistingPurchase": true,
+    "includesProDialogue": false,
+    "futureSeriesForSale": false
+  }
+}

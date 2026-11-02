@@ -521,7 +521,7 @@ registerChesI18n({
       "home.011": "City",
       "home.012": "SchoolParkについて詳しく →",
       "home.013": "女性のためのウェルビーイング",
-      "home.014": "今日の気分やからだの調子をCheckして、今日の自分に合う過ごし方を選ぶアプリです。",
+      "home.014": "18〜45歳の女性に向けたウェルビーイングアプリ。今日のCheckから、自分に合う過ごし方を考えます。記録を残して続けるときはLINE・Googleでログインします。",
       "home.015": "Camelliaについて →",
       "home.016": "Heartooを見る →",
       "home.017": "学びや貢献が、SchoolParkの中で使えるEMUERとして記録されていく。誰かの役に立った分だけ、できることが広がる仕組みを目指しています。",
@@ -575,7 +575,7 @@ registerChesI18n({
       "home.011": "City",
       "home.012": "More about SchoolPark →",
       "home.013": "Wellbeing for women",
-      "home.014": "An app where you check today’s mood and how your body feels, then choose a way to spend the day that suits you.",
+      "home.014": "A wellbeing app for women aged 18–45. Start with today’s Check, then sign in with LINE or Google to keep your records and continue.",
       "home.015": "About Camellia →",
       "home.016": "See Heartoo →",
       "home.017": "Learning and contributions are recorded as EMUER that you can use inside SchoolPark. We aim for a system where the more you help others, the more you can do.",
@@ -629,7 +629,7 @@ registerChesI18n({
       "home.011": "City",
       "home.012": "详细了解 SchoolPark →",
       "home.013": "面向女性的身心健康",
-      "home.014": "记录今天的心情和身体状况，选择适合今天自己的度过方式的应用。",
+      "home.014": "面向18至45岁女性的身心健康应用。从今日Check开始，保存记录并继续使用时通过LINE或Google登录。",
       "home.015": "了解 Camellia →",
       "home.016": "查看 Heartoo →",
       "home.017": "学习与贡献会作为可在 SchoolPark 内使用的 EMUER 被记录下来。我们的目标是：帮助他人越多，能做的事就越多。",
@@ -683,7 +683,7 @@ registerChesI18n({
       "home.011": "City",
       "home.012": "SchoolPark 자세히 보기 →",
       "home.013": "여성을 위한 웰빙",
-      "home.014": "오늘의 기분과 몸 상태를 Check하고, 오늘의 나에게 맞는 하루 보내는 법을 고르는 앱입니다.",
+      "home.014": "18~45세 여성을 위한 웰빙 앱입니다. 오늘의 Check로 시작하며 기록을 남기고 계속 이용할 때는 LINE·Google로 로그인합니다.",
       "home.015": "Camellia 알아보기 →",
       "home.016": "Heartoo 보기 →",
       "home.017": "배움과 기여가 SchoolPark 안에서 쓸 수 있는 EMUER로 기록됩니다. 누군가에게 도움이 된 만큼 할 수 있는 일이 넓어지는 구조를 지향합니다.",
@@ -708,3 +708,30 @@ registerChesI18n({
   }
 });
 /* LP-RENEWAL-2026-10:END */
+
+registerChesI18n({
+  "ja": {
+    "home.014": "18〜45歳の女性に向けたウェルビーイングアプリ。今日のCheckから、自分に合う過ごし方を考えます。記録を残して続けるときはLINE・Googleでログインします。",
+    "home.plans.title": "無料で読む。必要な機能から選ぶ。",
+    "home.plans.body": "light月500円・plus月3,000円・pro月10,000円（税込）。投稿・保存・研究の利用範囲と、既存公式パスの条件を比較できます。",
+    "home.plans.link": "Emuのプランを比較する →"
+  },
+  "en": {
+    "home.014": "A wellbeing app for women aged 18–45. Start with today’s Check, then sign in with LINE or Google to keep your records and continue.",
+    "home.plans.title": "Read for free. Choose the features you need.",
+    "home.plans.body": "light ¥500/month, plus ¥3,000/month, pro ¥10,000/month, tax included. Compare publication, saved-knowledge and research limits, and existing official-pass terms.",
+    "home.plans.link": "Compare Emu plans →"
+  },
+  "zh": {
+    "home.014": "面向18至45岁女性的身心健康应用。从今日Check开始，保存记录并继续使用时通过LINE或Google登录。",
+    "home.plans.title": "免费阅读，按需选择功能。",
+    "home.plans.body": "light每月500日元、plus每月3,000日元、pro每月10,000日元，均含税。可比较投稿、保存、研究额度和现有官方通行证条件。",
+    "home.plans.link": "比较Emu方案 →"
+  },
+  "ko": {
+    "home.014": "18~45세 여성을 위한 웰빙 앱입니다. 오늘의 Check로 시작하며 기록을 남기고 계속 이용할 때는 LINE·Google로 로그인합니다.",
+    "home.plans.title": "무료로 읽고, 필요한 기능부터 선택하세요.",
+    "home.plans.body": "light 월 500엔·plus 월 3,000엔·pro 월 10,000엔(세금 포함). 게시·저장·연구 한도와 기존 공식 패스 조건을 비교할 수 있습니다.",
+    "home.plans.link": "Emu 플랜 비교하기 →"
+  }
+});

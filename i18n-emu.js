@@ -407,7 +407,7 @@ registerChesI18n({
       "emu.lp.016": "読む",
       "emu.lp.017": "おすすめ・新着・今月のテーマから、経験から生まれた知識を読めます。",
       "emu.lp.018": "探す",
-      "emu.lp.019": "まだ答えがない困りごとに、知識を募集できます。EMUERの懸賞をつけて、届いた知識から採用します。",
+      "emu.lp.019": "まだ答えがない困りごとについて、経験のある人へ知識を募集できます。届いた回答を読み、役立った知識を採用できます。",
       "emu.lp.020": "一日シェア",
       "emu.lp.021": "「今日は、どんな一日にする？」。時間を決めて意識したことを残すと、あなたの普通の一日が誰かの学びになります。",
       "emu.lp.022": "議論",
@@ -420,15 +420,15 @@ registerChesI18n({
       "emu.lp.029": "星空に記録される",
       "emu.lp.030": "投稿や採用された改善が、あなたの星空に灯ります。",
       "emu.lp.031": "EMUERが付与される",
-      "emu.lp.032": "NFTとの交換や公式パスの割引に使えます。換金はできません。",
+      "emu.lp.032": "所定の活動・条件で付与され、公式ショップの対象商品との交換に使えます。交換にはlight以上などの利用条件があります。",
       "emu.lp.033": "読んで学んだことを、<br>SchoolParkで試す。",
       "emu.lp.034": "EmuとSchoolParkは、同じアプリの中の二つの場所です。Emuで得た知識をもとに、SchoolParkのGuildで話し合い、Questで実際に挑戦できます。知識の画面にある「議題にする」から、そのままGuildの議題にもできます。アカウントもPassportも共通です。",
       "emu.lp.035": "SchoolParkについて →",
       "emu.lp.036": "学ぶ・共有する",
       "emu.lp.037": "挑戦する・残す",
-      "emu.lp.038": "light・plus・pro の3つのプラン",
-      "emu.lp.039": "内容と料金はプランのページでご確認ください。SchoolPark公式パスの保有者は plus 相当として扱われます。",
-      "emu.lp.040": "プランを見る",
+      "emu.lp.038": "無料から、必要な使い方へ",
+      "emu.lp.039": "freeは0円。lightは月500円、plusは月3,000円、proは月10,000円（税込）。下の利用枠はEmuの公開APIから取得します。契約前にアプリで最新の条件をご確認ください。",
+      "emu.lp.040": "プランと公式パスの条件を見る",
       "emu.lp.041": "よくある質問",
       "emu.lp.042": "EmuとSchoolParkは何が違いますか？",
       "emu.lp.043": "＋",
@@ -440,3 +440,51 @@ registerChesI18n({
   }
 });
 /* LP-RENEWAL-2026-10:END */
+
+/* Current public guidance: 2026-11-02. */
+registerChesI18n({
+  "ja": {
+    "emu.lp.038": "無料から、必要な使い方へ",
+    "emu.lp.039": "freeは0円。lightは月500円、plusは月3,000円、proは月10,000円（税込）。下の利用枠はEmuの公開APIから取得します。契約前にアプリで最新の条件をご確認ください。",
+    "emu.lp.040": "プランと公式パスの条件を見る",
+    "emu.lp.032": "所定の活動・条件で付与され、公式ショップの対象商品との交換に使えます。交換にはlight以上などの利用条件があります。",
+    "emu.lp.019": "まだ答えがない困りごとについて、経験のある人へ知識を募集できます。届いた回答を読み、役立った知識を採用できます。",
+    "plans.loading": "最新の利用枠を読み込んでいます…",
+    "plans.pass": "既存公式パスは、確認済み保有条件を満たす間のplus相当の対象機能です。proの対話は含みません。販売時の条件と最初の5人への個別の約束は維持します。",
+    "plans.limited": "7日lightギフトや初投稿キャンペーンは、月額プランとは別の施策です。対象・期間・付与条件をアプリで確認してください。月額契約は自動更新です。",
+    "plans.guide": "Emu for SchoolParkの料金・利用範囲"
+  },
+  "en": {
+    "emu.lp.038": "Start free. Choose the features you need.",
+    "emu.lp.039": "free: ¥0. light: ¥500/month; plus: ¥3,000/month; pro: ¥10,000/month, tax included. Limits below come from Emu’s public API. Check the latest terms in the app before subscribing.",
+    "emu.lp.040": "Compare plans and official-pass terms",
+    "emu.lp.032": "EMUER is awarded under defined activity conditions and can be exchanged for eligible official-shop items. Exchanges have requirements, including light or above.",
+    "emu.lp.019": "Ask people with experience about a question you have, read their answers and select the knowledge that helped.",
+    "plans.loading": "Loading current limits…",
+    "plans.pass": "Existing official passes provide eligible plus-equivalent features while verified ownership conditions are met. Pro dialogue is not included. Original purchase terms and individual promises to the first five holders are preserved.",
+    "plans.limited": "The seven-day light gift and first-post campaign are separate from regular subscriptions. Check eligibility, dates and award conditions in the app. Monthly subscriptions renew automatically.",
+    "plans.guide": "Emu for SchoolPark plans and access"
+  },
+  "zh": {
+    "emu.lp.038": "从免费开始，选择所需的使用方式",
+    "emu.lp.039": "free为0日元。light每月500日元、plus每月3,000日元、pro每月10,000日元，均含税。下方额度来自Emu公开API。订阅前请在应用内确认最新条件。",
+    "emu.lp.040": "查看方案及官方通行证条件",
+    "emu.lp.032": "EMUER按既定活动条件发放，可兑换官方商店的指定商品。兑换需满足light及以上等条件。",
+    "emu.lp.019": "向有经验的人征集知识，阅读回答并采纳有帮助的内容。",
+    "plans.loading": "正在读取最新使用额度…",
+    "plans.pass": "现有官方通行证在满足已确认的持有条件期间可使用相当于plus的指定功能，不含pro对话。维持原销售条件及对最初五位持有人的个别承诺。",
+    "plans.limited": "7天light赠礼和首次投稿活动独立于常规订阅。适用对象、期间及发放条件请在应用内确认。月度订阅自动续订。",
+    "plans.guide": "Emu for SchoolPark收费方案及使用范围"
+  },
+  "ko": {
+    "emu.lp.038": "무료부터, 필요한 이용 방식으로",
+    "emu.lp.039": "free는 0엔. light 월 500엔, plus 월 3,000엔, pro 월 10,000엔이며 세금 포함입니다. 아래 한도는 Emu 공개 API에서 가져옵니다. 계약 전 앱에서 최신 조건을 확인해 주세요.",
+    "emu.lp.040": "플랜·공식 패스 조건 보기",
+    "emu.lp.032": "정해진 활동·조건에 따라 EMUER를 받고 공식 숍 대상 상품과 교환할 수 있습니다. 교환에는 light 이상 등 조건이 적용됩니다.",
+    "emu.lp.019": "경험이 있는 사람에게 지식을 요청하고 답변을 읽어 도움이 된 지식을 채택할 수 있습니다.",
+    "plans.loading": "최신 이용 한도를 불러오는 중…",
+    "plans.pass": "기존 공식 패스는 확인된 보유 조건을 충족하는 동안 plus 상당의 대상 기능을 제공합니다. pro 대화는 포함되지 않습니다. 판매 당시 조건과 최초 다섯 분에 대한 개별 약속은 유지됩니다.",
+    "plans.limited": "7일 light 선물과 첫 게시 캠페인은 정기 플랜과 별도입니다. 대상·기간·지급 조건은 앱에서 확인해 주세요. 월 정기 계약은 자동 갱신됩니다.",
+    "plans.guide": "Emu for SchoolPark 요금·이용 범위"
+  }
+});

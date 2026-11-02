@@ -1,0 +1,8 @@
+.hp-plan-comparison{color:#eee8da;min-width:0;overflow-wrap:anywhere;font:15px/1.85 system-ui,sans-serif}
+.hp-plan-comparison .hp-plan-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px}
+.hp-plan-comparison article{padding:20px;border:1px solid #73663f;background:#171b28;border-radius:10px;min-width:0}
+.hp-plan-comparison h3{margin:0 0 12px;color:#e4c566;font-size:19px}.hp-plan-comparison strong{font-size:19px;display:block}
+.hp-plan-comparison p{margin:12px 0 0}.hp-plan-comparison details{margin-top:20px}.hp-plan-comparison summary{cursor:pointer;min-height:44px;padding:10px 0;color:#e4c566}
+.hp-plan-comparison .hp-plan-table{overflow-x:auto;max-width:100%}.hp-plan-comparison table{border-collapse:collapse;min-width:680px;width:100%;font-size:14px}
+.hp-plan-comparison th,.hp-plan-comparison td{border:1px solid #665b45;padding:12px;text-align:left}.hp-plan-comparison th{background:#202438}.hp-plan-comparison caption{text-align:left;padding:12px 0;font-weight:700}
+.hp-plan-comparison :focus-visible{outline:2px solid #e4c566;outline-offset:3px}
