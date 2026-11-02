@@ -161,13 +161,13 @@ registerChesI18n({
       "cam.lp.022": "診断や治療は行いません。体調に不安があるときは、医療機関にご相談ください。",
       "cam.lp.023": "年齢ではなく、あなたの記録で",
       "cam.lp.024": "お伝えする内容は、年齢ではなくあなた自身の記録の積み重ねに合わせて変わります。",
-      "cam.lp.025": "LINE・Google・SchoolPark Passportのどれかでログインして始めます。記録の扱いは<a href=\"https://camellia-beta.vercel.app/privacy.html\" rel=\"noopener\" target=\"_blank\">プライバシーポリシー</a>に記載しています。",
-      "cam.lp.026": "デモ公開中",
-      "cam.lp.027": "Place（場所）：リリースに向けて、実店舗の方と協力して準備しています",
+      "cam.lp.025": "記録を残して続けるときは、LINEまたはGoogleでログインします。記録の扱いは<a href=\"https://camellia-beta.vercel.app/privacy.html\" rel=\"noopener\" target=\"_blank\">プライバシーポリシー</a>をご確認ください。",
+      "cam.lp.026": "デモ・準備状況",
+      "cam.lp.027": "Place（場所）：アプリ内のデモ・準備状況をご確認ください。実店舗の掲載・予約サービスとしてはご案内していません。",
       "cam.lp.028": "よくある質問",
-      "cam.lp.029": "登録は必要ですか？",
+      "cam.lp.029": "ログインや登録は必要ですか？",
       "cam.lp.030": "＋",
-      "cam.lp.031": "はい。LINE・Google・SchoolPark Passportのどれかでログインして始めます。Camelliaは18〜45歳の女性に向けたサービスです。",
+      "cam.lp.031": "今日のCheckは登録前に体験できます。記録を残して続けるときはLINEまたはGoogleでログインし、対象・同意・招待などの利用条件をアプリで確認してください。Camelliaは18〜45歳の女性に向けたサービスです。",
       "cam.lp.032": "「今日の一枚」はいつ引けますか？",
       "cam.lp.033": "今日のCheckのあとに引けます。気持ちを整えるきっかけとして、気軽にお使いください。",
       "cam.lp.034": "体調の相談に使えますか？",
@@ -178,8 +178,48 @@ registerChesI18n({
       "cam.lp.039": "プライバシーポリシー",
       "cam.lp.040": "お問い合わせ",
       "cam.lp.041": "合同会社型DAO　SchoolPark / CHES / Camellia",
-      "cam.lp.044": "公開中",
-      "cam.lp.045": "Circle（つながり）・SchoolPark Passportでのログイン"
+      "cam.lp.044": "始め方・利用条件",
+      "cam.lp.045": "LINE・Googleでログイン。利用できる範囲はアプリ内の案内をご確認ください。"
   }
 });
 /* LP-RENEWAL-2026-10:END */
+
+/* Current public guidance: 2026-11-02. */
+registerChesI18n({
+  "ja": {
+    "cam.lp.025": "記録を残して続けるときは、LINEまたはGoogleでログインします。記録の扱いは<a href=\"https://camellia-beta.vercel.app/privacy.html\" rel=\"noopener\" target=\"_blank\">プライバシーポリシー</a>をご確認ください。",
+    "cam.lp.029": "ログインや登録は必要ですか？",
+    "cam.lp.031": "今日のCheckは登録前に体験できます。記録を残して続けるときはLINEまたはGoogleでログインし、対象・同意・招待などの利用条件をアプリで確認してください。Camelliaは18〜45歳の女性に向けたサービスです。",
+    "cam.lp.044": "始め方・利用条件",
+    "cam.lp.045": "LINE・Googleでログイン。利用できる範囲はアプリ内の案内をご確認ください。",
+    "cam.lp.026": "デモ・準備状況",
+    "cam.lp.027": "Place（場所）：アプリ内のデモ・準備状況をご確認ください。実店舗の掲載・予約サービスとしてはご案内していません。"
+  },
+  "en": {
+    "cam.lp.025": "Sign in with LINE or Google to save your records and continue. See the <a href=\"https://camellia-beta.vercel.app/privacy.html\" rel=\"noopener\" target=\"_blank\">Privacy Policy</a>.",
+    "cam.lp.029": "Do I need to sign in or register?",
+    "cam.lp.031": "You can try today’s Check before registering. To keep your records and continue, sign in with LINE or Google and check the app’s eligibility, consent and any invitation requirements. Camellia is for women aged 18–45.",
+    "cam.lp.044": "Getting started and eligibility",
+    "cam.lp.045": "Sign in with LINE or Google. Check the app for the features available to you.",
+    "cam.lp.026": "Demo and preparation",
+    "cam.lp.027": "Place: check the app for its demo and preparation status. It is not advertised here as a real-store listing or booking service."
+  },
+  "zh": {
+    "cam.lp.025": "保存记录并继续使用时，请通过 LINE 或 Google 登录。请查看<a href=\"https://camellia-beta.vercel.app/privacy.html\" rel=\"noopener\" target=\"_blank\">隐私政策</a>。",
+    "cam.lp.029": "需要登录或注册吗？",
+    "cam.lp.031": "注册前可体验今日 Check。保存记录并继续使用时，请通过 LINE 或 Google 登录，并在应用内确认适用对象、同意和邀请等使用条件。Camellia 面向18至45岁的女性。",
+    "cam.lp.044": "开始使用与使用条件",
+    "cam.lp.045": "通过 LINE 或 Google 登录。可使用的功能请以应用内说明为准。",
+    "cam.lp.026": "演示与准备情况",
+    "cam.lp.027": "Place：请在应用内确认演示与准备情况。此处不将其作为实体店铺展示或预约服务宣传。"
+  },
+  "ko": {
+    "cam.lp.025": "기록을 저장하고 계속 이용할 때는 LINE 또는 Google로 로그인합니다. <a href=\"https://camellia-beta.vercel.app/privacy.html\" rel=\"noopener\" target=\"_blank\">개인정보 처리방침</a>을 확인해 주세요.",
+    "cam.lp.029": "로그인이나 가입이 필요한가요?",
+    "cam.lp.031": "가입 전에 오늘의 Check를 체험할 수 있습니다. 기록을 저장하고 계속 이용하려면 LINE 또는 Google로 로그인하고 대상·동의·초대 등 이용 조건을 앱에서 확인해 주세요. Camellia는 18~45세 여성을 위한 서비스입니다.",
+    "cam.lp.044": "시작 방법·이용 조건",
+    "cam.lp.045": "LINE·Google로 로그인합니다. 이용 가능한 범위는 앱에서 확인해 주세요.",
+    "cam.lp.026": "데모·준비 상황",
+    "cam.lp.027": "Place: 앱에서 데모와 준비 상황을 확인해 주세요. 여기서는 실제 매장 소개·예약 서비스로 안내하지 않습니다."
+  }
+});

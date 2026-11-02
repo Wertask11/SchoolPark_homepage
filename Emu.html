@@ -68,6 +68,8 @@ details>summary:focus-visible{outline-offset:6px}
  ]
 }
 </script>
+<link rel="stylesheet" href="plan-comparison.css">
+<script src="plan-comparison.js" defer></script>
 </head>
 <body>
 <header class="site-nav">
@@ -148,7 +150,7 @@ details>summary:focus-visible{outline-offset:6px}
 </div>
 <div style="background:#0f1526;border:1px solid rgba(240,235,224,.1);border-radius:6px;overflow:hidden;display:flex;flex-direction:column">
 <div style="aspect-ratio:1850/961;background:#141c35"><img alt="Emuの「知識を探す」画面" decoding="async" loading="lazy" src="assets/screens/emu-search.webp" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"/></div>
-<div style="padding:24px;display:flex;flex-direction:column;gap:8px"><h3 data-i18n="emu.lp.018" style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:22px">探す</h3><p data-i18n="emu.lp.019" style="font-size:15px;color:#b8b0a0;line-height:1.85">まだ答えがない困りごとに、知識を募集できます。EMUERの懸賞をつけて、届いた知識から採用します。</p></div>
+<div style="padding:24px;display:flex;flex-direction:column;gap:8px"><h3 data-i18n="emu.lp.018" style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:22px">探す</h3><p data-i18n="emu.lp.019" style="font-size:15px;color:#b8b0a0;line-height:1.85">まだ答えがない困りごとについて、経験のある人へ知識を募集できます。届いた回答を読み、役立った知識を採用できます。</p></div>
 </div>
 <div style="background:#0f1526;border:1px solid rgba(240,235,224,.1);border-radius:6px;overflow:hidden;display:flex;flex-direction:column">
 <div style="aspect-ratio:1850/961;background:#141c35"><img alt="Emuの「一日シェア」画面" decoding="async" loading="lazy" src="assets/screens/emu-ichinichi.webp" style="display:block;width:100%;height:100%;object-fit:cover;object-position:top"/></div>
@@ -171,7 +173,7 @@ details>summary:focus-visible{outline-offset:6px}
 <li style="border-top:1px solid #c9a84c;padding-top:18px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'DM Serif Display',serif;font-size:30px;color:#c9a84c">1</span><h3 data-i18n="emu.lp.025" style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:19px">知識を届ける</h3><p data-i18n="emu.lp.026" style="font-size:15px;color:#b8b0a0">うまくいったことも、いかなかったことも。</p></li>
 <li style="border-top:1px solid #c9a84c;padding-top:18px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'DM Serif Display',serif;font-size:30px;color:#c9a84c">2</span><h3 data-i18n="emu.lp.027" style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:19px">声と改善案が届く</h3><p data-i18n="emu.lp.028" style="font-size:15px;color:#b8b0a0">「役に立った」の声や、読んだ人からの改善案が届きます。</p></li>
 <li style="border-top:1px solid #c9a84c;padding-top:18px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'DM Serif Display',serif;font-size:30px;color:#c9a84c">3</span><h3 data-i18n="emu.lp.029" style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:19px">星空に記録される</h3><p data-i18n="emu.lp.030" style="font-size:15px;color:#b8b0a0">投稿や採用された改善が、あなたの星空に灯ります。</p></li>
-<li style="border-top:1px solid #c9a84c;padding-top:18px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'DM Serif Display',serif;font-size:30px;color:#c9a84c">4</span><h3 data-i18n="emu.lp.031" style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:19px">EMUERが付与される</h3><p data-i18n="emu.lp.032" style="font-size:15px;color:#b8b0a0">NFTとの交換や公式パスの割引に使えます。換金はできません。</p></li>
+<li style="border-top:1px solid #c9a84c;padding-top:18px;display:flex;flex-direction:column;gap:8px"><span style="font-family:'DM Serif Display',serif;font-size:30px;color:#c9a84c">4</span><h3 data-i18n="emu.lp.031" style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:19px">EMUERが付与される</h3><p data-i18n="emu.lp.032" style="font-size:15px;color:#b8b0a0">所定の活動・条件で付与され、公式ショップの対象商品との交換に使えます。交換にはlight以上などの利用条件があります。</p></li>
 </ol>
 </div>
 </section>
@@ -190,14 +192,19 @@ details>summary:focus-visible{outline-offset:6px}
 </div>
 </div>
 </section>
-<section style="background:#0f1526;padding:clamp(56px,8vw,96px) clamp(20px,4vw,48px)">
+<section id="plans" style="background:#0f1526;padding:clamp(56px,8vw,96px) clamp(20px,4vw,48px)">
 <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center">
 <div style="display:flex;flex-direction:column;gap:12px;max-width:640px">
 <div style="font-family:'DM Serif Display',serif;font-style:italic;font-size:18px;color:#c9a84c">Membership</div>
-<h2 data-i18n="emu.lp.038" style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(24px,3vw,34px);line-height:1.5">light・plus・pro の3つのプラン</h2>
-<p data-i18n="emu.lp.039" style="font-size:15px;color:#d8d0c0;line-height:1.9">内容と料金はプランのページでご確認ください。SchoolPark公式パスの保有者は plus 相当として扱われます。</p>
+<h2 data-i18n="emu.lp.038" style="font-family:'Shippori Mincho B1',serif;font-weight:800;font-size:clamp(24px,3vw,34px);line-height:1.5">無料から、必要な使い方へ</h2>
+<p data-i18n="emu.lp.039" style="font-size:15px;color:#d8d0c0;line-height:1.9">freeは0円。lightは月500円、plusは月3,000円、proは月10,000円（税込）。下の利用枠はEmuの公開APIから取得します。契約前にアプリで最新の条件をご確認ください。</p>
 </div>
-<a class="hv2" data-i18n="emu.lp.040" href="https://emu-for-schoolpark.vercel.app/membership.html" rel="noopener" style="border:1px solid #c9a84c;color:#c9a84c;font-family:'Zen Kaku Gothic New',sans-serif;font-weight:700;font-size:15px;padding:14px 24px;text-decoration:none;border-radius:4px;min-height:48px;display:inline-flex;align-items:center" target="_blank">プランを見る</a>
+<a class="hv2" data-i18n="emu.lp.040" href="https://emu-for-schoolpark.vercel.app/membership-plans.html" rel="noopener" style="border:1px solid #c9a84c;color:#c9a84c;font-family:'Zen Kaku Gothic New',sans-serif;font-weight:700;font-size:15px;padding:14px 24px;text-decoration:none;border-radius:4px;min-height:48px;display:inline-flex;align-items:center" target="_blank">プランと公式パスの条件を見る</a>
+</div>
+<div style="max-width:1100px;margin:28px auto 0">
+<div class="hp-plan-comparison" data-hp-plans aria-live="polite"><p data-i18n="plans.loading">最新の利用枠を読み込んでいます…</p></div>
+<p data-i18n="plans.pass" style="margin-top:22px;color:#d8d0c0;line-height:1.9">既存公式パスは、確認済み保有条件を満たす間のplus相当の対象機能です。proの対話は含みません。販売時の条件と最初の5人への個別の約束は維持します。</p>
+<p data-i18n="plans.limited" style="margin-top:12px;color:#d8d0c0;line-height:1.9">7日lightギフトや初投稿キャンペーンは、月額プランとは別の施策です。対象・期間・付与条件をアプリで確認してください。月額契約は自動更新です。</p>
 </div>
 </section>
 <section id="faq" style="padding:clamp(64px,9vw,104px) clamp(20px,4vw,48px)">
