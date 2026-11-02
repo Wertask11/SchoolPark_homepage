@@ -1,6 +1,6 @@
 # Camellia and Emu plan guidance — 2026-11-02
 
-Status: implemented, local verification passed, Preview build succeeded. **Not merged, not published to Production, actual Preview browser verification blocked by the executor's HTTPS CONNECT policy.** Do not equate build success with page/API/measurement verification.
+Status: pre-merge verification snapshot. Implemented, local verification passed, Preview build succeeded. Actual Preview returns HTTP 302 to Vercel SSO; Founder explicitly waived Preview browser verification and authorized release after local and real PostHog checks. Those checks now pass. Final Production evidence will be posted to PR #9 after merge; this snapshot does not claim deployment by itself.
 
 Baseline main: `02c1318128f8767db24939c8e2d1519583122dd7` (PR #8), initially clean with no open PR. Dedicated branch `feat/current-camellia-plans-20261102`.
 
@@ -28,8 +28,8 @@ Official pass retains existing plus/applicable SchoolPark rights and original pu
 - Four Node tests pass. Syntax and diff checks pass. Static HTML/JS site has no declared lint/typecheck/build package task; Vercel Preview build is successful.
 - Actual Chromium local browser at 375/390/412/768/1280 for homepage, Camellia, Emu comparison and companion Emu plan page: 20 views, no page errors/overflow. Changed content checked in ja/en/zh/ko. Plan API is an actual Production read-only relay, not mocked. Local screenshots and JSON evidence: `/workspace/outputs/hp-plans-analytics-20261102`.
 - Initial actual Production read-only browser baseline confirms the outdated Passport claim on this HP and the correct LINE/Google UI on Camellia. No Production accounts, charges, publications, rewards or contract modifications.
-- Runtime policy currently denies the new Emu hostname and exact Preview hosts with HTTPS CONNECT 403. Additive environment draft saved; owner must review/save/publish it before executor can verify Preview. PostHog host is also requested for the companion Emu implementation. A saved draft is not an applied policy.
-- Companion unchanged Emu migration emulator test expects November credit 2 but gets 0 (6 pass/1 fail); cause/Production impact unresolved. Current backend/Rules are unchanged. Do not promote a failed migration test into a blanket rollout claim.
-- After Preview page/API checks succeed, normal release is already authorized. Merge and verify Vercel Production source/assets/links/policy response. Until then do not mark published or Production verified.
+- Environment changes are now applied; the current Emu hostname and real PostHog endpoint are reachable. Preview is protected by Vercel SSO. Founder explicitly waived Preview browser verification in this chat; no auth protection was bypassed.
+- Companion Emu checks: 231 relevant tests plus seven migration emulator tests pass. The migration test previously reused already-migrated actors; isolated fresh synthetic actors now preserve and pass all expected carry/reset assertions. Business logic/Rules are unchanged. Actual sender + real PostHog acceptance is verified for feed actions and local Auth/Firestore Lab publication/profile/bookmark/research flows, with internal-only anonymous payloads.
+- With the explicit Preview waiver and local/live checks satisfied, normal release is authorized. Merge and verify Vercel Production source/assets/links/policy response. PR #9 will record final deployment evidence. No change to contracts, pass rights, Rules or rewards is included.
 
 Companion implementation details, event allowlist/privacy/remaining dashboard verification: `Wertask11/emu-realtime`, branch `feat/hp-plans-analytics-20261102`, `docs/usage-measurement/2026-11-02.md`. Camellia is reference-only and unchanged.
